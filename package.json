@@ -1,0 +1,57 @@
+{
+  "name": "nuxt-schema-form",
+  "version": "0.1.0",
+  "description": "A runtime form generator for nuxt",
+  "main": "./dist/module.cjs",
+  "types": "./dist/module.d.ts",
+  "scripts": {
+    "build": "nuxt-module-build prepare && nuxt-module-build build .",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "test": "vitest test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiamEderzeel/nuxt-schema-form.git"
+  },
+  "keywords": [
+    "nuxt",
+    "jsonSchema",
+    "form"
+  ],
+  "author": "Liam Ederzeel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LiamEderzeel/nuxt-schema-form/issues"
+  },
+  "homepage": "https://github.com/LiamEderzeel/nuxt-schema-form#readme",
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@nuxt/eslint-config": "^1.0.0",
+    "@nuxt/kit": "^3.15.4",
+    "@nuxt/module-builder": "^0.8.4",
+    "@types/eslint": "^9.6.1",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "nuxt": "^3.15.4",
+    "nuxt-component-meta": "^0.10.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.22.0"
+  },
+  "dependencies": {
+    "json-schema-library": "10.0.0-rc7",
+    "json-schema-yup-transformer": "^1.6.12",
+    "pathe": "^2.0.2",
+    "tinyglobby": "^0.2.10",
+    "unplugin": "^2.1.2",
+    "unplugin-auto-import": "^19.0.0",
+    "unplugin-vue-components": "^28.0.0",
+    "yup": "^1.6.1"
+  },
+  "resolutions": {
+    "nuxt-schema-form": "workspace:*"
+  }
+}

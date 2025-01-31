@@ -1,0 +1,116 @@
+{
+  "title": "Questioneer",
+  "description": "Questioneer for tennis camp 'name'",
+  "type": "object",
+  "required": [
+    "personal",
+    "clothing",
+    "dietary",
+    "firstname"
+  ],
+  "properties": {
+    "custmoinput": {
+      "title": "Custom input",
+      "description": "First name pertisipant",
+      "type": "string",
+      "default": "",
+      "renderer": "CustomInput"
+    },
+    "firstname": {
+      "title": "Firstname",
+      "description": "First name pertisipant",
+      "type": "string",
+      "default": ""
+    },
+    "textarea": {
+      "title": "Firstname",
+      "description": "First name pertisipant",
+      "type": "string",
+      "default": "",
+      "renderer": "STextarea"
+    },
+    "personal": {
+      "title": "Personal",
+      "type": "object",
+      "required": [
+        "firstname",
+        "lastname",
+        "email"
+      ],
+      "properties": {
+        "firstname": {
+          "title": "Firstname",
+          "description": "First name pertisipant",
+          "type": "string",
+          "default": ""
+        },
+        "lastname": {
+          "title": "Lastname",
+          "description": "Last name pertisipant",
+          "type": "string",
+          "default": ""
+        },
+        "email": {
+          "title": "Email",
+          "description": "Last name pertisipant",
+          "type": "string",
+          "format": "email",
+          "default": ""
+        }
+      }
+    },
+    "clothing": {
+      "title": "Clothing",
+      "type": "object",
+      "required": [
+        "tshirtSize"
+      ],
+      "properties": {
+        "tshirtSize": {
+          "title": "T-shirt size",
+          "renderer": "SSelect",
+          "description": "T-shirt size",
+          "enum": [
+            "s",
+            "m",
+            "l",
+            "xl"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "dietary": {
+      "title": "Dietary",
+      "type": "object",
+      "required": [
+        "vegetarian",
+        "vegan",
+        "halal",
+        "nutAllergy"
+      ],
+      "properties": {
+        "vegetarian": {
+          "title": "Vegetarian",
+          "description": "Vegetarian dietary restrictions",
+          "type": "boolean"
+        },
+        "vegan": {
+          "title": "Vegan",
+          "description": "Vegan dietary restrictions",
+          "type": "boolean"
+        },
+        "halal": {
+          "title": "Halal",
+          "description": "Halal dietary restrictions",
+          "type": "boolean"
+        },
+        "nutAllergy": {
+          "title": "Nut Allergy",
+          "description": "Nut allergy",
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
