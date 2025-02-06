@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import type { JsonSchema } from 'json-schema-library'
-
 const props = defineProps<{
   id: string
-  properties: JsonSchema
+  title: string
+  description: string
 }>()
 
 const value = defineModel<boolean>({ required: true })
@@ -11,10 +10,7 @@ const value = defineModel<boolean>({ required: true })
 
 <template>
   <div>
-    <UFormGroup
-      :label="props.properties.title || id"
-      :name="props.id"
-    >
+    <UFormGroup :label="props.title || id" :description="props.description" :name="props.id">
       <UToggle v-model="value" />
     </UFormGroup>
   </div>

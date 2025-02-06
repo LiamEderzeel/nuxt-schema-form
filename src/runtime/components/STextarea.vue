@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import type { JsonSchema } from 'json-schema-library'
-
 const props = defineProps<{
   id: string
-  properties: JsonSchema
+  title: string
+  description: string
 }>()
 
 const value = defineModel<string | number>({ required: true })
@@ -11,18 +10,8 @@ const value = defineModel<string | number>({ required: true })
 
 <template>
   <div>
-    <UFormGroup
-      :label="props.properties.title"
-      :name="props.id"
-    >
-      <UInput
-        v-model="value"
-        :type="props.properties.type"
-      />
-      <UTextarea
-        v-model="value"
-        v-bind="properties"
-      />
+    <UFormGroup :label="props.title || id" :description="props.description" :name="props.id">
+      <UTextarea v-model="value" v-bind="properties" />
     </UFormGroup>
   </div>
 </template>

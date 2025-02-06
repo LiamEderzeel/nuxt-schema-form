@@ -2,11 +2,12 @@
 import SComponent from './SComponent.vue'
 import convertToYup from 'json-schema-yup-transformer'
 import type { JsonSchema } from 'json-schema-library'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps<{ schema: JsonSchema }>()
 
 const value = defineModel<Record<string, unknown>>({ required: true })
+const formRef = ref(null)
 
 const emit = defineEmits(['submit'])
 
@@ -15,33 +16,28 @@ async function onSubmit(_event: unknown) {
 }
 
 const formValidationSchema = computed(() => convertToYup(props.schema))
+
+const validateFields = async (fields: string[]) => {
+  let allValid = true
+  for (const field of fields) {
+    if (!(await formRef.value?.validate(field, { silent: true }))) {
+      allValid = false
+    }
+  }
+
+  return allValid
+}
 </script>
 
 <template>
-  <UForm
-    :state="value"
-    :schema="formValidationSchema"
-    autocomplete="on"
-    @submit="onSubmit"
-  >
-    <SComponent
-      v-for="(properties, id) of props.schema.properties"
-      :id="id.toString()"
-      :key="id"
-      v-model="value[id]"
-      :path="`.${id}`"
-      :properties="properties"
-      :json-schema-path="`properties.${id}`"
-    />
-    <slot />
+  <div>
+    <UForm ref="formRef" :state="value" :schema="formValidationSchema" autocomplete="on" @submit="onSubmit">
+      <SComponent id="" v-model="value" v-bind="schema" :validate-fields="validateFields" />
+      <slot />
 
-    <slot name="submit">
-      <UButton
-        class="btn"
-        type="submit"
-      >
-        Submit
-      </UButton>
-    </slot>
-  </UForm>
+      <slot name="submit">
+        <UButton class="btn" type="submit"> Submit </UButton>
+      </slot>
+    </UForm>
+  </div>
 </template>

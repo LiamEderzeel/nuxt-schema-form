@@ -1,10 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['../src/module', '@nuxt/ui'],
+  modules: ["../src/module", "@nuxt/ui"],
   components: {
     global: true,
-    dirs: ['@/components']
+    dirs: ["@/components"],
   },
   devtools: { enabled: true },
-  compatibilityDate: '2025-01-31'
-})
+  colorMode: {
+    preference: "light",
+  },
+  compatibilityDate: "2025-01-31",
+});

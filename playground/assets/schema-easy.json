@@ -1,0 +1,16 @@
+{
+  "title": "Questioneer",
+  "description": "Questioneer for tennis camp 'name'",
+  "type": "object",
+  "required": [
+    "firstname"
+  ],
+  "properties": {
+    "firstname": {
+      "title": "Firstname",
+      "description": "First name pertisipant",
+      "type": "string",
+      "default": ""
+    }
+  }
+}

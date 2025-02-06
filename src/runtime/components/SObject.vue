@@ -9,11 +9,6 @@ const props = defineProps<{
 }>()
 
 type PropertiesType = {
-  properties: {
-    [key: string]: {
-      [key: string]: unknown
-    }
-  }
   [key: string]: unknown
 }
 const emit = defineEmits(['update:modelValue'])
@@ -25,13 +20,14 @@ const onInput = (value: unknown, key: string) => {
 <template>
   <div>
     <h3>{{ props.properties.title }}</h3>
+
     <SComponent
-      v-for="[key, options] of Object.entries(properties.properties)"
-      :id="`${id}.${key}`"
+      v-for="[key, options] of Object.entries(properties)"
+      :id="id.length <= 0 ? `${key}` : `${id}.${key}`"
       :key="key"
       :model-value="modelValue[key]"
-      :json-schema-path="`${jsonSchemaPath}.properties.${key}`"
-      :properties="options"
+      :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${key}` : `${jsonSchemaPath}.properties.${key}`"
+      v-bind="options"
       @update:model-value="event => onInput(event, key)"
     />
   </div>

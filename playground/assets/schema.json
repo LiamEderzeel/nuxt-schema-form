@@ -1,35 +1,18 @@
 {
   "title": "Questioneer",
   "description": "Questioneer for tennis camp 'name'",
+  "renderer": "MultiStage",
   "type": "object",
   "required": [
     "personal",
+    "permissions",
     "clothing",
     "dietary",
     "firstname"
   ],
   "properties": {
-    "custmoinput": {
-      "title": "Custom input",
-      "description": "First name pertisipant",
-      "type": "string",
-      "default": "",
-      "renderer": "CustomInput"
-    },
-    "firstname": {
-      "title": "Firstname",
-      "description": "First name pertisipant",
-      "type": "string",
-      "default": ""
-    },
-    "textarea": {
-      "title": "Firstname",
-      "description": "First name pertisipant",
-      "type": "string",
-      "default": "",
-      "renderer": "STextarea"
-    },
     "personal": {
+      "icon": "i-lucide-user",
       "title": "Personal",
       "type": "object",
       "required": [
@@ -59,7 +42,23 @@
         }
       }
     },
+    "permissions": {
+      "icon": "i-lucide-lock",
+      "title": "Terms",
+      "type": "object",
+      "required": [
+        "agree"
+      ],
+      "properties": {
+        "agree": {
+          "title": "Agree",
+          "description": "Accept all term",
+          "type": "boolean"
+        }
+      }
+    },
     "clothing": {
+      "icon": "i-lucide-shirt",
       "title": "Clothing",
       "type": "object",
       "required": [
@@ -81,6 +80,7 @@
       }
     },
     "dietary": {
+      "icon": "i-lucide-apple",
       "title": "Dietary",
       "type": "object",
       "required": [
