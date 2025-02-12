@@ -59,5 +59,8 @@
   },
   "resolutions": {
     "@ederzeel/nuxt-schema-form": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
