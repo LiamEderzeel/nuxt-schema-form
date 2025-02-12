@@ -31,12 +31,28 @@ const validateFields = async (fields: string[]) => {
 
 <template>
   <div>
-    <UForm ref="formRef" :state="value" :schema="formValidationSchema" autocomplete="on" @submit="onSubmit">
-      <SComponent id="" v-model="value" v-bind="schema" :validate-fields="validateFields" />
+    <UForm
+      ref="formRef"
+      :state="value"
+      :schema="formValidationSchema"
+      autocomplete="on"
+      @submit="onSubmit"
+    >
+      <SComponent
+        id=""
+        v-model="value"
+        v-bind="schema"
+        :validate-fields="validateFields"
+      />
       <slot />
 
       <slot name="submit">
-        <UButton class="btn" type="submit"> Submit </UButton>
+        <UButton
+          class="btn"
+          type="submit"
+        >
+          Submit
+        </UButton>
       </slot>
     </UForm>
   </div>

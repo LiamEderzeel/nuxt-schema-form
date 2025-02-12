@@ -1,23 +1,73 @@
-import { createConfigForNuxt } from "@nuxt/eslint-config/flat";
+import globals from 'globals'
+import js from '@eslint/js'
+import ts from 'typescript-eslint'
+import eslintConfigPrettier from 'eslint-config-prettier'
 
-export default createConfigForNuxt({
-  features: {
-    tooling: true,
-    stylistic: {
-      commaDangle: "never",
-      braceStyle: "1tbs",
-    },
+/**
+ * @typedef {import("eslint").Linter.FlatConfig[]} FlatConfigs
+ */
+
+/** @type { FlatConfigs } */
+export default [
+  // ignores
+  {
+    ignores: ['.nuxt', 'dist', 'playground', 'specs', 'test/fixtures', 'coverage', 'src/runtime/templates/**', 'docs']
   },
-})
-  .overrideRules({
-    "import/first": "off",
-    "import/order": "off",
-    "vue/multi-word-component-names": "off",
-    // "vue/max-attributes-per-line": ["error", { singleline: 5 }],
-    // "@typescript-eslint/ban-types": "off",
-    // "@typescript-eslint/no-empty-object-type": "off",
-    // "@typescript-eslint/no-explicit-any": "off",
-  })
-  .prepend({
-    ignores: ["src/devtools/.component-meta"],
-  });
+
+  // for global and envrionment
+  {
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.browser
+      }
+    }
+  },
+
+  // eslint built-in
+  js.configs.recommended,
+
+  // typescript-eslint
+  ...ts.configs.recommendedTypeChecked,
+  {
+    files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts'],
+    languageOptions: {
+      parser: ts.parser,
+      parserOptions: {
+        sourceType: 'module',
+        project: true,
+        tsconfigRootDir: import.meta.dirname
+      }
+    },
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true
+        }
+      ]
+    }
+  },
+  {
+    files: ['**/*.js', '**/*.cjs', '**/*.mjs'],
+    ...ts.configs.disableTypeChecked
+  },
+
+  // prettier
+  eslintConfigPrettier,
+
+  // override rules
+  {
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/ban-ts-comment': 'off',
+      '@typescript-eslint/unbound-method': 'off'
+    }
+  }
+]

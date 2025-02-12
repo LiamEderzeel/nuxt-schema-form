@@ -22,8 +22,9 @@ export default defineNuxtModule<ModuleOptions>({
     docs: 'https://ui3.nuxt.dev/getting-started/installation/nuxt'
   },
   defaults: defaultOptions,
-  async setup(options, _nuxt) {
+  setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
+    nuxt.options.alias['#schema-form'] = resolve('./runtime')
 
     addComponentsDir({
       path: resolve('./runtime/components'),

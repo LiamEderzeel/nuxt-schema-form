@@ -62,7 +62,7 @@ export default function ComponentImportPlugin(
         }
       ]
     })
-  ] satisfies UnpluginOptions[]
+  ] /*satisfies*/ as UnpluginOptions[]
 }
 
 const RELATIVE_IMPORT_RE = /^\.{1,2}\//

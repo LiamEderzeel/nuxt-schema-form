@@ -10,7 +10,11 @@ const value = defineModel<boolean>({ required: true })
 
 <template>
   <div>
-    <UFormGroup :label="props.title || id" :description="props.description" :name="props.id">
+    <UFormGroup
+      :label="props.title || id"
+      :description="props.description"
+      :name="props.id"
+    >
       <UToggle v-model="value" />
     </UFormGroup>
   </div>

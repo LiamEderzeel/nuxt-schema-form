@@ -2,7 +2,12 @@
   <div class="w-full flex justify-center">
     <div class="w-full max-w-[800px]">
       <ColorMode />
-      <SForm v-if="schema" v-model="state" :schema="schema" @submit="onSubmit">
+      <SForm
+        v-if="schema"
+        v-model="state"
+        :schema="schema"
+        @submit="onSubmit"
+      >
         <template #submit>
           {{ undefined }}
         </template>

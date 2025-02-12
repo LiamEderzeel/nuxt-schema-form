@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 
 type Properties = {
-  properties?: { [key: string]: any }
+  properties?: { [key: string]: unknown }
 }
 
 export type SComponentProps = {
@@ -18,7 +18,7 @@ export type SComponentProps = {
 }
 
 const props = defineProps<SComponentProps>()
-const value = defineModel<any>({ required: true })
+const value = defineModel<unknown>({ required: true })
 
 const options = computed(() => ({
   ...props,
@@ -35,9 +35,23 @@ const options = computed(() => ({
       v-model="value"
     />
 
-    <SInputField v-else-if="type === 'string'" v-bind="options" v-model="value" />
-    <SToggle v-else-if="type === 'boolean'" v-bind="options" v-model="value" />
-    <SObject v-else-if="type === 'object'" v-bind="options" v-model="value" />
-    <div v-else>else</div>
+    <SInputField
+      v-else-if="type === 'string'"
+      v-bind="options"
+      v-model="value"
+    />
+    <SToggle
+      v-else-if="type === 'boolean'"
+      v-bind="options"
+      v-model="value"
+    />
+    <SObject
+      v-else-if="type === 'object'"
+      v-bind="options"
+      v-model="value"
+    />
+    <div v-else>
+      else
+    </div>
   </div>
 </template>

@@ -7,7 +7,7 @@ import { defu } from 'defu'
 // import tailwind from '@tailwindcss/vite'
 // import type colors from 'tailwindcss/colors'
 
-import type * as ui from '#build/ui'
+// import type * as ui from '#build/ui'
 
 import { defaultOptions } from './defaults'
 import type { ModuleOptions } from './module'
@@ -18,12 +18,12 @@ import AppConfigPlugin from './plugins/app-config'
 import ComponentImportPlugin from './plugins/components'
 import NuxtEnvironmentPlugin from './plugins/nuxt-environment'
 
-import type { DeepPartial } from './runtime/types/utils'
+// import type { DeepPartial } from './runtime/types/utils'
 
-type AppConfigUI = DeepPartial<typeof ui>
+// type AppConfigUI = DeepPartial<typeof ui>
 
 export interface NuxtUIOptions extends Omit<ModuleOptions, 'fonts' | 'colorMode'> {
-  ui?: AppConfigUI
+  ui?: object
 }
 
 export const runtimeDir = normalize(fileURLToPath(new URL('./runtime', import.meta.url)))
@@ -33,10 +33,11 @@ export const NuxtUIPlugin = createUnplugin<NuxtUIOptions | undefined>((_options 
 
   const appConfig = { ui: options.ui }
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return [
     NuxtEnvironmentPlugin(),
     ...ComponentImportPlugin(meta.framework, options),
-    AutoImport[meta.framework]({ dts: options.dts ?? true, dirs: [join(runtimeDir, 'composables')] }),
+    AutoImport[meta.framework]({ dts: true, dirs: [join(runtimeDir, 'composables')] }),
     // tailwind(),
     // PluginsPlugin(options),
     // TemplatePlugin(options, appConfig),
