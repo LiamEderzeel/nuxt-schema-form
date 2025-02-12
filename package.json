@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-schema-form",
+  "name": "@ederzeel/nuxt-schema-form",
   "version": "0.1.0",
   "description": "A runtime form generator for nuxt",
   "main": "./dist/module.cjs",
