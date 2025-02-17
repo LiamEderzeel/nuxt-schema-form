@@ -7,7 +7,12 @@ const props = defineProps<{
   schema: Record<string, unknown>
 }>()
 
+const colorMode = useColorMode()
 const schemaString = ref(JSON.stringify(props.schema, null, 2))
+const error = ref()
+const schemaObject = ref(new Draft2019(JSON.parse(schemaString.value)))
+const schema = ref(schemaObject.value.rootSchema)
+const state = ref(schemaObject.value.getTemplate())
 //
 // const test = {
 //   title: 'Questioneer',
@@ -26,15 +31,6 @@ const schemaString = ref(JSON.stringify(props.schema, null, 2))
 // }
 //
 // schemaString.value = JSON.stringify(test, null, 2)
-
-const error = ref()
-
-const schemaObject = ref(new Draft2019(JSON.parse(schemaString.value)))
-
-const schema = ref(schemaObject.value.rootSchema)
-const state = ref(schemaObject.value.getTemplate())
-
-const colorMode = useColorMode()
 
 const monacoOptions = computed(() => ({
   minimap: { enabled: false },
