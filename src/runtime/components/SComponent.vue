@@ -18,7 +18,7 @@ export type SComponentProps = {
 }
 
 const props = defineProps<SComponentProps>()
-const value = defineModel<unknown>({ required: true })
+const value = defineModel<unknown>({ required: true, default: '' })
 
 const options = computed(() => ({
   ...props,
