@@ -13,24 +13,6 @@ const error = ref()
 const schemaObject = ref(new Draft2019(JSON.parse(schemaString.value)))
 const schema = ref(schemaObject.value.rootSchema)
 const state = ref(schemaObject.value.getTemplate())
-//
-// const test = {
-//   title: 'Questioneer',
-//   type: 'object',
-//   required: ['first'],
-//   properties: {
-//     first: {
-//       title: 'firstname',
-//       type: 'string'
-//     },
-//     lastname: {
-//       title: 'lastname',
-//       type: 'string'
-//     }
-//   }
-// }
-//
-// schemaString.value = JSON.stringify(test, null, 2)
 
 const monacoOptions = computed(() => ({
   minimap: { enabled: false },
