@@ -2,8 +2,19 @@
   "name": "@ederzeel/nuxt-schema-form",
   "version": "0.1.0",
   "description": "A runtime form generator for nuxt",
-  "main": "./dist/module.cjs",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/module.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.mjs",
   "types": "./dist/module.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "nuxt-module-build prepare && nuxt-module-build build .",
     "dev": "nuxi dev playground",
