@@ -1,4 +1,5 @@
 {
+	"type": "module",
 	"dependencies": {
 		"@ederzeel/nuxt-schema-form": "../",
 		"@nuxt/ui": "^2.21.0",
