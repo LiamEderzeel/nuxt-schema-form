@@ -6,18 +6,18 @@ type Properties = {
 }
 
 export type SComponentProps = {
-  id: string
+  id?: string
   title?: string
   renderer?: string
   type: string
   properties?: Properties
   enum?: string[]
   description?: string
-  jsonSchemaPath: string
-  validateFields: (fields: string[]) => Promise<boolean>
+  jsonSchemaPath?: string
+  validateFields?: (fields: string[]) => Promise<boolean>
 }
 
-const props = defineProps<SComponentProps>()
+const props = withDefaults(defineProps<SComponentProps>(), { id: '', jsonSchemaPath: 'test' })
 const value = defineModel<unknown>({ required: true, default: '' })
 
 const options = computed(() => ({

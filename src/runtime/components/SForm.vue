@@ -39,7 +39,6 @@ const validateFields = async (fields: string[]) => {
       @submit="onSubmit"
     >
       <SComponent
-        id=""
         v-model="value"
         v-bind="schema"
         :validate-fields="validateFields"
