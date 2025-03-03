@@ -34,6 +34,7 @@
     "form"
   ],
   "author": "Liam Ederzeel",
+  "funding": "https://github.com/sponsors/liamederzeel",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/LiamEderzeel/nuxt-schema-form/issues"
