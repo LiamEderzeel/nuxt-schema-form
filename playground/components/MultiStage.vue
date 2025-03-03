@@ -86,33 +86,27 @@ const onNext = async () => {
     <!-- {{ formErrors }} -->
     <!-- {{ `${children[stage][0]}` }} -->
     <!-- {{ formErrors?.find((error) => error.path.includes(`${children[stage][0]}`)) }} -->
-    <h1>{{ props.title }}</h1>
+    <h1 class="mb-8 text-4xl leading-none tracking-tight">
+      {{ props.title }}
+    </h1>
 
     <div class="stepper">
       <StepperRoot v-model="stage" class="flex gap-2 w-full">
-        <StepperItem
-          v-for="item in steps"
-          :key="item.step"
+        <StepperItem v-for="item in steps" :key="item.step"
           class="w-full flex justify-center gap-2 cursor-pointer group relative px-4"
-          :data-error="item.error ? 'error' : undefined"
-          :step="item.step"
-        >
+          :data-error="item.error ? 'error' : undefined" :step="item.step">
           <StepperTrigger
-            class="inline-flex border-2 shadow-sm items-center text-white bg-primary-500 border-primary-500 group-data-[error=error]:bg-red-500 group-data-[error=error]:border-red-500 group-data-[state=inactive]:border-gray-200 group-data-[state=inactive]:bg-white group-data-[state=inactive]:text-stone-700 group-data-[disabled]:opacity-50 group-data-[disabled]:cursor-not-allowed justify-center rounded-full w-10 h-10 shrink-0 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
-          >
+            class="inline-flex border-2 shadow-sm items-center text-white bg-primary-500 border-primary-500 group-data-[error=error]:bg-red-500 group-data-[error=error]:border-red-500 group-data-[state=inactive]:border-gray-200 group-data-[state=inactive]:bg-white group-data-[state=inactive]:text-stone-700 group-data-[disabled]:opacity-50 group-data-[disabled]:cursor-not-allowed justify-center rounded-full w-10 h-10 shrink-0 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none">
             <StepperIndicator>
               <UIcon :name="item.icon" class="w-5 h-5 ms-auto transform transition-transform duration-200" />
             </StepperIndicator>
           </StepperTrigger>
 
-          <StepperSeparator
-            v-if="item.step !== steps[steps.length - 1].step"
-            class="absolute block top-5 left-[calc(50%+30px)] right-[calc(-50%+20px)] h-0.5 rounded-full bg-stone-300/50 shrink-0"
-          />
+          <StepperSeparator v-if="item.step !== steps[steps.length - 1].step"
+            class="absolute block top-5 left-[calc(50%+30px)] right-[calc(-50%+20px)] h-0.5 rounded-full bg-stone-300/50 shrink-0" />
 
           <div
-            class="absolute text-center top-full left-0 w-full mt-2 text-stone-700 dark:text-white group-data-[disabled]:opacity-50"
-          >
+            class="absolute text-center top-full left-0 w-full mt-2 text-stone-700 dark:text-white group-data-[disabled]:opacity-50">
             <StepperTitle class="font-medium">
               {{ item.title }}
             </StepperTitle>
@@ -125,14 +119,9 @@ const onNext = async () => {
     </div>
     <div class="stepper-content">
       <section v-for="[key, options, index] of children" v-show="stage == index" :key="key">
-        <SComponent
-          :id="id.length <= 0 ? `${key}` : `${id}.${key}`"
-          :key="key"
-          :model-value="modelValue[key]"
+        <SComponent :id="id.length <= 0 ? `${key}` : `${id}.${key}`" :key="key" :model-value="modelValue[key]"
           :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${key}` : `${jsonSchemaPath}.properties.${key}`"
-          v-bind="options"
-          @update:model-value="event => onInput(event, key)"
-        />
+          v-bind="options" @update:model-value="event => onInput(event, key)" />
       </section>
     </div>
 
@@ -147,7 +136,7 @@ const onNext = async () => {
 <style lang="css">
 .stepper {
   width: 100%;
-  height: 150px;
+  height: 6em;
   padding-bottom: 1em;
   /* display: flex; */
   /* align-items: center; */
