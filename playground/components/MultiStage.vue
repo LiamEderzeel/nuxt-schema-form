@@ -20,19 +20,17 @@ const props = defineProps<{
   title: string
   jsonSchemaPath: string
   validateFields: (fields: string[]) => Promise<boolean>
-  properties: PropertiesType
+  properties: { [key: string]: PropertiesType }
   modelValue: Record<string, unknown>
 }>()
 
 type PropertiesType = {
-  properties: {
-    title: string
-    description: string
-    properties: PropertiesType
-    icon: PropertiesType
-    [key: string]: unknown
-  }
-  [key: string]: unknown
+  title: string
+  description: string
+  type: string
+  properties: PropertiesType
+  icon: string
+  // [key: string]: unknown
 }
 const emit = defineEmits(['update:modelValue'])
 const onInput = (value: unknown, key: string) => {
@@ -65,17 +63,14 @@ const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 
 const steps = computed(() =>
   children.value.map((x, i) => ({
+    ...x[1],
     step: i,
-    title: x[1].title,
-    description: x[1].description,
-    icon: x[1].icon || '',
     error: formErrors?.value.find(error => error.path.includes(`${x[0]}`))
   }))
 )
 
 const onNext = async () => {
   const child = children.value[stage.value]
-  console.log(await props.validateFields(getChildFieldIds(child[0], child[1])))
   if (!(await props.validateFields(getChildFieldIds(child[0], child[1])))) return
   stage.value++
 }
@@ -92,21 +87,29 @@ const onNext = async () => {
 
     <div class="stepper">
       <StepperRoot v-model="stage" class="flex gap-2 w-full">
-        <StepperItem v-for="item in steps" :key="item.step"
+        <StepperItem
+          v-for="item in steps"
+          :key="item.step"
           class="w-full flex justify-center gap-2 cursor-pointer group relative px-4"
-          :data-error="item.error ? 'error' : undefined" :step="item.step">
+          :data-error="item.error ? 'error' : undefined"
+          :step="item.step"
+        >
           <StepperTrigger
-            class="inline-flex border-2 shadow-sm items-center text-white bg-primary-500 border-primary-500 group-data-[error=error]:bg-red-500 group-data-[error=error]:border-red-500 group-data-[state=inactive]:border-gray-200 group-data-[state=inactive]:bg-white group-data-[state=inactive]:text-stone-700 group-data-[disabled]:opacity-50 group-data-[disabled]:cursor-not-allowed justify-center rounded-full w-10 h-10 shrink-0 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none">
+            class="inline-flex border-2 shadow-sm items-center text-white bg-primary-500 border-primary-500 group-data-[error=error]:bg-red-500 group-data-[error=error]:border-red-500 group-data-[state=inactive]:border-gray-200 group-data-[state=inactive]:bg-white group-data-[state=inactive]:text-stone-700 group-data-[disabled]:opacity-50 group-data-[disabled]:cursor-not-allowed justify-center rounded-full w-10 h-10 shrink-0 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+          >
             <StepperIndicator>
               <UIcon :name="item.icon" class="w-5 h-5 ms-auto transform transition-transform duration-200" />
             </StepperIndicator>
           </StepperTrigger>
 
-          <StepperSeparator v-if="item.step !== steps[steps.length - 1].step"
-            class="absolute block top-5 left-[calc(50%+30px)] right-[calc(-50%+20px)] h-0.5 rounded-full bg-stone-300/50 shrink-0" />
+          <StepperSeparator
+            v-if="item.step !== steps[steps.length - 1].step"
+            class="absolute block top-5 left-[calc(50%+30px)] right-[calc(-50%+20px)] h-0.5 rounded-full bg-stone-300/50 shrink-0"
+          />
 
           <div
-            class="absolute text-center top-full left-0 w-full mt-2 text-stone-700 dark:text-white group-data-[disabled]:opacity-50">
+            class="absolute text-center top-full left-0 w-full mt-2 text-stone-700 dark:text-white group-data-[disabled]:opacity-50"
+          >
             <StepperTitle class="font-medium">
               {{ item.title }}
             </StepperTitle>
@@ -119,9 +122,14 @@ const onNext = async () => {
     </div>
     <div class="stepper-content">
       <section v-for="[key, options, index] of children" v-show="stage == index" :key="key">
-        <SComponent :id="id.length <= 0 ? `${key}` : `${id}.${key}`" :key="key" :model-value="modelValue[key]"
+        <SComponent
+          :id="id.length <= 0 ? `${key}` : `${id}.${key}`"
+          :key="key"
+          :model-value="modelValue[key]"
           :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${key}` : `${jsonSchemaPath}.properties.${key}`"
-          v-bind="options" @update:model-value="event => onInput(event, key)" />
+          v-bind="options"
+          @update:model-value="event => onInput(event, key)"
+        />
       </section>
     </div>
 
