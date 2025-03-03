@@ -2,8 +2,7 @@
 // import formSchema from '@/assets/schema.json'
 import { Draft2019 } from 'json-schema-library'
 import { computed } from 'vue'
-// import { IStandaloneEditorConstructionOptions } from 'monaco-editor'
-import { editor } from 'monaco-editor'
+import type { editor } from 'monaco-editor'
 type IStandaloneEditorConstructionOptions = editor.IStandaloneEditorConstructionOptions
 
 const props = defineProps<{
