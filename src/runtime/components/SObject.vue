@@ -3,6 +3,8 @@ import SComponent from './SComponent.vue'
 
 const props = defineProps<{
   id: string
+  title?: string
+  description?: string
   jsonSchemaPath: string
   properties: PropertiesType
   modelValue: Record<string, unknown>
@@ -19,7 +21,8 @@ const onInput = (value: unknown, key: string) => {
 
 <template>
   <div>
-    <h3>{{ props.properties.title }}</h3>
+    <h2 v-if="props.title" class="mb-4 text-2xl leading-none tracking-tight">{{ props.title }}</h2>
+    <p v-if="props.description" class="mb-4">{{ props.description }}</p>
 
     <SComponent
       v-for="[key, options] of Object.entries(properties)"
