@@ -2,6 +2,9 @@
 // import formSchema from '@/assets/schema.json'
 import { Draft2019 } from 'json-schema-library'
 import { computed } from 'vue'
+// import { IStandaloneEditorConstructionOptions } from 'monaco-editor'
+import { editor } from 'monaco-editor'
+type IStandaloneEditorConstructionOptions = editor.IStandaloneEditorConstructionOptions
 
 const props = defineProps<{
   schema: Record<string, unknown>
@@ -14,13 +17,15 @@ const schemaObject = ref(new Draft2019(JSON.parse(schemaString.value)))
 const schema = ref(schemaObject.value.rootSchema)
 const state = ref(schemaObject.value.getTemplate())
 
-const monacoOptions = computed(() => ({
-  minimap: { enabled: false },
-  theme: colorMode.value === 'dark' ? 'vs-dark' : 'vs-light',
-  contextmenu: false,
-  lineNumbers: 'off',
-  scrollBeyondLastLine: false
-}))
+const monacoOptions = computed(
+  (): IStandaloneEditorConstructionOptions => ({
+    minimap: { enabled: false },
+    theme: colorMode.value === 'dark' ? 'vs-dark' : 'vs-light',
+    contextmenu: false,
+    lineNumbers: 'off',
+    scrollBeyondLastLine: false
+  })
+)
 </script>
 
 <template>
