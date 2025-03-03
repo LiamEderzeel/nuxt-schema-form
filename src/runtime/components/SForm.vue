@@ -7,7 +7,7 @@ import { computed, ref } from 'vue'
 const props = defineProps<{ schema: JsonSchema }>()
 
 const value = defineModel<Record<string, unknown>>({ required: true })
-const formRef = ref(null)
+const formRef = ref()
 
 const emit = defineEmits(['submit'])
 
@@ -20,7 +20,7 @@ const formValidationSchema = computed(() => convertToYup(props.schema))
 const validateFields = async (fields: string[]) => {
   let allValid = true
   for (const field of fields) {
-    if (!(await formRef.value?.validate(field, { silent: true }))) {
+    if (!(await formRef.value.validate(field, { silent: true }))) {
       allValid = false
     }
   }
@@ -31,27 +31,12 @@ const validateFields = async (fields: string[]) => {
 
 <template>
   <div>
-    <UForm
-      ref="formRef"
-      :state="value"
-      :schema="formValidationSchema"
-      autocomplete="on"
-      @submit="onSubmit"
-    >
-      <SComponent
-        v-model="value"
-        v-bind="schema"
-        :validate-fields="validateFields"
-      />
+    <UForm ref="formRef" :state="value" :schema="formValidationSchema" autocomplete="on" @submit="onSubmit">
+      <SComponent v-model="value" v-bind="schema" :validate-fields="validateFields" />
       <slot />
 
       <slot name="submit">
-        <UButton
-          class="btn"
-          type="submit"
-        >
-          Submit
-        </UButton>
+        <UButton class="btn" type="submit"> Submit </UButton>
       </slot>
     </UForm>
   </div>
