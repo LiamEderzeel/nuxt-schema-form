@@ -30,7 +30,7 @@ const options = computed(() => ({
   <div class="s-form-group">
     <component
       v-bind="options"
-      :is="typeof renderer === 'string' ? renderer : renderer.name"
+      :is="typeof renderer === 'string' ? renderer : undefined"
       v-if="renderer"
       v-model="value"
     />
