@@ -1,0 +1,37 @@
+{
+  "title": "From",
+  "description": "A minimal form example",
+  "type": "object",
+  "required": [
+    "flex"
+  ],
+  "properties": {
+    "flex": {
+      "type": "object",
+      "renderer": "SRow",
+      "required": [
+        "firstname"
+      ],
+      "properties": {
+        "firstname": {
+          "title": "Firstname",
+          "description": "Firstname field for submitting a first name",
+          "type": "string",
+          "default": ""
+        },
+        "lastname": {
+          "title": "Lastname",
+          "description": "Lastname field for submitting a last name",
+          "type": "string",
+          "default": ""
+        },
+        "test": {
+          "title": "Lastname",
+          "description": "Lastname field for submitting a last name",
+          "type": "string",
+          "default": ""
+        }
+      }
+    }
+  }
+}
