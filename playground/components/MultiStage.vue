@@ -98,7 +98,10 @@ const onNext = async () => {
             class="inline-flex border-2 shadow-sm items-center text-primary-500 bg-white border-primary-500 group-data-[error=error]:text-red-500 group-data-[error=error]:border-red-500 group-data-[state=inactive]:border-gray-200 group-data-[state=inactive]:bg-white group-data-[state=inactive]:text-stone-700 group-data-[disabled]:opacity-50 group-data-[disabled]:cursor-not-allowed justify-center rounded-full w-10 h-10 shrink-0 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
           >
             <StepperIndicator class="flex">
-              <UIcon :name="item.icon" class="w-5 h-5 ms-auto transform transition-transform duration-200" />
+              <UIcon
+                :name="item.icon ?? 'lucide:check'"
+                class="w-5 h-5 ms-auto transform transition-transform duration-200"
+              />
             </StepperIndicator>
           </StepperTrigger>
 
