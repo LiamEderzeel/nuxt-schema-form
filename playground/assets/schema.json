@@ -1,70 +1,56 @@
 {
   "title": "Questioneer",
   "description": "Questioneer for tennis camp 'name'",
-  "renderer": "MultiStage",
   "type": "object",
   "required": [
-    "personal",
+    "participant",
+    "guardian",
     "permissions",
-    "clothing",
-    "dietary",
-    "firstname"
+    "misc"
   ],
+  "renderer": "MultiStage",
   "properties": {
-    "personal": {
-      "icon": "i-lucide-user",
-      "title": "Personal",
+    "participant": {
+      "title": "Deelnemer",
+      "icon": "lucide:user",
       "type": "object",
       "required": [
-        "firstname",
-        "lastname",
-        "email"
+        "flex",
+        "birthDate",
+        "tshirtSize",
+        "tennisLevel",
+        "swimmingLevel",
+        "health"
       ],
       "properties": {
-        "firstname": {
-          "title": "Firstname",
-          "description": "First name pertisipant",
-          "type": "string",
-          "default": ""
+        "flex": {
+          "required": [
+            "firstname",
+            "lastname"
+          ],
+          "type": "object",
+          "renderer": "SRow",
+          "properties": {
+            "firstname": {
+              "title": "Firstname",
+              "description": "First name pertisipant",
+              "type": "string",
+              "default": ""
+            },
+            "lastname": {
+              "title": "Lastname",
+              "description": "Last name pertisipant",
+              "type": "string",
+              "default": ""
+            }
+          }
         },
-        "lastname": {
-          "title": "Lastname",
-          "description": "Last name pertisipant",
-          "type": "string",
-          "default": ""
+        "birthDate": {
+          "title": "Geboorte datum",
+          "format": "date-time",
+          "default": "2000-01-01T00:00:00.000Z",
+          "type": "string"
         },
-        "email": {
-          "title": "Email",
-          "description": "Last name pertisipant",
-          "type": "string",
-          "format": "email",
-          "default": ""
-        }
-      }
-    },
-    "permissions": {
-      "icon": "i-lucide-lock",
-      "title": "Terms",
-      "type": "object",
-      "required": [
-        "agree"
-      ],
-      "properties": {
-        "agree": {
-          "title": "Agree",
-          "description": "Accept all term",
-          "type": "boolean"
-        }
-      }
-    },
-    "clothing": {
-      "icon": "i-lucide-shirt",
-      "title": "Clothing",
-      "type": "object",
-      "required": [
-        "tshirtSize"
-      ],
-      "properties": {
         "tshirtSize": {
           "title": "T-shirt size",
           "renderer": "SSelect",
@@ -76,39 +62,155 @@
             "xl"
           ],
           "type": "string"
+        },
+        "tennisLevel": {
+          "title": "Tennisniveau",
+          "renderer": "SSelect",
+          "description": "Het niveau van de deelnemer",
+          "enum": [
+            "red",
+            "orange",
+            "green",
+            "yellow",
+            "other"
+          ],
+          "type": "string"
+        },
+        "swimmingLevel": {
+          "title": "Zwemdiploma",
+          "renderer": "SSelect",
+          "description": "Het zwemdiploma van de deelnemer",
+          "enum": [
+            "a",
+            "b",
+            "c",
+            "geen"
+          ],
+          "type": "string"
+        },
+        "health": {
+          "title": "Voedsel allergieën of gezondheid",
+          "renderer": "STextarea",
+          "description": "Zijn er bijzonderheden waar we rekening mee moeten houden betreffende voedsel allergieën en/of informatie over de gezondheid?",
+          "type": "string"
         }
       }
     },
-    "dietary": {
-      "icon": "i-lucide-apple",
-      "title": "Dietary",
+    "guardian": {
+      "title": "Voogd",
+      "icon": "lucide:users",
       "type": "object",
       "required": [
-        "vegetarian",
-        "vegan",
-        "halal",
-        "nutAllergy"
+        "flex"
       ],
       "properties": {
-        "vegetarian": {
-          "title": "Vegetarian",
-          "description": "Vegetarian dietary restrictions",
+        "flex": {
+          "required": [
+            "firstname",
+            "lastname"
+          ],
+          "type": "object",
+          "renderer": "SRow",
+          "properties": {
+            "firstname": {
+              "title": "Firstname",
+              "description": "First name pertisipant",
+              "type": "string",
+              "default": ""
+            },
+            "lastname": {
+              "title": "Lastname",
+              "description": "Last name pertisipant",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "email": {
+          "title": "Email",
+          "description": "Last name pertisipant",
+          "type": "string",
+          "format": "email",
+          "default": ""
+        },
+        "phoneNumber": {
+          "title": "Telefoon nummber",
+          "description": "Telefoon nummer voor contact of noodgevallen",
+          "type": "string",
+          "format": "email",
+          "default": ""
+        },
+        "emergencyNumber": {
+          "title": "Extra nood nummer",
+          "description": "Telefoon nummer om te bellen bij nood",
+          "type": "string",
+          "format": "email",
+          "default": ""
+        },
+        "address": {
+          "type": "object",
+          "renderer": "Address",
+          "required": [
+            "street",
+            "number",
+            "zipCode",
+            "city"
+          ],
+          "properties": {
+            "street": {
+              "title": "Straat",
+              "type": "string"
+            },
+            "number": {
+              "title": "Huisnummer",
+              "type": "string"
+            },
+            "unit": {
+              "title": "Toevoeging",
+              "type": "string"
+            },
+            "zipCode": {
+              "title": "Postcode",
+              "type": "string"
+            },
+            "city": {
+              "title": "Stad",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "permissions": {
+      "title": "Toestemmig",
+      "type": "object",
+      "required": [
+        "permissions"
+      ],
+      "properties": {
+        "permissions": {
+          "title": "Toestemming",
+          "description": "Door middel van het aanvinken van onderstaande selectiebox, geef hierbij toestemming voor de vastlegging en de weergave van mijn naam, beeltenis en afbeelding verbonden aan mijn persoon, in foto&#39;s, beelden, of audiovisuele opnamen gemaakt, alsook in publiciteit over de onderneming.",
+          "const": false,
           "type": "boolean"
         },
-        "vegan": {
-          "title": "Vegan",
-          "description": "Vegan dietary restrictions",
-          "type": "boolean"
+        "questions": {
+          "title": "Vragen",
+          "renderer": "STextarea",
+          "description": "Overige opmerkingen/bijzonderheden/vragen?",
+          "type": "string"
         },
-        "halal": {
-          "title": "Halal",
-          "description": "Halal dietary restrictions",
-          "type": "boolean"
-        },
-        "nutAllergy": {
-          "title": "Nut Allergy",
-          "description": "Nut allergy",
-          "type": "boolean"
+        "found": {
+          "title": "Hoe bent u erachter gekomen dat er een kamp was:",
+          "renderer": "SSelect",
+          "enum": [
+            "trainer",
+            "website",
+            "mouthToMouth",
+            "socialMedia",
+            "other"
+          ],
+          "type": "string"
         }
       }
     }
