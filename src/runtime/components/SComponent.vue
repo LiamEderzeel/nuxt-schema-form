@@ -12,6 +12,7 @@ export type SComponentProps = {
   type: string
   properties?: Properties
   enum?: string[]
+  format?: string
   description?: string
   jsonSchemaPath?: string
   validateFields?: (fields: string[]) => Promise<boolean>
@@ -35,6 +36,7 @@ const options = computed(() => ({
       v-model="value"
     />
 
+    <SDate v-else-if="type === 'string' && format === 'date-time'" v-bind="options" v-model="value" />
     <SInputField v-else-if="type === 'string'" v-bind="options" v-model="value" />
     <SToggle v-else-if="type === 'boolean'" v-bind="options" v-model="value" />
     <SObject v-else-if="type === 'object'" v-bind="options" v-model="value" />
