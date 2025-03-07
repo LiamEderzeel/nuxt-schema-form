@@ -15,7 +15,7 @@ const props = defineProps<{
 type PropertiesType = {
   [key: string]: unknown
 }
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'submit'])
 const onInput = (value: unknown, key: string) => {
   emit('update:modelValue', { ...props.modelValue, [key]: value })
 }
@@ -36,6 +36,7 @@ const onInput = (value: unknown, key: string) => {
       :isRequired="required.includes(key)"
       class="mt-4"
       @update:model-value="event => onInput(event, key)"
+      @submit="() => emit('submit')"
     />
   </div>
 </template>

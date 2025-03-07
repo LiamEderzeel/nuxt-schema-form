@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, defineEmits } from 'vue'
 
 type Properties = {
   properties?: { [key: string]: unknown }
@@ -23,26 +23,26 @@ export type SComponentProps = {
 
 const props = withDefaults(defineProps<SComponentProps>(), { id: '', jsonSchemaPath: 'test' })
 const value = defineModel<unknown>({ required: true, default: '' })
+const emit = defineEmits(['submit'])
 
 const options = computed(() => ({
   ...props,
   jsonSchemaPath: `${props.jsonSchemaPath}.${props.id}`
 }))
+const onSubmit = () => {
+  emit('submit')
+}
 </script>
 
 <template>
   <div class="s-form-group">
-    <component
-      v-bind="options"
-      :is="typeof renderer === 'string' ? renderer : undefined"
-      v-if="renderer"
-      v-model="value"
-    />
+    <component v-if="renderer" v-bind="options" v-model="value"
+      :is="typeof renderer === 'string' ? renderer : undefined" @submit="onSubmit" />
 
     <SDate v-else-if="type === 'string' && format === 'full-date'" v-bind="options" v-model="value" />
     <SInputField v-else-if="type === 'string'" v-bind="options" v-model="value" />
     <SToggle v-else-if="type === 'boolean'" v-bind="options" v-model="value" />
-    <SObject v-else-if="type === 'object'" v-bind="options" v-model="value" />
+    <SObject v-else-if="type === 'object'" v-bind="options" v-model="value" @submit="onSubmit" />
     <div v-else>else</div>
   </div>
 </template>

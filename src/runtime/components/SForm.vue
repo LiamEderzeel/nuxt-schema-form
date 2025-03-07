@@ -44,13 +44,17 @@ const validateFields = async (fields: string[]) => {
 
   return allValid
 }
+
+const submit = () => {
+  formRef.value.submit()
+}
 </script>
 
 <template>
   <div>
     <!-- {{ formRef ? formRef.errors : undefined }} -->
     <UForm ref="formRef" :state="value" :schema="formValidationSchema" autocomplete="on" @submit="onSubmit">
-      <SComponent v-model="value" v-bind="schema" :validate-fields="validateFields" />
+      <SComponent v-model="value" v-bind="schema" :validate-fields="validateFields" @submit="submit" />
       <slot />
 
       <slot name="submit">

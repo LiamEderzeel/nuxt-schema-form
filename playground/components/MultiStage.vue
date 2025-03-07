@@ -34,7 +34,7 @@ type PropertiesType = {
   icon: string
   // [key: string]: unknown
 }
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'submit'])
 const onInput = (value: unknown, key: string) => {
   emit('update:modelValue', { ...props.modelValue, [key]: value })
 }
@@ -73,7 +73,11 @@ const steps = computed(() =>
 const onNext = async () => {
   const child = children.value[stage.value]
   if (!(await props.validateFields(getChildFieldIds(child[0], child[1])))) return
-  if (stage.value < steps.value.length) stage.value++
+  if (stage.value < steps.value.length - 1) {
+    stage.value++
+  } else {
+    emit('submit')
+  }
 }
 </script>
 
@@ -139,7 +143,7 @@ const onNext = async () => {
     </div>
 
     <slot name="submit">
-      <UButton :type="stage == steps.length - 1 ? 'submit' : undefined" @click="onNext">
+      <UButton @click="onNext">
         {{ stage != steps.length - 1 ? 'Next' : 'Submit' }}
       </UButton>
     </slot>

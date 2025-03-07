@@ -5,7 +5,7 @@
         <h1>Demo</h1>
         <ColorMode />
       </div>
-      <SForm v-if="schema" v-model="state" :schema="schema" :custom-validation="customValidation">
+      <SForm v-if="schema" v-model="state" :schema="schema" :custom-validation="customValidation" @submit="onSubmit">
         <template #submit>
           {{ undefined }}
         </template>
