@@ -6,7 +6,7 @@ const props = defineProps<{
   title?: string
   description?: string
   enum: string[]
-  enum_titles: string[]
+  enum_titles?: string[]
   isRequired: boolean
 }>()
 
