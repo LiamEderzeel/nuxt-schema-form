@@ -50,8 +50,7 @@ const getChildFieldIds = (id: string, schema: ChildIdsKeys) => {
   if (schema.properties == null) return children
   for (const [key, child] of Object.entries(schema.properties)) {
     if (child.properties != null) {
-      const childIds = getChildFieldIds(key, child)
-      childIds.map(x => `${id}.${x}`)
+      const childIds = getChildFieldIds(key, child).map(x => `${id}.${x}`)
       children.push(...childIds)
     } else {
       children.push(`${id}.${key}`)
