@@ -29,11 +29,6 @@ const value = defineModel<{ street: string; number: string; unit: string; zipCod
   required: true
 })
 
-const options = computed(() => ({
-  ...props,
-  jsonSchemaPath: `${props.id}${props.jsonSchemaPath}`
-}))
-
 const emit = defineEmits(['update:modelValue'])
 const onInput = (value: unknown, key: string) => {
   emit('update:modelValue', { ...props.modelValue, [key]: value })
