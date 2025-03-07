@@ -73,7 +73,7 @@ const steps = computed(() =>
 const onNext = async () => {
   const child = children.value[stage.value]
   if (!(await props.validateFields(getChildFieldIds(child[0], child[1])))) return
-  stage.value++
+  if (stage.value < steps.value.length) stage.value++
 }
 </script>
 
