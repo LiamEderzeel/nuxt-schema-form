@@ -5,7 +5,6 @@
   "required": [
     "participant",
     "guardian",
-    "permissions",
     "misc"
   ],
   "renderer": "MultiStage",
@@ -19,8 +18,7 @@
         "birthDate",
         "tshirtSize",
         "tennisLevel",
-        "swimmingLevel",
-        "health"
+        "swimmingLevel"
       ],
       "properties": {
         "flex": {
@@ -47,14 +45,13 @@
         },
         "birthDate": {
           "title": "Geboorte datum",
-          "format": "date-time",
-          "default": "2000-01-01T00:00:00.000Z",
+          "format": "full-date",
+          "default": "2000-01-01",
           "type": "string"
         },
         "tshirtSize": {
-          "title": "T-shirt size",
+          "title": "T-shirt maat",
           "renderer": "SSelect",
-          "description": "T-shirt size",
           "enum": [
             "s",
             "m",
@@ -108,7 +105,11 @@
       "icon": "lucide:users",
       "type": "object",
       "required": [
-        "flex"
+        "flex",
+        "email",
+        "phoneNumber",
+        "emergencyNumber",
+        "address"
       ],
       "properties": {
         "flex": {
@@ -144,14 +145,12 @@
           "title": "Telefoon nummber",
           "description": "Telefoon nummer voor contact of noodgevallen",
           "type": "string",
-          "format": "email",
           "default": ""
         },
         "emergencyNumber": {
           "title": "Extra nood nummer",
           "description": "Telefoon nummer om te bellen bij nood",
           "type": "string",
-          "format": "email",
           "default": ""
         },
         "address": {
@@ -188,24 +187,22 @@
         }
       }
     },
-    "permissions": {
-      "title": "Toestemmig",
+    "misc": {
+      "title": "Inschrijven",
       "type": "object",
       "required": [
-        "permissions"
+        "permission",
+        "found"
       ],
       "properties": {
-        "permissions": {
+        "permission": {
           "title": "Toestemming",
           "description": "Door middel van het aanvinken van onderstaande selectiebox, geef hierbij toestemming voor de vastlegging en de weergave van mijn naam, beeltenis en afbeelding verbonden aan mijn persoon, in foto&#39;s, beelden, of audiovisuele opnamen gemaakt, alsook in publiciteit over de onderneming.",
           "const": false,
+          "enum": [
+            false
+          ],
           "type": "boolean"
-        },
-        "questions": {
-          "title": "Vragen",
-          "renderer": "STextarea",
-          "description": "Overige opmerkingen/bijzonderheden/vragen?",
-          "type": "string"
         },
         "found": {
           "title": "Hoe bent u erachter gekomen dat er een kamp was:",
@@ -217,6 +214,12 @@
             "socialMedia",
             "other"
           ],
+          "type": "string"
+        },
+        "questions": {
+          "title": "Vragen",
+          "renderer": "STextarea",
+          "description": "Overige opmerkingen/bijzonderheden/vragen?",
           "type": "string"
         }
       }
