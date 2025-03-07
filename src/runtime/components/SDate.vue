@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { format } from 'date-fns'
-import { computed, ref } from 'vue'
+import { ref, watch } from 'vue'
 import DatePicker from './DatePicker.vue'
+
 const props = defineProps<{
   id: string
   title?: string
@@ -12,6 +13,9 @@ const props = defineProps<{
 
 const value = defineModel<string>({ required: true })
 const date = ref(new Date(value.value))
+watch(date, () => {
+  value.value = date.value.toISOString()
+})
 </script>
 
 <template>

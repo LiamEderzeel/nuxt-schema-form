@@ -26,7 +26,7 @@ const value = defineModel<unknown>({ required: true, default: '' })
 
 const options = computed(() => ({
   ...props,
-  jsonSchemaPath: `${props.id}${props.jsonSchemaPath}`
+  jsonSchemaPath: `${props.jsonSchemaPath}.${props.id}`
 }))
 </script>
 
@@ -39,7 +39,7 @@ const options = computed(() => ({
       v-model="value"
     />
 
-    <SDate v-else-if="type === 'string' && format === 'date-time'" v-bind="options" v-model="value" />
+    <SDate v-else-if="type === 'string' && format === 'full-date'" v-bind="options" v-model="value" />
     <SInputField v-else-if="type === 'string'" v-bind="options" v-model="value" />
     <SToggle v-else-if="type === 'boolean'" v-bind="options" v-model="value" />
     <SObject v-else-if="type === 'object'" v-bind="options" v-model="value" />
