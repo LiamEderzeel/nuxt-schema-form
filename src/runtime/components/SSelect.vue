@@ -1,10 +1,15 @@
 <script lang="ts" setup>
+import { computed } from 'vue'
+
 const props = defineProps<{
   id: string
   title?: string
   description?: string
   enum: string[]
+  enum_titles: string[]
 }>()
+
+const options = computed(() => props.enum.map((x, i) => ({ key: props?.enum_titles?.[i] ?? x, value: x })))
 
 const value = defineModel<string>({ required: true })
 </script>
@@ -12,7 +17,13 @@ const value = defineModel<string>({ required: true })
 <template>
   <div>
     <UFormGroup :label="props.title || id" :description="props.description" :name="props.id">
-      <USelect v-model="value" placeholder="select size" :options="props.enum" />
+      <USelect
+        v-model="value"
+        placeholder="select size"
+        :options="options"
+        value-attribute="value"
+        option-attribute="key"
+      />
     </UFormGroup>
   </div>
 </template>

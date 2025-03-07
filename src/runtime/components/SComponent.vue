@@ -12,6 +12,7 @@ export type SComponentProps = {
   type: string
   properties?: Properties
   enum?: string[]
+  enum_titles?: string[]
   format?: string
   description?: string
   jsonSchemaPath?: string

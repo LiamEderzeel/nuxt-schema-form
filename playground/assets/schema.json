@@ -74,6 +74,13 @@
             "yellow",
             "other"
           ],
+          "enum_titles": [
+            "rood",
+            "oranje",
+            "groen",
+            "geel",
+            "overige"
+          ],
           "type": "string"
         },
         "swimmingLevel": {
