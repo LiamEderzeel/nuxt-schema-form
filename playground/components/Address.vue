@@ -21,11 +21,11 @@ type PropertiesType = {
   number: Default
   unit: Default
   zipCode: Default
-  country: Default
+  city: Default
   [key: string]: unknown
 }
 
-const value = defineModel<{ street: string; number: string; unit: string; zipCode: string; country: string }>({
+const value = defineModel<{ street: string; number: string; unit: string; zipCode: string; city: string }>({
   required: true
 })
 
@@ -38,43 +38,34 @@ const onInput = (value: unknown, key: string) => {
 <template>
   <div>
     <div class="flex flex-row gap-4">
+      <SInputField v-bind="{
+        ...properties.street,
+        id: `${id}.street`,
+        jsonSchemaPath: `${props.jsonSchemaPath}.properties.street`
+      }" v-model="value.street" @update:model-value="event => onInput(event, 'street')"
+        :isRequired="required.includes('street')" class="flex flex-col flex-4" />
+      <SInputField v-bind="{
+        ...properties.number,
+        id: `${id}.number`,
+        jsonSchemaPath: `${props.jsonSchemaPath}.properties.number`
+      }" v-model="value.number" @update:model-value="event => onInput(event, 'number')"
+        :isRequired="required.includes('number')" class="flex flex-col flex-1" />
       <SInputField
-        v-bind="{ ...properties.street, jsonSchemaPath: `${props.id}${props.jsonSchemaPath}` }"
-        v-model="value.street"
-        @update:model-value="event => onInput(event, 'street')"
-        :isRequired="required.includes('street')"
-        class="flex flex-col flex-4"
-      />
-      <SInputField
-        v-bind="{ ...properties.number, jsonSchemaPath: `${props.id}${props.jsonSchemaPath}` }"
-        v-model="value.number"
-        @update:model-value="event => onInput(event, 'number')"
-        :isRequired="required.includes('number')"
-        class="flex flex-col flex-1"
-      />
-      <SInputField
-        v-bind="{ ...properties.unit, jsonSchemaPath: `${props.id}${props.jsonSchemaPath}` }"
-        v-model="value.unit"
-        @update:model-value="event => onInput(event, 'unit')"
-        :isRequired="required.includes('unit')"
-        class="flex flex-col flex-1"
-      />
+        v-bind="{ ...properties.unit, id: `${id}.unit`, jsonSchemaPath: `${props.jsonSchemaPath}.properties.unit` }"
+        v-model="value.unit" @update:model-value="event => onInput(event, 'unit')"
+        :isRequired="required.includes('unit')" class="flex flex-col flex-1" />
     </div>
     <div class="flex flex-row gap-4">
+      <SInputField v-bind="{
+        ...properties.zipCode,
+        id: `${id}.zipCode`,
+        jsonSchemaPath: `${props.jsonSchemaPath}.properties.zipCode`
+      }" v-model="value.zipCode" @update:model-value="event => onInput(event, 'zipCode')"
+        :isRequired="required.includes('zipCode')" class="flex flex-col flex-2" />
       <SInputField
-        v-bind="{ ...properties.zipCode, jsonSchemaPath: `${props.id}${props.jsonSchemaPath}` }"
-        v-model="value.zipCode"
-        @update:model-value="event => onInput(event, 'zipCode')"
-        :isRequired="required.includes('zipCode')"
-        class="flex flex-col flex-2"
-      />
-      <SInputField
-        v-bind="{ ...properties.city, jsonSchemaPath: `${props.id}${props.jsonSchemaPath}` }"
-        v-model="value.city"
-        @update:model-value="event => onInput(event, 'city')"
-        :isRequired="required.includes('city')"
-        class="flex flex-col flex-1"
-      />
+        v-bind="{ ...properties.city, id: `${id}.city`, jsonSchemaPath: `${props.jsonSchemaPath}.properties.city` }"
+        v-model="value.city" @update:model-value="event => onInput(event, 'city')"
+        :isRequired="required.includes('city')" class="flex flex-col flex-1" />
     </div>
   </div>
 </template>
