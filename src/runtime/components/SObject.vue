@@ -31,6 +31,7 @@ const onInput = (value: unknown, key: string) => {
       :model-value="modelValue[key]"
       :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${key}` : `${jsonSchemaPath}.properties.${key}`"
       v-bind="options"
+      class="mt-4"
       @update:model-value="event => onInput(event, key)"
     />
   </div>
