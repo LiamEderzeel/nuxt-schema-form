@@ -16,6 +16,8 @@ export type SComponentProps = {
   format?: string
   description?: string
   jsonSchemaPath?: string
+  required?: string[]
+  isRequired: boolean
   validateFields?: (fields: string[]) => Promise<boolean>
 }
 

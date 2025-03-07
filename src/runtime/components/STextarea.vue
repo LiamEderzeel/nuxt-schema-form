@@ -3,6 +3,7 @@ const props = defineProps<{
   id: string
   title?: string
   description?: string
+  isRequired: boolean
 }>()
 
 const value = defineModel<string | number>({ required: true })
@@ -10,7 +11,12 @@ const value = defineModel<string | number>({ required: true })
 
 <template>
   <div>
-    <UFormGroup :label="props.title || id" :description="props.description" :name="props.id">
+    <UFormGroup
+      :label="props.title || id"
+      :hint="!props.isRequired ? 'optional' : undefined"
+      :description="props.description"
+      :name="props.id"
+    >
       <UTextarea v-model="value" v-bind="properties" />
     </UFormGroup>
   </div>

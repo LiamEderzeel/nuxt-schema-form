@@ -22,6 +22,8 @@ const props = defineProps<{
   validateFields: (fields: string[]) => Promise<boolean>
   properties: { [key: string]: PropertiesType }
   modelValue: Record<string, unknown>
+  required: string[]
+  isRequired: boolean
 }>()
 
 type PropertiesType = {
@@ -131,6 +133,7 @@ const onNext = async () => {
           :model-value="modelValue[key]"
           :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${key}` : `${jsonSchemaPath}.properties.${key}`"
           v-bind="options"
+          :isRequired="required.includes(key)"
           @update:model-value="event => onInput(event, key)"
         />
       </section>

@@ -7,6 +7,7 @@ const props = defineProps<{
   title?: string
   description?: string
   type: string
+  isRequired: boolean
 }>()
 
 const value = defineModel<string>({ required: true })
@@ -15,7 +16,12 @@ const date = ref(new Date(value.value))
 
 <template>
   <div>
-    <UFormGroup :label="props.title || id" :description="props.description" :name="props.id">
+    <UFormGroup
+      :label="props.title || id"
+      :hint="!props.isRequired ? 'optional' : undefined"
+      :description="props.description"
+      :name="props.id"
+    >
       <UPopover :popper="{ placement: 'bottom-start' }">
         <UButton icon="i-heroicons-calendar-days-20-solid" :label="format(date, 'd MMM, yyy')" />
 

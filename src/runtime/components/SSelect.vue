@@ -7,6 +7,7 @@ const props = defineProps<{
   description?: string
   enum: string[]
   enum_titles: string[]
+  isRequired: boolean
 }>()
 
 const options = computed(() => props.enum.map((x, i) => ({ key: props?.enum_titles?.[i] ?? x, value: x })))
@@ -16,7 +17,12 @@ const value = defineModel<string>({ required: true })
 
 <template>
   <div>
-    <UFormGroup :label="props.title || id" :description="props.description" :name="props.id">
+    <UFormGroup
+      :label="props.title || id"
+      :hint="!props.isRequired ? 'optional' : undefined"
+      :description="props.description"
+      :name="props.id"
+    >
       <USelect
         v-model="value"
         placeholder="select size"

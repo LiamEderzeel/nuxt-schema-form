@@ -4,6 +4,7 @@ const props = defineProps<{
   title?: string
   description?: string
   type: string
+  isRequired: boolean
 }>()
 
 const value = defineModel<string | number>({ required: true })
@@ -11,7 +12,12 @@ const value = defineModel<string | number>({ required: true })
 
 <template>
   <div>
-    <UFormGroup :label="props.title || id" :description="props.description" :name="props.id">
+    <UFormGroup
+      :label="props.title || id"
+      :hint="!props.isRequired ? 'optional' : undefined"
+      :description="props.description"
+      :name="props.id"
+    >
       <UInput v-model="value" :type="props.type" />
     </UFormGroup>
   </div>

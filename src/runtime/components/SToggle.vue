@@ -3,6 +3,8 @@ const props = defineProps<{
   id: string
   title?: string
   description?: string
+  enum?: boolean[]
+  isRequired: boolean
 }>()
 
 const value = defineModel<boolean>({ required: true })
@@ -10,7 +12,12 @@ const value = defineModel<boolean>({ required: true })
 
 <template>
   <div>
-    <UFormGroup :label="props.title || id" :description="props.description" :name="props.id">
+    <UFormGroup
+      :label="props.title || id"
+      :hint="!props.isRequired ? 'optional' : undefined"
+      :description="props.description"
+      :name="props.id"
+    >
       <UToggle v-model="value" />
     </UFormGroup>
   </div>
