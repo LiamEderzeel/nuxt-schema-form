@@ -1,22 +1,10 @@
 <script lang="ts" setup>
 import { Draft2019 } from 'json-schema-library'
 
-const schemaObject = ref(
-  new Draft2019({
-    title: 'From',
-    description: 'A minimal form example',
-    type: 'object',
-    required: ['firstname'],
-    properties: {
-      firstname: {
-        title: 'Firstname',
-        description: 'Firstname field for submitting a first name',
-        type: 'string',
-        default: ''
-      }
-    }
-  })
-)
+import formSchema from '@/assets/schema-flex.json'
+// import formSchema from '@/assets/schema-basic.json'
+
+const schemaObject = ref(new Draft2019(formSchema))
 
 const schema = ref(schemaObject.value.rootSchema)
 const state = ref(schemaObject.value.getTemplate())

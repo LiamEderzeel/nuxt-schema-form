@@ -1,0 +1,16 @@
+{
+  "title": "From",
+  "description": "A minimal form example",
+  "type": "object",
+  "required": [
+    "firstname"
+  ],
+  "properties": {
+    "firstname": {
+      "title": "Firstname",
+      "description": "Firstname field for submitting a first name",
+      "type": "string",
+      "default": ""
+    }
+  }
+}
