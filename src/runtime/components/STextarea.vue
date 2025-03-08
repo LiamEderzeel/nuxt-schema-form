@@ -17,7 +17,7 @@ const value = defineModel<string | number>({ required: true })
       :description="props.description"
       :name="props.id"
     >
-      <UTextarea v-model="value" v-bind="properties" />
+      <UTextarea v-model="value" />
     </UFormGroup>
   </div>
 </template>
