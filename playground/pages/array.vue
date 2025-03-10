@@ -11,7 +11,9 @@ const state = ref(schemaObject.value.getTemplate())
 </script>
 
 <template>
-  <div>
-    <SForm v-if="schema" v-model="state" :schema="schema"> </SForm>
+  <div class="w-full pt-10 flex justify-center">
+    <UCard class="w-full max-w-[1200px] p-10">
+      <SForm v-if="schema" v-model="state" :schema="schema"> </SForm>
+    </UCard>
   </div>
 </template>

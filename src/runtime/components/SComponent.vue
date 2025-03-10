@@ -19,6 +19,9 @@ export type SComponentProps = {
   required?: string[]
   isRequired: boolean
   items?: { [key: string]: unknown }
+  edit?: boolean
+  minItems?: number
+  maxItems?: number
   validateFields?: (fields: string[]) => Promise<boolean>
 }
 
@@ -37,8 +40,13 @@ const onSubmit = () => {
 
 <template>
   <div class="s-form-group">
-    <component v-if="renderer" v-bind="options" v-model="value"
-      :is="typeof renderer === 'string' ? renderer : undefined" @submit="onSubmit" />
+    <component
+      v-if="renderer"
+      v-bind="options"
+      v-model="value"
+      :is="typeof renderer === 'string' ? renderer : undefined"
+      @submit="onSubmit"
+    />
 
     <SDate v-else-if="type === 'string' && format === 'full-date'" v-bind="options" v-model="value" />
     <SInputField v-else-if="type === 'string'" v-bind="options" v-model="value" />

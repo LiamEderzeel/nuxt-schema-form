@@ -13,9 +13,20 @@ const props = defineProps<{
   isRequired: boolean
   minItems?: number
   maxItems?: number
+  edit?: boolean
+  columns?: ColumnItem[]
 }>()
 
+type ColumnItem = {
+  key: string
+  label?: string
+  class?: string
+}
+
 type PropertiesType = {
+  properties: {
+    [key: string]: unknown
+  }
   [key: string]: unknown
 }
 const emit = defineEmits(['update:modelValue', 'submit'])
@@ -24,17 +35,88 @@ const onInput = (value: unknown, index: number) => {
   emit('update:modelValue', props.modelValue)
 }
 
+const schemaObject = ref(new Draft2019(props.items))
+
 const values = computed(() => {
   if (props.modelValue.length > 0) {
     return props.modelValue
-  } else if (props.minItems > 0) {
-    const schemaObject = ref(new Draft2019(props.items))
-
+  } else if (props.minItems && props.minItems > 0) {
     const template = schemaObject.value.getTemplate()
     return [...Array(props.minItems)].map(_ => template)
   }
 
   return []
+})
+
+const add = () => {
+  emit('update:modelValue', [...props.modelValue, schemaObject.value.getTemplate()])
+}
+
+const model = ref({
+  open: false,
+  index: 0
+})
+
+const open = (index: number) => {
+  model.value = { open: true, index: index }
+}
+const actions = (i: number) => [
+  [
+    {
+      label: 'edit',
+      click: () => open(i)
+    }
+  ],
+  [
+    {
+      label: 'delete',
+      click: () => open(i)
+    }
+  ]
+]
+
+const columns = computed(() => {
+  const columns = props.columns ?? []
+
+  if (props.items.type === 'object') {
+    for (const column of Object.keys(props?.items?.properties).map(x => ({ key: x, label: x }))) {
+      columns.push(column)
+    }
+  }
+
+  if (props.edit) {
+    columns.push({
+      key: 'actions',
+      class: 'w-2'
+    })
+  }
+
+  return columns
+})
+
+const selectedRows = ref([])
+
+const todoStatus = [
+  {
+    key: 'uncompleted',
+    label: 'In Progress',
+    value: false
+  },
+  {
+    key: 'completed',
+    label: 'Completed',
+    value: true
+  }
+]
+const options = computed(() => {
+  if (props.edit) {
+    return {
+      modelValue: selectedRows.value,
+      'onUpdate:modelValue': value => (selectedRows.value = value)
+    }
+  } else {
+    return {}
+  }
 })
 </script>
 
@@ -44,11 +126,56 @@ const values = computed(() => {
     <p v-if="props.description" class="mb-4">{{ props.description }}</p>
 
     <div>
-      <SComponent v-for="(value, i) of modelValue" :id="id.length <= 0 ? `${i}` : `${id}[0].${items.id}`" :key="i"
-        :model-value="value"
-        :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${i}` : `${jsonSchemaPath}[${i}]`" v-bind="items"
-        :isRequired="false" class="mt-4" @update:model-value="event => onInput(event, i)"
-        @submit="() => emit('submit')" />
+      <div class="flex justify-between items-center w-full px-4 py-3">
+        <div class="flex gap-1.5 items-center">
+          <UButton
+            v-if="edit"
+            :disabled="maxItems && values.length >= maxItems"
+            @click="add"
+            icon="i-heroicons-plus"
+            trailing
+            color="gray"
+            size="xs"
+          />
+        </div>
+        <div class="flex gap-1.5 items-center">
+          <UDropdown v-if="selectedRows.length > 1" :items="actions" :ui="{ width: 'w-36' }">
+            <UButton icon="i-heroicons-chevron-down" trailing color="gray" size="xs"> Action </UButton>
+          </UDropdown>
+        </div>
+      </div>
+      <UTable v-bind="options" :rows="values" :columns="columns">
+        <template #name-data="{ row }">
+          <span :class="[selected.find(person => person.id === row.id) && 'text-primary-500 dark:text-primary-400']">{{
+            row.name
+          }}</span>
+        </template>
+
+        <template #actions-data="{ row }">
+          <UDropdown :items="actions(row)">
+            <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
+          </UDropdown>
+        </template>
+      </UTable>
     </div>
+    <UModal v-model="model.open">
+      <UCard>
+        <SComponent
+          :id="id.length <= 0 ? `${model.index}` : `${id}[0].${items.id}`"
+          :model-value="values[model.index]"
+          :json-schema-path="
+            jsonSchemaPath?.length <= 0 ? `properties.${model.index}` : `${jsonSchemaPath}[${model.index}]`
+          "
+          v-bind="items"
+          :isRequired="false"
+          class="mt-4"
+          @update:model-value="event => onInput(event, model.index)"
+          @submit="() => emit('submit')"
+        />
+        <template #footer>
+          <UButton>Save</UButton>
+        </template>
+      </UCard>
+    </UModal>
   </div>
 </template>
