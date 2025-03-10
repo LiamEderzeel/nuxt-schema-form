@@ -40,10 +40,10 @@ const schemaObject = ref(new Draft2019(props.items))
 
 const values = computed(() => {
   if (props.modelValue.length > 0) {
-    return props.modelValue
+    return props.modelValue.map((x, i) => ({ ...x, __id: i }))
   } else if (props.minItems && props.minItems > 0) {
     const template = schemaObject.value.getTemplate()
-    return [...Array(props.minItems)].map(_ => template)
+    return [...Array(props.minItems)].map((_, i) => ({ ...template, __id: i }))
   }
 
   return []
@@ -51,6 +51,20 @@ const values = computed(() => {
 
 const add = () => {
   emit('update:modelValue', [...props.modelValue, schemaObject.value.getTemplate()])
+}
+
+const remove = (index: number) => {
+  const res = props.modelValue.splice(index, 1)
+  emit('update:modelValue', res)
+}
+
+const massRemove = () => {
+  let res = props.modelValue
+  for (const index of selectedRows.value.map(x => x.__id)) {
+    res.splice(index, 1)
+  }
+
+  emit('update:modelValue', res)
 }
 
 const model = ref({
@@ -61,6 +75,7 @@ const model = ref({
 const open = (index: number) => {
   model.value = { open: true, index: index }
 }
+
 const actions = (i: number) => [
   [
     {
@@ -71,7 +86,22 @@ const actions = (i: number) => [
   [
     {
       label: 'delete',
-      click: () => open(i)
+      click: () => {
+        remove(i)
+        selectedRows.value = []
+      }
+    }
+  ]
+]
+
+const massActions = [
+  [
+    {
+      label: 'delete',
+      click: () => {
+        massRemove()
+        selectedRows.value = []
+      }
     }
   ]
 ]
@@ -148,12 +178,12 @@ const options = computed(() => {
           />
         </div>
         <div class="flex gap-1.5 items-center">
-          <UDropdown v-if="selectedRows.length > 1" :items="actions" :ui="{ width: 'w-36' }">
+          <UDropdown v-if="selectedRows.length > 0" :items="massActions">
             <UButton icon="i-heroicons-chevron-down" trailing color="gray" size="xs"> Action </UButton>
           </UDropdown>
         </div>
       </div>
-      <UTable v-bind="options" :rows="values" :columns="columns">
+      <UTable v-bind="options" by="__id" :rows="values" :columns="columns">
         <template #name-data="{ row }">
           <span :class="[selected.find(person => person.id === row.id) && 'text-primary-500 dark:text-primary-400']">{{
             row.name
