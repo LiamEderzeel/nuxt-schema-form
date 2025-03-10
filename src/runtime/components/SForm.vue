@@ -54,12 +54,17 @@ const submit = () => {
   <div>
     {{ formRef ? formRef.errors : undefined }}
     <UForm ref="formRef" :state="value" :schema="formValidationSchema" autocomplete="on" @submit="onSubmit">
-      <SComponent v-model="value" v-bind="schema" :validate-fields="validateFields" @submit="submit"
-        :isRequired="true" />
+      <SComponent
+        v-model="value"
+        v-bind="schema"
+        :validate-fields="validateFields"
+        @submit="submit"
+        :isRequired="true"
+      />
       <slot />
 
       <slot name="submit">
-        <UButton class="btn" type="submit"> Submit </UButton>
+        <UButton class="btn mt-4" type="submit"> Submit </UButton>
       </slot>
     </UForm>
   </div>

@@ -15,6 +15,7 @@ const props = defineProps<{
   maxItems?: number
   edit?: boolean
   columns?: ColumnItem[]
+  editInline?: boolean
 }>()
 
 type ColumnItem = {
@@ -108,15 +109,23 @@ const todoStatus = [
     value: true
   }
 ]
+
+const expand = ref({
+  openedRows: [],
+  row: null
+})
+
 const options = computed(() => {
+  const res = {}
   if (props.edit) {
-    return {
-      modelValue: selectedRows.value,
-      'onUpdate:modelValue': value => (selectedRows.value = value)
-    }
-  } else {
-    return {}
+    res.modelValue = selectedRows.value
+    res['onUpdate:modelValue'] = value => (selectedRows.value = value)
   }
+  if (props.editInline) {
+    res.expand = expand.value
+    res['update:expand'] = value => (expand.value = value)
+  }
+  return res
 })
 </script>
 
@@ -151,8 +160,23 @@ const options = computed(() => {
           }}</span>
         </template>
 
-        <template #actions-data="{ row }">
-          <UDropdown :items="actions(row)">
+        <template #expand="{ row, index }">
+          <div class="p-4">
+            <SComponent
+              :id="id.length <= 0 ? `${index}` : `${id}[${index}].${items.id}`"
+              :model-value="row"
+              :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${index}` : `${jsonSchemaPath}[${index}]`"
+              v-bind="items"
+              :isRequired="false"
+              class="mt-4"
+              @update:model-value="event => onInput(event, index)"
+              @submit="() => emit('submit')"
+            />
+          </div>
+        </template>
+
+        <template #actions-data="{ index }">
+          <UDropdown :items="actions(index)">
             <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
           </UDropdown>
         </template>
