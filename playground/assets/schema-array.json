@@ -1,0 +1,106 @@
+{
+  "title": "From",
+  "description": "A minimal form example",
+  "type": "object",
+  "required": [
+    "list",
+    "listEditable",
+    "listEditableInline"
+  ],
+  "properties": {
+    "list": {
+      "title": "Array ",
+      "description": "Array of items",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 5,
+      "edit": false,
+      "items": {
+        "title": "From",
+        "description": "A minimal form example",
+        "type": "object",
+        "required": [
+          "firstname",
+          "lastname"
+        ],
+        "properties": {
+          "firstname": {
+            "title": "Firstname",
+            "description": "Firstname field for submitting a first name",
+            "type": "string",
+            "default": "Jan"
+          },
+          "lastname": {
+            "title": "Lastname",
+            "description": "Last field for submitting a first name",
+            "type": "string",
+            "default": "Jackson"
+          }
+        }
+      }
+    },
+    "listEditable": {
+      "title": "Array Editable",
+      "description": "Array of items that can be edited with model",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 5,
+      "edit": true,
+      "items": {
+        "title": "From",
+        "description": "A minimal form example",
+        "type": "object",
+        "required": [
+          "firstname",
+          "lastname"
+        ],
+        "properties": {
+          "firstname": {
+            "title": "Firstname",
+            "description": "Firstname field for submitting a first name",
+            "type": "string",
+            "default": "Peter"
+          },
+          "lastname": {
+            "title": "Lastname",
+            "description": "Last field for submitting a first name",
+            "type": "string",
+            "default": "Jackson"
+          }
+        }
+      }
+    },
+    "listEditableInline": {
+      "title": "Array Editable inline",
+      "description": "Array of items that can be edited inline",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 5,
+      "edit": true,
+      "editInline": true,
+      "items": {
+        "title": "From",
+        "description": "A minimal form example",
+        "type": "object",
+        "required": [
+          "firstname",
+          "lastname"
+        ],
+        "properties": {
+          "firstname": {
+            "title": "Firstname",
+            "description": "Firstname field for submitting a first name",
+            "type": "string",
+            "default": "Peter"
+          },
+          "lastname": {
+            "title": "Lastname",
+            "description": "Last field for submitting a first name",
+            "type": "string",
+            "default": "Jackson"
+          }
+        }
+      }
+    }
+  }
+}

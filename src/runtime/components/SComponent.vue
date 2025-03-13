@@ -9,7 +9,7 @@ export type SComponentProps = {
   id?: string
   title?: string
   renderer?: string
-  type: string
+  type?: string
   properties?: Properties
   enum?: string[]
   enum_titles?: string[]
@@ -18,10 +18,15 @@ export type SComponentProps = {
   jsonSchemaPath?: string
   required?: string[]
   isRequired: boolean
+  items?: { [key: string]: unknown }
+  edit?: boolean
+  minItems?: number
+  maxItems?: number
+  editInline?: boolean
   validateFields?: (fields: string[]) => Promise<boolean>
 }
 
-const props = withDefaults(defineProps<SComponentProps>(), { id: '', jsonSchemaPath: 'test' })
+const props = withDefaults(defineProps<SComponentProps>(), { id: '', jsonSchemaPath: '' })
 const value = defineModel<unknown>({ required: true, default: '' })
 const emit = defineEmits(['submit'])
 
@@ -36,13 +41,19 @@ const onSubmit = () => {
 
 <template>
   <div class="s-form-group">
-    <component v-if="renderer" v-bind="options" v-model="value"
-      :is="typeof renderer === 'string' ? renderer : undefined" @submit="onSubmit" />
+    <component
+      v-if="renderer"
+      v-bind="options"
+      v-model="value"
+      :is="typeof renderer === 'string' ? renderer : undefined"
+      @submit="onSubmit"
+    />
 
     <SDate v-else-if="type === 'string' && format === 'full-date'" v-bind="options" v-model="value" />
     <SInputField v-else-if="type === 'string'" v-bind="options" v-model="value" />
     <SToggle v-else-if="type === 'boolean'" v-bind="options" v-model="value" />
     <SObject v-else-if="type === 'object'" v-bind="options" v-model="value" @submit="onSubmit" />
+    <SArray v-else-if="type === 'array'" v-bind="options" v-model="value" />
     <div v-else>else</div>
   </div>
 </template>
