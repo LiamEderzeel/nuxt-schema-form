@@ -22,16 +22,21 @@ async function onSubmit(_event: unknown) {
 const formValidationSchema = computed(() => convertToYup(props.schema, props?.options?.jsonSchemaYupTransfromer ?? {}))
 
 export type CustomValidation = {
-  field: string
+  name: string
   message: string
   validate(state: any): boolean
 }
 
 const validateFields = async (fields: string[]) => {
   let allValid = true
-  for (const field of fields) {
-    if (!(await formRef.value.validate(field, { silent: true }))) {
-      allValid = false
+  for (const name of fields) {
+    try {
+      if (!(await formRef.value.validate({ name: fields, silent: true }))) {
+        allValid = false
+      }
+    } catch (err) {
+      console.log(err)
+      return
     }
   }
 
@@ -39,8 +44,8 @@ const validateFields = async (fields: string[]) => {
     for (const { field, message, validate } of props.options.customValidation) {
       if (!fields.includes(field)) continue
       if (!validate(value.value)) {
-        const errors = [{ path: field, message }]
-        formRef.value.setErrors(errors, field)
+        const errors = [{ name, message }]
+        formRef.value.setErrors(errors, name)
         allValid = false
       }
     }

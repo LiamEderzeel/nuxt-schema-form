@@ -12,13 +12,13 @@ const value = defineModel<boolean>({ required: true })
 
 <template>
   <div>
-    <UFormGroup
+    <UFormField
       :label="props.title || id"
       :hint="!props.isRequired ? 'optional' : undefined"
       :description="props.description"
       :name="props.id"
     >
-      <UToggle v-model="value" />
-    </UFormGroup>
+      <USwitch v-model="value" />
+    </UFormField>
   </div>
 </template>

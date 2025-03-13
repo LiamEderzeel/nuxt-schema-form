@@ -30,12 +30,12 @@ const monacoOptions = computed(
 <template>
   <div class="w-full gap-10 flex">
     <div
-      class="w-1/2 h-[80vh] rounded-md ring-1 focus:ring-2 ring-gray-300 dark:ring-gray-700 overflow-hidden shadow-sm"
+      class="w-1/2 h-[80vh] rounded-md ring-1 focus:ring-2 ring-neutral-300 dark:ring-gray-700 overflow-hidden shadow-sm"
     >
       <MonacoEditor v-model="schemaString" :options="monacoOptions" lang="json" class="h-full rounded-md" />
-      <!-- <UFormGroup :error="error"> -->
-      <!--   <UTextarea v-model="schemaString" @update:model-value="onUpdate" :rows="25" class="w-full" /> -->
-      <!-- </UFormGroup> -->
+      <UFormField :error="error">
+        <UTextarea v-model="schemaString" :rows="25" class="w-full" @update:model-value="onUpdate" />
+      </UFormField>
     </div>
     <div class="w-1/2">
       <SForm v-if="schema && error == null" v-model="state" :schema="schema">
