@@ -1,0 +1,65 @@
+<script setup lang="ts">
+import { mapContentNavigation } from '@nuxt/ui-pro/runtime/utils/content.js'
+import type { ContentNavigationItem } from '@nuxt/content'
+import type { NavigationMenuItem } from '@nuxt/ui'
+
+const appConfig = useAppConfig()
+const radius = computed(() => `:root { --ui-radius: ${appConfig.theme.radius}rem; }`)
+
+useHead({
+  htmlAttrs: { lang: 'en' },
+  meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
+  link: [{ rel: 'icon', href: '/favicon.ico' }],
+  style: [{ innerHTML: radius, id: 'nuxt-ui-radius', tagPriority: -2 }]
+})
+
+// useSeoMeta({
+//   titleTemplate: `%s - ${appConfig.seo.siteName}`,
+//   ogSiteName: appConfig.seo.siteName,
+//   twitterCard: 'summary_large_image'
+// })
+
+// Navigation Data
+const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'))
+const nav = computed<ContentNavigationItem[]>(
+  () => mapContentNavigation(navigation.value).at(0).children as ContentNavigationItem[]
+)
+provide('navigation', nav)
+
+// Search
+const { data: files } = useAsyncData('/api/search.json', () => queryCollectionSearchSections('docs'), { server: false })
+
+const currentVersionNavigation = useNuxtApp().$currentDocsVersionNavigation
+
+// // Header
+const route = useRoute()
+const links = computed<NavigationMenuItem[]>(() => [
+  {
+    label: 'Docs',
+    to: `/docs/getting-started`,
+    // icon: 'i-heroicons-book-open',
+    active: route.path.startsWith('/docs')
+  }
+  // {
+  //   label: 'Roadmap',
+  //   to: '/roadmap',
+  //   icon: 'i-heroicons-map'
+  // }
+])
+</script>
+
+<template>
+  <NuxtLoadingIndicator />
+  <HeaderComponent :links="links" />
+
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
+
+  <FooterComponent />
+
+  <ClientOnly>
+    <LazyUContentSearch :files="files" :navigation="currentVersionNavigation" :multiple="true" :kbds="['meta', 'K']" />
+  </ClientOnly>
+  <UApp></UApp>
+</template>
