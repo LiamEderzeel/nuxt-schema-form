@@ -3,8 +3,12 @@ import SComponent from './SComponent.vue'
 import convertToYup from 'json-schema-yup-transformer'
 import type { JsonSchema } from 'json-schema-library'
 import { computed, ref } from 'vue'
+import type { Config } from 'json-schema-yup-transformer'
 
-const props = defineProps<{ schema: JsonSchema; customValidation?: CustomValidation[] }>()
+const props = defineProps<{
+  schema: JsonSchema
+  options?: { customValidation?: CustomValidation[]; jsonSchemaYupTransfromer?: Config }
+}>()
 
 const value = defineModel<Record<string, unknown>>({ required: true })
 const formRef = ref()
@@ -15,7 +19,8 @@ async function onSubmit(_event: unknown) {
   emit('submit', value.value)
 }
 
-const formValidationSchema = computed(() => convertToYup(props.schema))
+console.log(props?.options?.jsonSchemaYupTransfromer)
+const formValidationSchema = computed(() => convertToYup(props.schema, props?.options?.jsonSchemaYupTransfromer ?? {}))
 
 export type CustomValidation = {
   field: string
@@ -31,8 +36,8 @@ const validateFields = async (fields: string[]) => {
     }
   }
 
-  if (props.customValidation) {
-    for (const { field, message, validate } of props.customValidation) {
+  if (props?.options?.customValidation) {
+    for (const { field, message, validate } of props.options.customValidation) {
       if (!fields.includes(field)) continue
       if (!validate(value.value)) {
         const errors = [{ path: field, message }]
@@ -54,13 +59,8 @@ const submit = () => {
   <div>
     {{ formRef ? formRef.errors : undefined }}
     <UForm ref="formRef" :state="value" :schema="formValidationSchema" autocomplete="on" @submit="onSubmit">
-      <SComponent
-        v-model="value"
-        v-bind="schema"
-        :validate-fields="validateFields"
-        @submit="submit"
-        :isRequired="true"
-      />
+      <SComponent v-model="value" v-bind="schema" :validate-fields="validateFields" @submit="submit"
+        :isRequired="true" />
       <slot />
 
       <slot name="submit">

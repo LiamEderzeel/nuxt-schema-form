@@ -30,14 +30,14 @@
           "renderer": "SRow",
           "properties": {
             "firstname": {
-              "title": "Firstname",
-              "description": "First name pertisipant",
+              "title": "Voornaam",
+              "description": "Voornaam deelnemer",
               "type": "string",
               "default": ""
             },
             "lastname": {
-              "title": "Lastname",
-              "description": "Last name pertisipant",
+              "title": "Achternaam",
+              "description": "Achternaam deelnemer",
               "type": "string",
               "default": ""
             }
@@ -121,14 +121,14 @@
           "renderer": "SRow",
           "properties": {
             "firstname": {
-              "title": "Firstname",
-              "description": "First name pertisipant",
+              "title": "Voornaam",
+              "description": "Voornaam voogd",
               "type": "string",
               "default": ""
             },
             "lastname": {
               "title": "Lastname",
-              "description": "Last name pertisipant",
+              "description": "Achternaame voogd",
               "type": "string",
               "default": ""
             }
@@ -136,7 +136,7 @@
         },
         "email": {
           "title": "Email",
-          "description": "Last name pertisipant",
+          "description": "Email address voogd",
           "type": "string",
           "format": "email",
           "default": ""
