@@ -19,7 +19,6 @@ async function onSubmit(_event: unknown) {
   emit('submit', value.value)
 }
 
-console.log(props?.options?.jsonSchemaYupTransfromer)
 const formValidationSchema = computed(() => convertToYup(props.schema, props?.options?.jsonSchemaYupTransfromer ?? {}))
 
 export type CustomValidation = {
@@ -57,7 +56,7 @@ const submit = () => {
 
 <template>
   <div>
-    {{ formRef ? formRef.errors : undefined }}
+    <!-- {{ formRef ? formRef.errors : undefined }} -->
     <UForm ref="formRef" :state="value" :schema="formValidationSchema" autocomplete="on" @submit="onSubmit">
       <SComponent v-model="value" v-bind="schema" :validate-fields="validateFields" @submit="submit"
         :isRequired="true" />
