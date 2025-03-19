@@ -4,7 +4,12 @@ import pkg from "../package.json";
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  modules: ["@nuxt/ui-pro", "@nuxt/content", "@nuxt/eslint"],
+  modules: [
+    "@nuxt/ui-pro",
+    "@nuxt/content",
+    "@nuxt/eslint",
+    "nuxt-component-meta",
+  ],
 
   css: ["~/assets/css/main.css"],
 
@@ -12,6 +17,12 @@ export default defineNuxtConfig({
     public: {
       githubLink: "https://github.com/ederzeel/nuxt-form",
       version: pkg.version,
+    },
+  },
+
+  mdc: {
+    highlight: {
+      noApiRoute: false,
     },
   },
 

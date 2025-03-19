@@ -114,6 +114,12 @@ importers:
       nuxt:
         specifier: ^3.16.0
         version: 3.16.0(@parcel/watcher@2.5.1)(@types/node@22.13.10)(better-sqlite3@11.9.0)(db0@0.3.1(better-sqlite3@11.9.0))(eslint@9.22.0(jiti@2.4.2))(ioredis@5.6.0)(lightningcss@1.29.2)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.35.0)(terser@5.39.0)(typescript@5.8.2)(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)
+      shiki-transformer-color-highlight:
+        specifier: ^1.0.0
+        version: 1.0.0
+      vue-component-meta:
+        specifier: ^2.2.8
+        version: 2.2.8(typescript@5.8.2)
     devDependencies:
       '@iconify-json/heroicons':
         specifier: ^1.2.2
@@ -124,9 +130,24 @@ importers:
       '@nuxt/eslint':
         specifier: ^1.2.0
         version: 1.2.0(@vue/compiler-sfc@3.5.13)(eslint@9.22.0(jiti@2.4.2))(magicast@0.3.5)(typescript@5.8.2)(vite@6.2.2(@types/node@22.13.10)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))
+      '@nuxtjs/mdc':
+        specifier: ^0.15.0
+        version: 0.15.0(magicast@0.3.5)
+      '@vueuse/core':
+        specifier: ^13.0.0
+        version: 13.0.0(vue@3.5.13(typescript@5.8.2))
       eslint:
         specifier: ^9.22.0
         version: 9.22.0(jiti@2.4.2)
+      json5:
+        specifier: ^2.2.3
+        version: 2.2.3
+      ohash:
+        specifier: ^2.0.11
+        version: 2.0.11
+      scule:
+        specifier: ^1.3.0
+        version: 1.3.0
       tailwindcss:
         specifier: 4.0.13
         version: 4.0.13
@@ -2248,6 +2269,9 @@ packages:
 
   colorette@1.4.0:
     resolution: {integrity: sha512-Y2oEozpomLn7Q3HFP7dpww7AtMJplbM9lGZP6RDfHqmbeRjiwRg4n6VM6j4KLmRke85uWEI7JqF17f3pqdRA0g==}
+
+  colorjs.io@0.5.2:
+    resolution: {integrity: sha512-twmVoizEW7ylZSN32OgKdXRmo1qg+wT5/6C3xu5b9QsWzSFAhHLn2xd8ro0diCsKfCj1RdaTP/nrcW+vAoQPIw==}
 
   colortranslator@4.1.0:
     resolution: {integrity: sha512-bwa5awaMnQ6dpm9D3nbsFwUr6x6FrTKmxPdolNtSYfxCNR7ZM93GG1OF5Y3Sy1LvYdalb3riKC9uTn0X5NB36g==}
@@ -4689,6 +4713,9 @@ packages:
   shell-quote@1.8.2:
     resolution: {integrity: sha512-AzqKpGKjrj7EM6rKVQEPpB288oCfnrEIuyoT9cyF4nmGa7V8Zk6f7RRqYisX8X9m+Q7bd632aZW4ky7EhbQztA==}
     engines: {node: '>= 0.4'}
+
+  shiki-transformer-color-highlight@1.0.0:
+    resolution: {integrity: sha512-WwoXcbSQF4Hcfu/F4V7jvZxqmix4f8KNYNlYiNwz0w9RcABqhdNQOLeRRw3VNV2LBYdNcNR0qd9HVnlV+D+uzg==}
 
   shiki@3.2.1:
     resolution: {integrity: sha512-VML/2o1/KGYkEf/stJJ+s9Ypn7jUKQPomGLGYso4JJFMFxVDyPNsjsI3MB3KLjlMOeH44gyaPdXC6rik2WXvUQ==}
@@ -8544,6 +8571,8 @@ snapshots:
 
   colorette@1.4.0: {}
 
+  colorjs.io@0.5.2: {}
+
   colortranslator@4.1.0: {}
 
   comma-separated-tokens@2.0.3: {}
@@ -11890,6 +11919,12 @@ snapshots:
   shebang-regex@3.0.0: {}
 
   shell-quote@1.8.2: {}
+
+  shiki-transformer-color-highlight@1.0.0:
+    dependencies:
+      '@shikijs/core': 3.2.1
+      '@shikijs/types': 3.2.1
+      colorjs.io: 0.5.2
 
   shiki@3.2.1:
     dependencies:
