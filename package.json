@@ -52,7 +52,6 @@
     "eslint-config-prettier": "^10.0.1",
     "globals": "^15.14.0",
     "jiti": "^2.4.2",
-    "json-schema-library": "10.0.0-rc7",
     "json-schema-yup-transformer": "^1.6.12",
     "magic-string": "^0.30.17",
     "mlly": "^1.7.4",
@@ -70,6 +69,7 @@
   },
   "dependencies": {
     "date-fns": "^4.1.0",
+    "json-schema-library": "10.0.0-rc7",
     "v-calendar": "^3.1.2"
   },
   "resolutions": {
