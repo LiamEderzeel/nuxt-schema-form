@@ -6,7 +6,7 @@ import { hash } from 'ohash'
 import { CalendarDate } from '@internationalized/date'
 import * as theme from '#build/ui'
 import * as themePro from '#build/ui-pro'
-import { get, set } from '#ui/utils'
+import { get, set } from '#schema-form/utils'
 
 interface Cast {
   get: (args: any) => any
@@ -104,7 +104,7 @@ const component = defineAsyncComponent(() => {
     return import(`#ui-pro/components/${upperFirst(camelName)}.vue`)
   }
 
-  return import(`#ui/components/${upperFirst(camelName)}.vue`)
+  return import(`#schema-form/components/${upperFirst(camelName)}.vue`)
 })
 
 const componentProps = reactive({
@@ -158,23 +158,23 @@ const options = computed(() => {
     const propItems = get(props.items, key, [])
     const items = propItems.length
       ? propItems.map((item: any) => ({
-        value: item,
-        label: String(item)
-      }))
+          value: item,
+          label: String(item)
+        }))
       : prop?.type === 'boolean' || prop?.type === 'boolean | undefined'
         ? [
-          { value: true, label: 'true' },
-          { value: false, label: 'false' }
-        ]
+            { value: true, label: 'true' },
+            { value: false, label: 'false' }
+          ]
         : Object.keys(componentTheme?.variants?.[key] || {})
-          .filter(variant => {
-            return variant !== 'true' && variant !== 'false'
-          })
-          .map(variant => ({
-            value: variant,
-            label: variant,
-            chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
-          }))
+            .filter(variant => {
+              return variant !== 'true' && variant !== 'false'
+            })
+            .map(variant => ({
+              value: variant,
+              label: variant,
+              chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
+            }))
 
     return {
       name: key,
@@ -345,38 +345,68 @@ const { data: ast } = await useAsyncData(
 <template>
   <div class="my-5">
     <div>
-      <div v-if="options.length"
-        class="flex flex-wrap items-center gap-2.5 border border-(--ui-border-muted) border-b-0 relative rounded-t-[calc(var(--ui-radius)*1.5)] px-4 py-2.5 overflow-x-auto">
+      <div
+        v-if="options.length"
+        class="flex flex-wrap items-center gap-2.5 border border-(--ui-border-muted) border-b-0 relative rounded-t-[calc(var(--ui-radius)*1.5)] px-4 py-2.5 overflow-x-auto"
+      >
         <template v-for="option in options" :key="option.name">
-          <UFormField :label="option.label" size="sm"
-            class="inline-flex ring ring-(--ui-border-accented) rounded-(--ui-radius)" :ui="{
+          <UFormField
+            :label="option.label"
+            size="sm"
+            class="inline-flex ring ring-(--ui-border-accented) rounded-(--ui-radius)"
+            :ui="{
               wrapper: 'bg-(--ui-bg-elevated)/50 rounded-l-(--ui-radius) flex border-r border-(--ui-border-accented)',
               label: 'text-(--ui-text-muted) px-2 py-1.5',
               container: 'mt-0'
-            }">
-            <USelect v-if="option.items?.length" :model-value="getComponentProp(option.name)" :items="option.items"
-              value-key="value" color="neutral" variant="soft" class="rounded-(--ui-radius) rounded-l-none min-w-12"
-              :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']" :ui="{ itemLeadingChip: 'size-2' }"
-              @update:model-value="setComponentProp(option.name, $event)">
+            }"
+          >
+            <USelect
+              v-if="option.items?.length"
+              :model-value="getComponentProp(option.name)"
+              :items="option.items"
+              value-key="value"
+              color="neutral"
+              variant="soft"
+              class="rounded-(--ui-radius) rounded-l-none min-w-12"
+              :class="[option.name.toLowerCase().endsWith('color') && 'pl-6']"
+              :ui="{ itemLeadingChip: 'size-2' }"
+              @update:model-value="setComponentProp(option.name, $event)"
+            >
               <template v-if="option.name.toLowerCase().endsWith('color')" #leading="{ modelValue, ui }">
-                <UChip v-if="modelValue" inset standalone :color="modelValue as any" :size="ui.itemLeadingChipSize()"
-                  class="size-2" />
+                <UChip
+                  v-if="modelValue"
+                  inset
+                  standalone
+                  :color="modelValue as any"
+                  :size="ui.itemLeadingChipSize()"
+                  class="size-2"
+                />
               </template>
             </USelect>
-            <UInput v-else :type="option.type?.includes('number') && typeof getComponentProp(option.name) === 'number' ? 'number' : 'text'
-              " :model-value="getComponentProp(option.name)" color="neutral" variant="soft"
+            <UInput
+              v-else
+              :type="
+                option.type?.includes('number') && typeof getComponentProp(option.name) === 'number' ? 'number' : 'text'
+              "
+              :model-value="getComponentProp(option.name)"
+              color="neutral"
+              variant="soft"
               :ui="{ base: 'rounded-(--ui-radius) rounded-l-none min-w-12' }"
-              @update:model-value="setComponentProp(option.name, $event)" />
+              @update:model-value="setComponentProp(option.name, $event)"
+            />
           </UFormField>
         </template>
       </div>
 
-      <div v-if="component" class="flex justify-center border border-b-0 border-(--ui-border-muted) relative p-4 z-[1]"
+      <div
+        v-if="component"
+        class="flex justify-center border border-b-0 border-(--ui-border-muted) relative p-4 z-[1]"
         :class="[
           !options.length && 'rounded-t-[calc(var(--ui-radius)*1.5)]',
           props.class,
           { 'overflow-hidden': props.overflowHidden }
-        ]">
+        ]"
+      >
         <component :is="component" v-bind="{ ...componentProps, ...componentEvents }">
           <template v-for="slot in Object.keys(slots || {})" :key="slot" #[slot]>
             <slot :name="slot" mdc-unwrap="p">

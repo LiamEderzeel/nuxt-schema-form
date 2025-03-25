@@ -19,7 +19,10 @@ async function onSubmit(_event: unknown) {
   emit('submit', value.value)
 }
 
-const formValidationSchema = computed(() => convertToYup(props.schema, props?.options?.jsonSchemaYupTransfromer ?? {}))
+const formValidationSchema = computed(() => {
+  if (props?.options == null) return {}
+  return convertToYup(props.schema, props?.options?.jsonSchemaYupTransfromer ?? {})
+})
 
 export type CustomValidation = {
   field: string
