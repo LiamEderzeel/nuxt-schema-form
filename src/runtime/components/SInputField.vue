@@ -7,7 +7,7 @@ const props = defineProps<{
   isRequired: boolean
 }>()
 
-const value = defineModel<string | number>({ required: true })
+const value = defineModel<string>({ required: true, default: '' })
 </script>
 
 <template>
