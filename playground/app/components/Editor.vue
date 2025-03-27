@@ -12,6 +12,7 @@ const props = defineProps<{
 const colorMode = useColorMode()
 const schemaString = ref(JSON.stringify(props.schema, null, 2))
 const error = ref()
+
 const schemaObject = ref(new Draft2019(JSON.parse(schemaString.value)))
 const schema2 = ref(schemaObject.value.rootSchema)
 const state = ref(schemaObject.value.getTemplate())
@@ -25,6 +26,12 @@ const monacoOptions = computed(
     scrollBeyondLastLine: false
   })
 )
+
+const onSubmit = (value: any) => {
+  if (value == null) return
+
+  console.log(JSON.stringify(value, null, 2))
+}
 </script>
 
 <template>
