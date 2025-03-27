@@ -34,7 +34,7 @@ const monacoOptions = computed(
     >
       <MonacoEditor v-model="schemaString" :options="monacoOptions" lang="json" class="h-full rounded-md" />
       <UFormField :error="error">
-        <UTextarea v-model="schemaString" :rows="25" class="w-full" @update:model-value="onUpdate" />
+        <UTextarea v-model="schemaString" :rows="25" class="w-full" />
       </UFormField>
     </div>
     <div class="w-1/2">
