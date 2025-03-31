@@ -4,7 +4,7 @@ import type { ContentNavigationItem, DocsCollectionItem } from '@nuxt/content'
 const runtimeConfig = useRuntimeConfig()
 definePageMeta({ layout: 'docs' })
 const route = useRoute()
-// const { $currentDocsVersionNavigation } = useNuxtApp()
+const { $currentDocsVersionNavigation } = useNuxtApp()
 
 // Main page data
 const { data } = await useAsyncData(
@@ -42,7 +42,7 @@ function findPageHeadline(navigation?: ContentNavigationItem[], page?: DocsColle
 if (!data.value) throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 const page = computed(() => data.value?.page)
 const surround = computed(() => data.value?.surround)
-// const headline = computed(() => findPageHeadline($currentDocsVersionNavigation.value, page.value))
+const headline = computed(() => findPageHeadline($currentDocsVersionNavigation.value, page.value))
 
 // Page Metadata (SEO & OG)
 // const { setPageMeta } = usePageMeta()
