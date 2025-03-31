@@ -20,11 +20,11 @@ export function omit<Data extends object, Keys extends keyof Data>(data: Data, k
   return result as Omit<Data, Keys>
 }
 
-export function get(
-  object: Record<string, any> | undefined,
+export function get<T>(
+  object: NestedObject | undefined,
   path: (string | number)[] | string,
-  defaultValue?: any
-): any {
+  defaultValue?: T
+): T | undefined {
   if (typeof path === 'string') {
     path = path.split('.').map(key => {
       const numKey = Number(key)
@@ -32,20 +32,26 @@ export function get(
     })
   }
 
-  let result: any = object
+  let result: NestedObject | undefined = object
 
   for (const key of path) {
     if (result === undefined || result === null) {
       return defaultValue
     }
 
-    result = result[key]
+    if (typeof key === 'string' && !(key in result)) {
+      return defaultValue
+    }
+
+    result = result[key] as NestedObject | undefined
   }
 
-  return result !== undefined ? result : defaultValue
+  return result !== undefined ? (result as T) : defaultValue
 }
 
-export function set(object: Record<string, any>, path: (string | number)[] | string, value: any): void {
+type NestedObject = { [key: string]: any }
+
+export function set(object: NestedObject, path: (string | number)[] | string, value: unknown): void {
   if (typeof path === 'string') {
     path = path.split('.').map(key => {
       const numKey = Number(key)
@@ -53,14 +59,23 @@ export function set(object: Record<string, any>, path: (string | number)[] | str
     })
   }
 
-  path.reduce((acc, key, i) => {
-    if (acc[key] === undefined) acc[key] = {}
-    if (i === path.length - 1) acc[key] = value
-    return acc[key]
+  const keys = path
+  keys.reduce((acc, key, i) => {
+    if (acc[key] === undefined) {
+      acc[key] = isLastKey(i, keys) ? value : {}
+    } else if (i === keys.length - 1) {
+      acc[key] = value
+    }
+    return acc[key] as NestedObject
   }, object)
 }
 
+function isLastKey(index: number, keys: (string | number)[]): boolean {
+  return index === keys.length - 1
+}
+
 export function looseToNumber(val: any): any {
+  if (typeof val !== 'string') return val
   const n = Number.parseFloat(val)
   return Number.isNaN(n) ? val : n
 }
