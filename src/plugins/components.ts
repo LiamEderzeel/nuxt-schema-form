@@ -4,14 +4,14 @@ import { globSync } from 'tinyglobby'
 import AutoImportComponents from 'unplugin-vue-components'
 
 import { runtimeDir } from '../unplugin'
-import type { NuxtUIOptions } from '../unplugin'
+import type { NuxtSchemaFormOptions } from '../unplugin'
 
 /**
  * This plugin adds all the Nuxt UI components as auto-imports.
  */
 export default function ComponentImportPlugin(
   framework: UnpluginContextMeta['framework'],
-  options: NuxtUIOptions & { prefix: NonNullable<NuxtUIOptions['prefix']> }
+  options: NuxtSchemaFormOptions & { prefix: NonNullable<NuxtSchemaFormOptions['prefix']> }
 ) {
   const components = globSync('**/*.vue', { cwd: join(runtimeDir, 'components') })
   const componentNames = new Set(components.map(c => `${options.prefix}${c.replace(/\.vue$/, '')}`))
