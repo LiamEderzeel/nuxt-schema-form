@@ -12,8 +12,9 @@ const props = defineProps<{
 const colorMode = useColorMode()
 const schemaString = ref(JSON.stringify(props.schema, null, 2))
 const error = ref()
+
 const schemaObject = ref(new Draft2019(JSON.parse(schemaString.value)))
-const schema = ref(schemaObject.value.rootSchema)
+const schema2 = ref(schemaObject.value.rootSchema)
 const state = ref(schemaObject.value.getTemplate())
 
 const monacoOptions = computed(
@@ -25,20 +26,26 @@ const monacoOptions = computed(
     scrollBeyondLastLine: false
   })
 )
+
+const onSubmit = (value: any) => {
+  if (value == null) return
+
+  console.log(JSON.stringify(value, null, 2))
+}
 </script>
 
 <template>
   <div class="w-full gap-10 flex">
     <div
-      class="w-1/2 h-[80vh] rounded-md ring-1 focus:ring-2 ring-gray-300 dark:ring-gray-700 overflow-hidden shadow-sm"
+      class="w-1/2 h-[80vh] rounded-md ring-1 focus:ring-2 ring-neutral-300 dark:ring-gray-700 overflow-hidden shadow-sm"
     >
       <MonacoEditor v-model="schemaString" :options="monacoOptions" lang="json" class="h-full rounded-md" />
-      <!-- <UFormGroup :error="error"> -->
-      <!--   <UTextarea v-model="schemaString" @update:model-value="onUpdate" :rows="25" class="w-full" /> -->
-      <!-- </UFormGroup> -->
+      <UFormField :error="error">
+        <UTextarea v-model="schemaString" :rows="25" class="w-full" />
+      </UFormField>
     </div>
     <div class="w-1/2">
-      <SForm v-if="schema && error == null" v-model="state" :schema="schema">
+      <SForm v-if="schema2 && error == null" v-model="state" :schema="schema2" @submit="onSubmit">
         <template #submit>
           {{ undefined }}
         </template>

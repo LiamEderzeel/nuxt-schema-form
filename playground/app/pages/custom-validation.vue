@@ -37,7 +37,7 @@ const jsonSchemaYupTransfromer: Config = {
 
 const customValidation: CustomValidation[] = [
   {
-    field: 'misc.permission',
+    name: 'misc.permission',
     message: 'Toestemming is verplicht',
     validate: (state): boolean => state.misc.permission == true
   }

@@ -173,14 +173,14 @@ const options = computed(() => {
             @click="add"
             icon="i-heroicons-plus"
             trailing
-            color="gray"
+            color="neutral"
             size="xs"
           />
         </div>
         <div class="flex gap-1.5 items-center">
-          <UDropdown v-if="selectedRows.length > 0" :items="massActions">
-            <UButton icon="i-heroicons-chevron-down" trailing color="gray" size="xs"> Action </UButton>
-          </UDropdown>
+          <UDropdownMenu v-if="selectedRows.length > 0" :items="massActions">
+            <UButton icon="i-heroicons-chevron-down" trailing color="neutral" size="xs"> Action </UButton>
+          </UDropdownMenu>
         </div>
       </div>
       <UTable v-bind="options" by="__id" :rows="values" :columns="columns">
@@ -206,13 +206,13 @@ const options = computed(() => {
         </template>
 
         <template #actions-data="{ index }">
-          <UDropdown :items="actions(index)">
-            <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
-          </UDropdown>
+          <UDropdownMenu :items="actions(index)">
+            <UButton color="neutral" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
+          </UDropdownMenu>
         </template>
       </UTable>
     </div>
-    <UModal v-model="model.open">
+    <UModal v-model:open="model.open">
       <UCard>
         <SComponent
           :id="id.length <= 0 ? `${model.index}` : `${id}[0].${items.id}`"

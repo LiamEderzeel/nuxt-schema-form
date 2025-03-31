@@ -28,8 +28,7 @@
         "test": {
           "title": "Lastname",
           "description": "Lastname field for submitting a last name",
-          "type": "string",
-          "default": ""
+          "type": "number"
         }
       }
     }

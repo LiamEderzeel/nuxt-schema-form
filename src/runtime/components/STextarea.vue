@@ -11,13 +11,13 @@ const value = defineModel<string | number>({ required: true })
 
 <template>
   <div>
-    <UFormGroup
+    <UFormField
       :label="props.title || id"
       :hint="!props.isRequired ? 'optional' : undefined"
       :description="props.description"
       :name="props.id"
     >
-      <UTextarea v-model="value" />
-    </UFormGroup>
+      <UTextarea v-model="value" class="w-full" />
+    </UFormField>
   </div>
 </template>

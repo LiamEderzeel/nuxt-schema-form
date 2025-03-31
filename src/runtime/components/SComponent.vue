@@ -27,7 +27,7 @@ export type SComponentProps = {
 }
 
 const props = withDefaults(defineProps<SComponentProps>(), { id: '', jsonSchemaPath: '' })
-const value = defineModel<unknown>({ required: true, default: '' })
+const value = defineModel<unknown>({ required: true })
 const emit = defineEmits(['submit'])
 
 const options = computed(() => ({
@@ -50,6 +50,7 @@ const onSubmit = () => {
     />
 
     <SDate v-else-if="type === 'string' && format === 'full-date'" v-bind="options" v-model="value" />
+    <SInputNumber v-else-if="type === 'number' || type === 'integer'" v-bind="options" v-model="value" />
     <SInputField v-else-if="type === 'string'" v-bind="options" v-model="value" />
     <SToggle v-else-if="type === 'boolean'" v-bind="options" v-model="value" />
     <SObject v-else-if="type === 'object'" v-bind="options" v-model="value" @submit="onSubmit" />

@@ -7,18 +7,18 @@ const props = defineProps<{
   isRequired: boolean
 }>()
 
-const value = defineModel<string | number>({ required: true })
+const value = defineModel<string>({ required: true, default: '' })
 </script>
 
 <template>
   <div>
-    <UFormGroup
+    <UFormField
       :label="props.title || id"
       :hint="!props.isRequired ? 'optional' : undefined"
       :description="props.description"
       :name="props.id"
     >
-      <UInput v-model="value" :type="props.type" />
-    </UFormGroup>
+      <UInput v-model="value" :type="props.type" class="w-full" />
+    </UFormField>
   </div>
 </template>
