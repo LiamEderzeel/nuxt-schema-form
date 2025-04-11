@@ -4,6 +4,7 @@ import convertToYup from 'json-schema-yup-transformer'
 import type { JsonSchema } from 'json-schema-library'
 import { computed, ref } from 'vue'
 import type { Config } from 'json-schema-yup-transformer'
+import type { CustomValidation } from '#schema-form-types'
 
 const props = defineProps<{
   schema: JsonSchema
@@ -23,12 +24,6 @@ const formValidationSchema = computed(() => {
   if (props?.options == null) return {}
   return convertToYup(props.schema, props?.options?.jsonSchemaYupTransfromer ?? {})
 })
-
-export type CustomValidation = {
-  field: string
-  message: string
-  validate(state: any): boolean
-}
 
 const validateFields = async (fields: string[]) => {
   let allValid = true
@@ -66,13 +61,8 @@ const submit = () => {
   <div>
     <!-- {{ formRef ? formRef.errors : undefined }} -->
     <UForm ref="formRef" :state="value" :schema="formValidationSchema" autocomplete="on" @submit="onSubmit">
-      <SComponent
-        v-model="value"
-        v-bind="schema"
-        :validate-fields="validateFields"
-        @submit="submit"
-        :isRequired="true"
-      />
+      <SComponent v-model="value" v-bind="schema" :validate-fields="validateFields" @submit="submit"
+        :isRequired="true" />
       <slot />
 
       <slot name="submit">
