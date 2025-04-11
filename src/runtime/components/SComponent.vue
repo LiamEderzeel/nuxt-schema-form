@@ -41,13 +41,9 @@ const onSubmit = () => {
 
 <template>
   <div class="s-form-group">
-    <component
-      v-if="renderer"
-      v-bind="options"
-      v-model="value"
-      :is="typeof renderer === 'string' ? renderer : undefined"
-      @submit="onSubmit"
-    />
+    <template v-if="renderer != null && renderer === 'none'">test</template>
+    <component v-else-if="renderer" v-bind="options" v-model="value"
+      :is="typeof renderer === 'string' ? renderer : undefined" @submit="onSubmit" />
 
     <SDate v-else-if="type === 'string' && format === 'full-date'" v-bind="options" v-model="value" />
     <SInputNumber v-else-if="type === 'number' || type === 'integer'" v-bind="options" v-model="value" />
