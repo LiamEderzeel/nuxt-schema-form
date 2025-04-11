@@ -41,7 +41,7 @@ const onSubmit = () => {
 
 <template>
   <div class="s-form-group">
-    <template v-if="renderer != null && renderer === 'none'">test</template>
+    <template v-if="renderer != null && renderer === 'none'">{{ undefined }}</template>
     <component v-else-if="renderer" v-bind="options" v-model="value"
       :is="typeof renderer === 'string' ? renderer : undefined" @submit="onSubmit" />
 
