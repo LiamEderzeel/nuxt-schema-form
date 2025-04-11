@@ -1,0 +1,16 @@
+{
+  "title": "Numbers",
+  "description": "A minimal form example",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "number": {
+      "title": "number",
+      "type": "number"
+    },
+    "int": {
+      "title": "int",
+      "type": "integer"
+    }
+  }
+}
