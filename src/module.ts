@@ -1,5 +1,5 @@
-import { addComponentsDir, createResolver, defineNuxtModule } from "@nuxt/kit";
-import { defaultOptions } from "./defaults";
+import { addComponentsDir, createResolver, defineNuxtModule } from '@nuxt/kit'
+import { defaultOptions } from './defaults'
 
 // export type * from './runtime/types'
 
@@ -9,35 +9,36 @@ export interface ModuleOptions {
    * @defaultValue `S`
    * @link https://ui3.nuxt.dev/getting-started/installation/nuxt#prefix
    */
-  prefix?: string;
+  prefix?: string
 }
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: "SchemaForm",
-    configKey: "schemaForm",
+    name: 'SchemaForm',
+    configKey: 'schemaForm',
     compatibility: {
-      nuxt: ">=3.13.1",
+      nuxt: '>=3.13.1'
     },
-    docs: "https://ui3.nuxt.dev/getting-started/installation/nuxt",
+    docs: 'https://ui3.nuxt.dev/getting-started/installation/nuxt'
   },
   defaults: defaultOptions,
   setup(options, nuxt) {
-    const { resolve } = createResolver(import.meta.url);
-    nuxt.options.alias["#schema-form"] = resolve("./runtime");
+    const { resolve } = createResolver(import.meta.url)
+    nuxt.options.alias['#schema-form'] = resolve('./runtime')
+    nuxt.options.alias['#schema-form-types'] = resolve('./runtime/types')
 
     addComponentsDir({
-      path: resolve("./runtime/components"),
+      path: resolve('./runtime/components'),
       prefix: options.prefix,
-      pathPrefix: false,
-    });
+      pathPrefix: false
+    })
 
     // optimize deps
-    nuxt.options.vite ??= {};
-    nuxt.options.vite.optimizeDeps ??= {};
-    nuxt.options.vite.optimizeDeps.include ??= [];
-    nuxt.options.vite.optimizeDeps.include.push("json-schema-library");
-    nuxt.options.vite.optimizeDeps.include.push("json-schema-yup-transformer");
-    nuxt.options.build.transpile.push("json-schema-library");
-  },
-});
+    nuxt.options.vite ??= {}
+    nuxt.options.vite.optimizeDeps ??= {}
+    nuxt.options.vite.optimizeDeps.include ??= []
+    nuxt.options.vite.optimizeDeps.include.push('json-schema-library')
+    nuxt.options.vite.optimizeDeps.include.push('json-schema-yup-transformer')
+    nuxt.options.build.transpile.push('json-schema-library')
+  }
+})
