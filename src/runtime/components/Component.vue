@@ -1,5 +1,11 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
+import SObject from './Object.vue'
+import SDate from './Date.vue'
+import SToggle from './Toggle.vue'
+import SArray from './Array.vue'
+import SInputNumber from './InputNumber.vue'
+import SInputField from './InputField.vue'
 
 type Properties = {
   properties?: { [key: string]: unknown }

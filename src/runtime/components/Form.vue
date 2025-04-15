@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import SComponent from './SComponent.vue'
+import SComponent from './Component.vue'
 import convertToYup from 'json-schema-yup-transformer'
 import type { JsonSchema } from 'json-schema-library'
 import { computed, ref } from 'vue'

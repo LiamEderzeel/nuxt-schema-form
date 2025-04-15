@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Draft2019 } from 'json-schema-library'
-import SComponent from './SComponent.vue'
+import SComponent from './Component.vue'
 import { ref, computed } from 'vue'
 
 const props = defineProps<{
@@ -167,15 +167,8 @@ const options = computed(() => {
     <div>
       <div class="flex justify-between items-center w-full px-4 py-3">
         <div class="flex gap-1.5 items-center">
-          <UButton
-            v-if="edit"
-            :disabled="maxItems && values.length >= maxItems"
-            @click="add"
-            icon="i-heroicons-plus"
-            trailing
-            color="neutral"
-            size="xs"
-          />
+          <UButton v-if="edit" :disabled="maxItems && values.length >= maxItems" @click="add" icon="i-heroicons-plus"
+            trailing color="neutral" size="xs" />
         </div>
         <div class="flex gap-1.5 items-center">
           <UDropdownMenu v-if="selectedRows.length > 0" :items="massActions">
@@ -187,21 +180,15 @@ const options = computed(() => {
         <template #name-data="{ row }">
           <span :class="[selected.find(person => person.id === row.id) && 'text-primary-500 dark:text-primary-400']">{{
             row.name
-          }}</span>
+            }}</span>
         </template>
 
         <template #expand="{ row, index }">
           <div class="p-4">
-            <SComponent
-              :id="id.length <= 0 ? `${index}` : `${id}[${index}].${items.id}`"
-              :model-value="row"
+            <SComponent :id="id.length <= 0 ? `${index}` : `${id}[${index}].${items.id}`" :model-value="row"
               :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${index}` : `${jsonSchemaPath}[${index}]`"
-              v-bind="items"
-              :isRequired="false"
-              class="mt-4"
-              @update:model-value="event => onInput(event, index)"
-              @submit="() => emit('submit')"
-            />
+              v-bind="items" :isRequired="false" class="mt-4" @update:model-value="event => onInput(event, index)"
+              @submit="() => emit('submit')" />
           </div>
         </template>
 
@@ -214,18 +201,10 @@ const options = computed(() => {
     </div>
     <UModal v-model:open="model.open">
       <UCard>
-        <SComponent
-          :id="id.length <= 0 ? `${model.index}` : `${id}[0].${items.id}`"
-          :model-value="values[model.index]"
-          :json-schema-path="
-            jsonSchemaPath?.length <= 0 ? `properties.${model.index}` : `${jsonSchemaPath}[${model.index}]`
-          "
-          v-bind="items"
-          :isRequired="false"
-          class="mt-4"
-          @update:model-value="event => onInput(event, model.index)"
-          @submit="() => emit('submit')"
-        />
+        <SComponent :id="id.length <= 0 ? `${model.index}` : `${id}[0].${items.id}`" :model-value="values[model.index]"
+          :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${model.index}` : `${jsonSchemaPath}[${model.index}]`
+            " v-bind="items" :isRequired="false" class="mt-4" @update:model-value="event => onInput(event, model.index)"
+          @submit="() => emit('submit')" />
         <template #footer>
           <UButton>Save</UButton>
         </template>
