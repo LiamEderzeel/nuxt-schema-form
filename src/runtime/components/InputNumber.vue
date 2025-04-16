@@ -14,8 +14,9 @@ const value = defineModel<number>({ required: true, default: 0 })
   <div>
     <UFormField :label="props.title || id" :hint="!props.isRequired ? 'optional' : undefined"
       :description="props.description" :name="props.id">
-      <UInputNumber v-model="value" class="w-full" orientation="vertical" :stepSnapping="props.type === 'number'"
-        :format-options="{
+      {{ props.type === 'integer' }}
+      <UInputNumber v-model="value" class="w-full" orientation="vertical" :step="0.01"
+        :stepSnapping="props.type === 'integer'" :format-options="{
           minimumFractionDigits: props.type === 'number' ? 1 : undefined
         }" />
     </UFormField>
