@@ -54,6 +54,10 @@ const validateFields = async (fields: string[]) => {
 const submit = () => {
   formRef.value.submit()
 }
+
+defineExpose({
+  submit
+})
 </script>
 
 <template>
