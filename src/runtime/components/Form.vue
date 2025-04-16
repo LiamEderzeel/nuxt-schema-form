@@ -21,7 +21,6 @@ async function onSubmit(_event: unknown) {
 }
 
 const formValidationSchema = computed(() => {
-  if (props?.options == null) return {}
   return convertToYup(props.schema, props?.options?.jsonSchemaYupTransfromer ?? {})
 })
 
