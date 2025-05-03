@@ -16,8 +16,6 @@
       "maxItems": 5,
       "edit": false,
       "items": {
-        "title": "From",
-        "description": "A minimal form example",
         "type": "object",
         "required": [
           "firstname",
@@ -47,8 +45,6 @@
       "maxItems": 5,
       "edit": true,
       "items": {
-        "title": "From",
-        "description": "A minimal form example",
         "type": "object",
         "required": [
           "firstname",
@@ -79,8 +75,6 @@
       "edit": true,
       "editInline": true,
       "items": {
-        "title": "From",
-        "description": "A minimal form example",
         "type": "object",
         "required": [
           "firstname",

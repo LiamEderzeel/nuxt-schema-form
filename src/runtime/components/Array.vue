@@ -1,7 +1,12 @@
 <script lang="ts" setup>
 import { Draft2019 } from 'json-schema-library'
 import SComponent from './Component.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, h, resolveComponent } from 'vue'
+import type { TableColumn } from '@nuxt/ui'
+import type { Row } from '@tanstack/vue-table'
+
+const UDropdownMenu = resolveComponent('UDropdownMenu')
+const UButton = resolveComponent('UButton')
 
 const props = defineProps<{
   id: string
@@ -9,18 +14,20 @@ const props = defineProps<{
   description?: string
   jsonSchemaPath: string
   items: PropertiesType
-  modelValue: unknown[]
+  modelValue: Record<string, unknown>[]
   isRequired: boolean
   minItems?: number
   maxItems?: number
   edit?: boolean
-  columns?: ColumnItem[]
+  columns?: TableColumn<{}>[]
   editInline?: boolean
 }>()
 
 type ColumnItem = {
   key: string
   label?: string
+  header?: string
+  accessorKey?: string
   class?: string
 }
 
@@ -31,7 +38,7 @@ type PropertiesType = {
   [key: string]: unknown
 }
 const emit = defineEmits(['update:modelValue', 'submit'])
-const onInput = (value: unknown, index: number) => {
+const onInput = (value: Record<string, unknown>, index: number) => {
   props.modelValue[index] = value
   emit('update:modelValue', props.modelValue)
 }
@@ -55,7 +62,7 @@ const add = () => {
 
 const remove = (index: number) => {
   const res = props.modelValue.splice(index, 1)
-  emit('update:modelValue', res)
+  emit('update:modelValue', props.modelValue)
 }
 
 const massRemove = () => {
@@ -67,32 +74,15 @@ const massRemove = () => {
   emit('update:modelValue', res)
 }
 
-const model = ref({
+const model = ref<{ open: boolean; index: number; value: Record<string, unknown> }>({
   open: false,
-  index: 0
+  index: 0,
+  value: {}
 })
 
 const open = (index: number) => {
-  model.value = { open: true, index: index }
+  model.value = { open: true, index: index, value: structuredClone(values.value[index]) }
 }
-
-const actions = (i: number) => [
-  [
-    {
-      label: 'edit',
-      click: () => open(i)
-    }
-  ],
-  [
-    {
-      label: 'delete',
-      click: () => {
-        remove(i)
-        selectedRows.value = []
-      }
-    }
-  ]
-]
 
 const massActions = [
   [
@@ -106,39 +96,86 @@ const massActions = [
   ]
 ]
 
-const columns = computed(() => {
+const columns = computed<TableColumn<{}>[]>(() => {
   const columns = props.columns ?? []
+  if (props.editInline) {
+    columns.push({
+      id: 'expand',
+      cell: ({ row }) =>
+        h(UButton, {
+          color: 'neutral',
+          variant: 'ghost',
+          icon: 'i-lucide-chevron-down',
+          square: true,
+          'aria-label': 'Expand',
+          ui: {
+            leadingIcon: ['transition-transform', row.getIsExpanded() ? 'duration-200 rotate-180' : '']
+          },
+          onClick: () => row.toggleExpanded()
+        })
+    })
+  }
 
   if (props.items.type === 'object') {
-    for (const column of Object.keys(props?.items?.properties).map(x => ({ key: x, label: x }))) {
+    for (const column of Object.keys(props?.items?.properties).map<TableColumn<{}>>(x => ({
+      header: x,
+      accessorKey: x,
+      cell: ({ row }) => row.getValue(x)
+    }))) {
       columns.push(column)
     }
   }
 
   if (props.edit) {
     columns.push({
-      key: 'actions',
-      class: 'w-2'
+      id: 'actions',
+      cell: ({ row }) => {
+        return h(
+          'div',
+          { class: 'text-right' },
+          h(
+            UDropdownMenu,
+            {
+              content: {
+                align: 'end'
+              },
+              items: getRowItems(row),
+              'aria-label': 'Actions dropdown'
+            },
+            () =>
+              h(UButton, {
+                icon: 'i-lucide-ellipsis-vertical',
+                color: 'neutral',
+                variant: 'ghost',
+                class: 'ml-auto',
+                'aria-label': 'Actions dropdown'
+              })
+          )
+        )
+      }
     })
   }
 
   return columns
 })
 
-const selectedRows = ref([])
+function getRowItems(row: Row<{}>) {
+  return [
+    {
+      label: 'edit',
+      onSelect: () => open(row.index)
+    },
+    {
+      label: 'delete',
+      onSelect: () => {
+        remove(row.index)
+        selectedRows.value = []
+      }
+    }
+  ]
+}
 
-const todoStatus = [
-  {
-    key: 'uncompleted',
-    label: 'In Progress',
-    value: false
-  },
-  {
-    key: 'completed',
-    label: 'Completed',
-    value: true
-  }
-]
+const selectedRows = ref<{ __id: any }[]>([])
 
 const expand = ref({
   openedRows: [],
@@ -146,7 +183,16 @@ const expand = ref({
 })
 
 const options = computed(() => {
-  const res = {}
+  let res: {
+    modelValue?: any
+    'onUpdate:modelValue'?: (v: any) => void
+    expand?: {
+      openedRows: any[]
+      row: null
+    }
+    'update:expand'?: (v: any) => void
+  } = {}
+
   if (props.edit) {
     res.modelValue = selectedRows.value
     res['onUpdate:modelValue'] = value => (selectedRows.value = value)
@@ -155,6 +201,7 @@ const options = computed(() => {
     res.expand = expand.value
     res['update:expand'] = value => (expand.value = value)
   }
+
   return res
 })
 </script>
@@ -176,39 +223,37 @@ const options = computed(() => {
           </UDropdownMenu>
         </div>
       </div>
-      <UTable v-bind="options" by="__id" :rows="values" :columns="columns">
-        <template #name-data="{ row }">
-          <span :class="[selected.find(person => person.id === row.id) && 'text-primary-500 dark:text-primary-400']">{{
-            row.name
-            }}</span>
-        </template>
-
-        <template #expand="{ row, index }">
+      <UTable v-bind="options" by="__id" :data="values" :columns="columns" class="flex-1">
+        <template #expanded="{ row }">
+          {{ row }}
           <div class="p-4">
-            <SComponent :id="id.length <= 0 ? `${index}` : `${id}[${index}].${items.id}`" :model-value="row"
-              :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${index}` : `${jsonSchemaPath}[${index}]`"
-              v-bind="items" :isRequired="false" class="mt-4" @update:model-value="event => onInput(event, index)"
+            <SComponent :id="id.length <= 0 ? `${row.index}` : `${id}[${row.index}].${items.id}`"
+              :model-value="row.original" :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${row.index}` : `${jsonSchemaPath}[${row.index}]`
+                " v-bind="items" :isRequired="false" class="mt-4"
+              @update:model-value="(event: Record<string, unknown>) => onInput(event, row.index)"
               @submit="() => emit('submit')" />
           </div>
-        </template>
-
-        <template #actions-data="{ index }">
-          <UDropdownMenu :items="actions(index)">
-            <UButton color="neutral" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
-          </UDropdownMenu>
         </template>
       </UTable>
     </div>
     <UModal v-model:open="model.open">
-      <UCard>
-        <SComponent :id="id.length <= 0 ? `${model.index}` : `${id}[0].${items.id}`" :model-value="values[model.index]"
-          :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${model.index}` : `${jsonSchemaPath}[${model.index}]`
-            " v-bind="items" :isRequired="false" class="mt-4" @update:model-value="event => onInput(event, model.index)"
-          @submit="() => emit('submit')" />
-        <template #footer>
-          <UButton>Save</UButton>
-        </template>
-      </UCard>
+      <template #content>
+        <UCard>
+          <SComponent :id="id.length <= 0 ? `${model.index}` : `${id}[0].${items.id}`" :model-value="model.value"
+            :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${model.index}` : `${jsonSchemaPath}[${model.index}]`
+              " v-bind="items" :isRequired="false" class="mt-4"
+            @update:model-value="(event: Record<string, unknown>) => (model.value = event)"
+            @submit="() => emit('submit')" />
+          <template #footer>
+            <UButton @click="
+              () => {
+                onInput(model.value, model.index)
+                model.open = false
+              }
+            ">Save</UButton>
+          </template>
+        </UCard>
+      </template>
     </UModal>
   </div>
 </template>
