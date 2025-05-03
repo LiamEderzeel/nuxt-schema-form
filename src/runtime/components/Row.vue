@@ -13,7 +13,7 @@ const props = defineProps<{
 }>()
 
 type PropertiesType = {
-  [key: string]: unknown
+  [key: string]: Record<string, unknown>
 }
 const emit = defineEmits(['update:modelValue'])
 const onInput = (value: unknown, key: string) => {
@@ -30,6 +30,6 @@ const onInput = (value: unknown, key: string) => {
       :key="key" :model-value="modelValue[key]"
       :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${key}` : `${jsonSchemaPath}.properties.${key}`"
       v-bind="options" :isRequired="required.includes(key)" class="flex flex-col flex-1"
-      @update:model-value="event => onInput(event, key)" />
+      @update:model-value="(event: unknown) => onInput(event, key)" />
   </div>
 </template>
