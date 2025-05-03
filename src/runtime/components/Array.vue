@@ -22,66 +22,13 @@ const props = defineProps<{
   columns?: TableColumn<{}>[]
   editInline?: boolean
 }>()
-
-type ColumnItem = {
-  key: string
-  label?: string
-  header?: string
-  accessorKey?: string
-  class?: string
-}
+const emit = defineEmits(['update:modelValue', 'submit'])
 
 type PropertiesType = {
   properties: {
     [key: string]: unknown
   }
   [key: string]: unknown
-}
-const emit = defineEmits(['update:modelValue', 'submit'])
-const onInput = (value: Record<string, unknown>, index: number) => {
-  props.modelValue[index] = value
-  emit('update:modelValue', props.modelValue)
-}
-
-const schemaObject = ref(new Draft2019(props.items))
-
-const values = computed(() => {
-  if (props.modelValue.length > 0) {
-    return props.modelValue.map((x, i) => ({ ...x, __id: i }))
-  } else if (props.minItems && props.minItems > 0) {
-    const template = schemaObject.value.getTemplate()
-    return [...Array(props.minItems)].map((_, i) => ({ ...template, __id: i }))
-  }
-
-  return []
-})
-
-const add = () => {
-  emit('update:modelValue', [...props.modelValue, schemaObject.value.getTemplate()])
-}
-
-const remove = (index: number) => {
-  const res = props.modelValue.splice(index, 1)
-  emit('update:modelValue', props.modelValue)
-}
-
-const massRemove = () => {
-  let res = props.modelValue
-  for (const index of selectedRows.value.map(x => x.__id)) {
-    res.splice(index, 1)
-  }
-
-  emit('update:modelValue', res)
-}
-
-const model = ref<{ open: boolean; index: number; value: Record<string, unknown> }>({
-  open: false,
-  index: 0,
-  value: {}
-})
-
-const open = (index: number) => {
-  model.value = { open: true, index: index, value: structuredClone(values.value[index]) }
 }
 
 const massActions = [
@@ -95,6 +42,29 @@ const massActions = [
     }
   ]
 ]
+
+const selectedRows = ref<{ __id: any }[]>([])
+const schemaObject = ref(new Draft2019(props.items))
+const model = ref<{ open: boolean; index: number; value: Record<string, unknown> }>({
+  open: false,
+  index: 0,
+  value: {}
+})
+const expand = ref({
+  openedRows: [],
+  row: null
+})
+
+const values = computed(() => {
+  if (props.modelValue.length > 0) {
+    return props.modelValue.map((x, i) => ({ ...x, __id: i }))
+  } else if (props.minItems && props.minItems > 0) {
+    const template = schemaObject.value.getTemplate()
+    return [...Array(props.minItems)].map((_, i) => ({ ...template, __id: i }))
+  }
+
+  return []
+})
 
 const columns = computed<TableColumn<{}>[]>(() => {
   const columns = props.columns ?? []
@@ -175,13 +145,6 @@ function getRowItems(row: Row<{}>) {
   ]
 }
 
-const selectedRows = ref<{ __id: any }[]>([])
-
-const expand = ref({
-  openedRows: [],
-  row: null
-})
-
 const options = computed(() => {
   let res: {
     modelValue?: any
@@ -204,6 +167,33 @@ const options = computed(() => {
 
   return res
 })
+
+const open = (index: number) => {
+  model.value = { open: true, index: index, value: structuredClone(values.value[index]) }
+}
+
+const onInput = (value: Record<string, unknown>, index: number) => {
+  props.modelValue[index] = value
+  emit('update:modelValue', props.modelValue)
+}
+
+const add = () => {
+  emit('update:modelValue', [...props.modelValue, schemaObject.value.getTemplate()])
+}
+
+const remove = (index: number) => {
+  props.modelValue.splice(index, 1)
+  emit('update:modelValue', props.modelValue)
+}
+
+const massRemove = () => {
+  let res = props.modelValue
+  for (const index of selectedRows.value.map(x => x.__id)) {
+    res.splice(index, 1)
+  }
+
+  emit('update:modelValue', res)
+}
 </script>
 
 <template>
