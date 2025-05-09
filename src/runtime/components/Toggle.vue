@@ -3,7 +3,6 @@ const props = defineProps<{
   id: string
   title?: string
   description?: string
-  enum?: boolean[]
   isRequired: boolean
 }>()
 
