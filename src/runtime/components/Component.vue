@@ -23,6 +23,7 @@ export type SComponentProps = {
   enum_titles?: string[]
   format?: string
   description?: string
+  placeholder?: string
   jsonSchemaPath?: string
   required?: string[]
   isRequired: boolean

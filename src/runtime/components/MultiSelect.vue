@@ -5,6 +5,7 @@ const props = defineProps<{
   id: string
   title?: string
   description?: string
+  placeholder?: string
   jsonSchemaPath: string
   items: {
     id: string
@@ -36,7 +37,7 @@ const value = defineModel<string[]>({ required: true })
     >
       <USelect
         v-model="value"
-        placeholder="select size"
+        :placeholder="props.placeholder || 'select size'"
         :items="options"
         multiple
         value-attribute="value"

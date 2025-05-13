@@ -5,6 +5,7 @@ const props = defineProps<{
   id: string
   title?: string
   description?: string
+  placeholder?: string
   enum: string[]
   enum_titles?: string[]
   isRequired: boolean
@@ -25,7 +26,7 @@ const value = defineModel<string>({ required: true })
     >
       <USelect
         v-model="value"
-        placeholder="select size"
+        :placeholder="props.placeholder || 'Make a seletion'"
         :items="options"
         value-attribute="value"
         option-attribute="key"
