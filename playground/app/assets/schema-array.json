@@ -3,11 +3,28 @@
   "description": "A minimal form example",
   "type": "object",
   "required": [
+    "select",
     "list",
     "listEditable",
     "listEditableInline"
   ],
   "properties": {
+    "select": {
+      "title": "Array ",
+      "description": "Array of items",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "monday",
+          "tuesday"
+        ],
+        "enum_titles": [
+          "Monday",
+          "Tuesday"
+        ]
+      }
+    },
     "list": {
       "title": "Array ",
       "description": "Array of items",

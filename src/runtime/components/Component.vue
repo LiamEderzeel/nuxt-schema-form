@@ -26,7 +26,7 @@ export type SComponentProps = {
   jsonSchemaPath?: string
   required?: string[]
   isRequired: boolean
-  items?: PropertiesType[]
+  items?: PropertiesType
   edit?: boolean
   minItems?: number
   maxItems?: number
@@ -144,9 +144,9 @@ const Render = () => {
       editInline: props.editInline,
       jsonSchemaPath: `${props.jsonSchemaPath}.${props.id}`,
       onSubmit,
-      modelValue: value.value as Record<string, unknown>[],
-      'onUpdate:modelValue': (v: string) => {
-        value.value = v
+      modelValue: value.value as unknown[],
+      'onUpdate:modelValue': (v: unknown) => {
+        value.value = v as unknown[]
       }
     })
   }
