@@ -14,7 +14,7 @@ const props = defineProps<{
   title?: string
   description?: string
   jsonSchemaPath: string
-  items: PropertiesType[]
+  items: PropertiesType
   modelValue: Record<string, unknown>[]
   isRequired: boolean
   minItems?: number
@@ -216,10 +216,9 @@ const massRemove = () => {
       </div>
       <UTable v-bind="options" by="__id" :data="values" :columns="columns" class="flex-1">
         <template #expanded="{ row }">
-          {{ row }}
           <div class="p-4">
             <SComponent
-              :id="id.length <= 0 ? `${row.index}` : `${id}[${row.index}].${items.id}`"
+              :id="id.length <= 0 ? `${row.index}` : `${id}[${row.index}]`"
               :model-value="row.original"
               :json-schema-path="
                 jsonSchemaPath?.length <= 0 ? `properties.${row.index}` : `${jsonSchemaPath}[${row.index}]`
@@ -238,7 +237,7 @@ const massRemove = () => {
       <template #content>
         <UCard>
           <SComponent
-            :id="id.length <= 0 ? `${model.index}` : `${id}[0].${items.id}`"
+            :id="id.length <= 0 ? `${model.index}` : `${id}[0]`"
             :model-value="model.value"
             :json-schema-path="
               jsonSchemaPath?.length <= 0 ? `properties.${model.index}` : `${jsonSchemaPath}[${model.index}]`
