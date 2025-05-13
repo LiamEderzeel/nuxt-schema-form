@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
 import ColorMode from '@/components/ColorMode.vue'
-import formSchema from '@/assets/schema.json'
+import formSchema from '@/assets/schema-custom-validation.json'
 import type { CustomValidation } from '#schema-form/components/SForm.vue'
 import { Draft2019 } from 'json-schema-library'
 import type { Config } from 'json-schema-yup-transformer'

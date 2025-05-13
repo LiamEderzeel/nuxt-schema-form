@@ -1,0 +1,53 @@
+{
+  "title": "Questioneer",
+  "description": "Questioneer for tennis camp 'name'",
+  "type": "object",
+  "required": [
+    "misc"
+  ],
+  "renderer": "MultiStage",
+  "properties": {
+    "misc": {
+      "title": "Inschrijven",
+      "type": "object",
+      "required": [
+        "permission",
+        "found",
+        "name"
+      ],
+      "properties": {
+        "permission": {
+          "title": "Toestemming",
+          "description": "Door middel van het aanvinken van onderstaande selectiebox, geef hierbij toestemming voor de vastlegging en de weergave van mijn naam, beeltenis en afbeelding verbonden aan mijn persoon, in foto&#39;s, beelden, of audiovisuele opnamen gemaakt, alsook in publiciteit over de onderneming.",
+          "const": false,
+          "enum": [
+            false
+          ],
+          "type": "boolean"
+        },
+        "found": {
+          "title": "Hoe bent u erachter gekomen dat er een kamp was:",
+          "renderer": "SSelect",
+          "enum": [
+            "trainer",
+            "website",
+            "mouthToMouth",
+            "socialMedia",
+            "other"
+          ],
+          "type": "string"
+        },
+        "questions": {
+          "title": "Vragen",
+          "renderer": "STextarea",
+          "description": "Overige opmerkingen/bijzonderheden/vragen?",
+          "type": "string"
+        },
+        "name": {
+          "title": "name",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
