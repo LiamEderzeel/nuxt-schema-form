@@ -17,7 +17,7 @@ export interface FormError<T extends string = string> {
 
 const props = defineProps<{
   id: string
-  title: string
+  title?: string
   jsonSchemaPath: string
   validateFields: (fields: string[]) => Promise<boolean>
   properties: { [key: string]: PropertiesType }
@@ -82,11 +82,11 @@ const onNext = async () => {
 </script>
 
 <template>
-  <div class="stepper-container">
+  <div class="stepper-container mt-8">
     <!-- {{ formErrors }} -->
     <!-- {{ `${children[stage][0]}` }} -->
     <!-- {{ formErrors?.find((error) => error.path.includes(`${children[stage][0]}`)) }} -->
-    <h1 class="mb-8 text-4xl leading-none tracking-tight">
+    <h1 v-if="props.title" class="mb-8 text-4xl leading-none tracking-tight">
       {{ props.title }}
     </h1>
 
