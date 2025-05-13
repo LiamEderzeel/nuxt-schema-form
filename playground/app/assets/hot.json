@@ -1,0 +1,254 @@
+{
+  "description": "Questioneer for tennis camp 'name'",
+  "type": "object",
+  "required": [
+    "participant",
+    "guardian",
+    "misc"
+  ],
+  "renderer": "MultiStage",
+  "properties": {
+    "participant": {
+      "title": "Deelnemer",
+      "icon": "lucide:user",
+      "type": "object",
+      "required": [
+        "flex",
+        "birthDate",
+        "tshirtSize",
+        "tennisLevel",
+        "swimmingLevel"
+      ],
+      "properties": {
+        "flex": {
+          "required": [
+            "firstname",
+            "lastname"
+          ],
+          "type": "object",
+          "renderer": "SRow",
+          "properties": {
+            "firstname": {
+              "title": "Voornaam",
+              "description": "Voornaam deelnemer",
+              "type": "string",
+              "default": ""
+            },
+            "lastname": {
+              "title": "Achternaam",
+              "description": "Achternaam deelnemer",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "birthDate": {
+          "title": "Geboorte datum",
+          "format": "full-date",
+          "default": "2000-01-01",
+          "type": "string"
+        },
+        "tshirtSize": {
+          "title": "T-shirt maat",
+          "renderer": "SSelect",
+          "enum": [
+            "s",
+            "m",
+            "l",
+            "xl"
+          ],
+          "enum_titles": [
+            "Maat S (5/6 jaar)",
+            "Maat M (7/8 jaar)",
+            "Maat L (9/11 jaar)",
+            "Maat XL (12/13 jaar)"
+          ],
+          "type": "string"
+        },
+        "tennisLevel": {
+          "title": "Tennisniveau",
+          "renderer": "SSelect",
+          "description": "Het niveau van de deelnemer",
+          "enum": [
+            "red",
+            "orange",
+            "green",
+            "yellow",
+            "other"
+          ],
+          "enum_titles": [
+            "rood",
+            "oranje",
+            "groen",
+            "geel",
+            "overige"
+          ],
+          "type": "string"
+        },
+        "swimmingLevel": {
+          "title": "Zwemdiploma",
+          "renderer": "SSelect",
+          "description": "Het zwemdiploma van de deelnemer",
+          "enum": [
+            "a",
+            "b",
+            "c",
+            "geen"
+          ],
+          "type": "string"
+        },
+        "health": {
+          "title": "Voedsel allergieën of gezondheid",
+          "renderer": "STextarea",
+          "description": "Zijn er bijzonderheden waar we rekening mee moeten houden betreffende voedsel allergieën en/of informatie over de gezondheid?",
+          "type": "string"
+        }
+      }
+    },
+    "guardian": {
+      "title": "Voogd",
+      "icon": "lucide:users",
+      "type": "object",
+      "required": [
+        "flex",
+        "email",
+        "phoneNumber",
+        "address"
+      ],
+      "properties": {
+        "flex": {
+          "required": [
+            "firstname",
+            "lastname"
+          ],
+          "type": "object",
+          "renderer": "SRow",
+          "properties": {
+            "firstname": {
+              "title": "Voornaam",
+              "description": "Voornaam voogd",
+              "type": "string",
+              "default": ""
+            },
+            "lastname": {
+              "title": "Lastname",
+              "description": "Achternaame voogd",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "email": {
+          "title": "Email",
+          "description": "Email address voogd",
+          "type": "string",
+          "format": "email",
+          "default": ""
+        },
+        "phoneNumber": {
+          "title": "Telefoon nummber",
+          "description": "Telefoon nummer voor contact of noodgevallen",
+          "type": "string",
+          "default": ""
+        },
+        "emergencyNumber": {
+          "title": "Extra nood nummer",
+          "description": "Telefoon nummer om te bellen bij nood",
+          "type": "string",
+          "default": ""
+        },
+        "address": {
+          "type": "object",
+          "renderer": "Address",
+          "required": [
+            "street",
+            "number",
+            "zipCode",
+            "city"
+          ],
+          "properties": {
+            "street": {
+              "title": "Straat",
+              "type": "string"
+            },
+            "number": {
+              "title": "Huisnummer",
+              "type": "string"
+            },
+            "unit": {
+              "title": "Toevoeging",
+              "type": "string"
+            },
+            "zipCode": {
+              "title": "Postcode",
+              "type": "string"
+            },
+            "city": {
+              "title": "Stad",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "misc": {
+      "title": "Inschrijven",
+      "type": "object",
+      "required": [
+        "permission",
+        "found",
+        "days"
+      ],
+      "properties": {
+        "days": {
+          "title": "Dagen",
+          "description": "Geef aan welken 3 dagen de deelnemer aanwezig is op het tennis kamp.",
+          "maxItems": 3,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "monday",
+              "tuesday",
+              "wednesday",
+              "thursday"
+            ],
+            "enum_titles": [
+              "Maandag",
+              "Dinsdag",
+              "Woensdag",
+              "Donderdag"
+            ]
+          }
+        },
+        "permission": {
+          "title": "Toestemming",
+          "description": "Door middel van het aanvinken van onderstaande selectiebox, geef hierbij toestemming voor de vastlegging en de weergave van mijn naam, beeltenis en afbeelding verbonden aan mijn persoon, in foto&#39;s, beelden, of audiovisuele opnamen gemaakt, alsook in publiciteit over de onderneming.",
+          "const": false,
+          "enum": [
+            false
+          ],
+          "type": "boolean"
+        },
+        "found": {
+          "title": "Hoe bent u erachter gekomen dat er een kamp was:",
+          "renderer": "SSelect",
+          "enum": [
+            "trainer",
+            "website",
+            "mouthToMouth",
+            "socialMedia",
+            "other"
+          ],
+          "type": "string"
+        },
+        "questions": {
+          "title": "Vragen",
+          "renderer": "STextarea",
+          "description": "Overige opmerkingen/bijzonderheden/vragen?",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
