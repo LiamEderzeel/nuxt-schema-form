@@ -17,7 +17,7 @@ export type SComponentProps = {
   id?: string
   title?: string
   renderer?: string
-  type?: string
+  type?: string | unknown[]
   properties?: Properties
   enum?: string[]
   enum_titles?: string[]
@@ -45,7 +45,8 @@ const onSubmit = () => {
 }
 
 const Render = () => {
-  const { type, renderer, format } = props
+  const { type: t, renderer, format } = props
+  const type = Array.isArray(t) ? t[0] : t
   if (type == null || (renderer != null && renderer === 'none')) {
     return undefined
   } else if (renderer) {
