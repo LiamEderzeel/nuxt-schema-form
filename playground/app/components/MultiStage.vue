@@ -62,15 +62,13 @@ const getChildFieldIds = (id: string, schema: ChildIdsKeys) => {
 
 const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 
-const steps = computed(() =>
-  children.value.map((x, i) => ({
+const steps = computed(() => {
+  return children.value.map((x, i) => ({
     ...x[1],
     step: i,
-    error: formErrors?.value.find(error => {
-      return error.name.includes(`${x[0]}`)
-    })
+    error: formErrors?.value.find(error => error?.path?.includes(`${x[0]}`))
   }))
-)
+})
 
 const onNext = async () => {
   const child = children.value[stage.value]

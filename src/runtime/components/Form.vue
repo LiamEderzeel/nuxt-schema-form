@@ -41,7 +41,7 @@ const validateFields = async (fields: string[]) => {
     for (const { field, message, validate } of props.options.customValidation) {
       if (!fields.includes(field)) continue
       if (!validate(value.value)) {
-        const errors = [{ field, message }]
+        const errors = [{ name: field, message }]
         formRef.value.setErrors(errors, field)
         allValid = false
       }
