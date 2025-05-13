@@ -4,6 +4,7 @@ import SComponent from './Component.vue'
 import { ref, computed, h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 import type { Row } from '@tanstack/vue-table'
+import type { PropertiesType } from '../types'
 
 const UDropdownMenu = resolveComponent('UDropdownMenu')
 const UButton = resolveComponent('UButton')
@@ -23,13 +24,6 @@ const props = defineProps<{
   editInline?: boolean
 }>()
 const emit = defineEmits(['update:modelValue', 'submit'])
-
-type PropertiesType = {
-  properties: {
-    [key: string]: unknown
-  }
-  [key: string]: unknown
-}
 
 const massActions = [
   [
@@ -204,8 +198,15 @@ const massRemove = () => {
     <div>
       <div class="flex justify-between items-center w-full px-4 py-3">
         <div class="flex gap-1.5 items-center">
-          <UButton v-if="edit" :disabled="maxItems && values.length >= maxItems" @click="add" icon="i-heroicons-plus"
-            trailing color="neutral" size="xs" />
+          <UButton
+            v-if="edit"
+            :disabled="maxItems && values.length >= maxItems"
+            @click="add"
+            icon="i-heroicons-plus"
+            trailing
+            color="neutral"
+            size="xs"
+          />
         </div>
         <div class="flex gap-1.5 items-center">
           <UDropdownMenu v-if="selectedRows.length > 0" :items="massActions">
@@ -215,13 +216,19 @@ const massRemove = () => {
       </div>
       <UTable v-bind="options" by="__id" :data="values" :columns="columns" class="flex-1">
         <template #expanded="{ row }">
-          {{ row }}
           <div class="p-4">
-            <SComponent :id="id.length <= 0 ? `${row.index}` : `${id}[${row.index}].${items.id}`"
-              :model-value="row.original" :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${row.index}` : `${jsonSchemaPath}[${row.index}]`
-                " v-bind="items" :isRequired="false" class="mt-4"
+            <SComponent
+              :id="id.length <= 0 ? `${row.index}` : `${id}[${row.index}]`"
+              :model-value="row.original"
+              :json-schema-path="
+                jsonSchemaPath?.length <= 0 ? `properties.${row.index}` : `${jsonSchemaPath}[${row.index}]`
+              "
+              v-bind="items"
+              :isRequired="false"
+              class="mt-4"
               @update:model-value="(event: Record<string, unknown>) => onInput(event, row.index)"
-              @submit="() => emit('submit')" />
+              @submit="() => emit('submit')"
+            />
           </div>
         </template>
       </UTable>
@@ -229,18 +236,28 @@ const massRemove = () => {
     <UModal v-model:open="model.open">
       <template #content>
         <UCard>
-          <SComponent :id="id.length <= 0 ? `${model.index}` : `${id}[0].${items.id}`" :model-value="model.value"
-            :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${model.index}` : `${jsonSchemaPath}[${model.index}]`
-              " v-bind="items" :isRequired="false" class="mt-4"
+          <SComponent
+            :id="id.length <= 0 ? `${model.index}` : `${id}[0]`"
+            :model-value="model.value"
+            :json-schema-path="
+              jsonSchemaPath?.length <= 0 ? `properties.${model.index}` : `${jsonSchemaPath}[${model.index}]`
+            "
+            v-bind="items"
+            :isRequired="false"
+            class="mt-4"
             @update:model-value="(event: Record<string, unknown>) => (model.value = event)"
-            @submit="() => emit('submit')" />
+            @submit="() => emit('submit')"
+          />
           <template #footer>
-            <UButton @click="
-              () => {
-                onInput(model.value, model.index)
-                model.open = false
-              }
-            ">Save</UButton>
+            <UButton
+              @click="
+                () => {
+                  onInput(model.value, model.index)
+                  model.open = false
+                }
+              "
+              >Save</UButton
+            >
           </template>
         </UCard>
       </template>
