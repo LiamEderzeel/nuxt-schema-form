@@ -51,6 +51,7 @@ const Render = () => {
     return h(resolveComponent(renderer), {
       ...props,
       jsonSchemaPath: `${props.jsonSchemaPath}.${props.id}`,
+      onSubmit,
       // is: typeof renderer === 'string' ? renderer : undefined,
       modelValue: value.value,
       'onUpdate:modelValue': (v: unknown) => {
@@ -142,6 +143,7 @@ const Render = () => {
       columns: props.columns,
       editInline: props.editInline,
       jsonSchemaPath: `${props.jsonSchemaPath}.${props.id}`,
+      onSubmit,
       modelValue: value.value as Record<string, unknown>[],
       'onUpdate:modelValue': (v: string) => {
         value.value = v
