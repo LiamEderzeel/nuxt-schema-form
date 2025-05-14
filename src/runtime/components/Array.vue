@@ -22,11 +22,6 @@ const props = defineProps<{
 
 const emit = defineEmits(['update:modelValue', 'submit'])
 
-const onInput = (value: Record<string, unknown>, index: number) => {
-  props.modelValue[index] = value
-  emit('update:modelValue', props.modelValue)
-}
-
 const Renderer = () => {
   if (props.items.type === 'object') {
     return h(SObject, {
