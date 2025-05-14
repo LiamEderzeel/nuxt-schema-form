@@ -176,22 +176,5 @@ const Render = () => {
 <template>
   <div class="s-form-group">
     <Render />
-
-    <!--<template v-if="renderer != null && renderer === 'none'">{{ undefined }}</template>
-    <component
-      v-else-if="renderer"
-      v-bind="options"
-      v-model="value"
-      :is="typeof renderer === 'string' ? renderer : undefined"
-      @submit="onSubmit"
-    />
-
-    <SDate v-else-if="type === 'string' && format === 'full-date'" v-bind="options" v-model="value" />
-    <SInputNumber v-else-if="type === 'number' || type === 'integer'" v-bind="options" v-model="value" />
-    <SInputField v-else-if="type === 'string'" v-bind="options" v-model="value" />
-    <SToggle v-else-if="type === 'boolean'" v-bind="options" v-model="value" />
-    <SObject v-else-if="type === 'object'" v-bind="options" v-model="value" @submit="onSubmit" />
-    <SArray v-else-if="type === 'array'" v-bind="options" v-model="value" />
-    <div v-else>else</div>-->
   </div>
 </template>
