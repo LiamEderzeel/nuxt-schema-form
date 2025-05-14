@@ -17,7 +17,7 @@ const value = defineModel<string>()
       :description="props.description"
       :name="props.id"
     >
-      <UTextarea class="w-full" :value="value || ''" @input="value = $event.target.value" />
+      <UTextarea class="w-full" :modelValue="value || ''" @update:modelValue="value = $event" />
     </UFormField>
   </div>
 </template>
