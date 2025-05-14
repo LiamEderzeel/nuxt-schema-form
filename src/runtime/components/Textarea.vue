@@ -6,7 +6,7 @@ const props = defineProps<{
   isRequired: boolean
 }>()
 
-const value = defineModel<string | number>({ required: true })
+const value = defineModel<string>()
 </script>
 
 <template>
@@ -17,7 +17,7 @@ const value = defineModel<string | number>({ required: true })
       :description="props.description"
       :name="props.id"
     >
-      <UTextarea v-model="value" class="w-full" />
+      <UTextarea class="w-full" :value="value || ''" @input="value = $event.target.value" />
     </UFormField>
   </div>
 </template>
