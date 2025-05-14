@@ -13,7 +13,7 @@ const props = defineProps<{
 
 const options = computed(() => props.enum.map((x, i) => ({ label: props?.enum_titles?.[i] ?? x, value: x })))
 
-const value = defineModel<string>()
+const value = defineModel<string>({ default: '' })
 </script>
 
 <template>
