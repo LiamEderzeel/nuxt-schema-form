@@ -6,6 +6,7 @@ import SToggle from './Toggle.vue'
 import SArray from './Array.vue'
 import SInputNumber from './InputNumber.vue'
 import SInputField from './InputField.vue'
+import SSelect from './Select.vue'
 import type { PropertiesType } from '../types'
 import type { TableColumn } from '@nuxt/ui'
 
@@ -61,6 +62,7 @@ const Render = () => {
       }
     })
   } else if (type === 'string') {
+    const { enum: eenum } = props
     if (format === 'full-date') {
       return h(SDate, {
         id: props.id,
@@ -74,10 +76,25 @@ const Render = () => {
           value.value = v
         }
       })
+    } else if (eenum) {
+      return h(SSelect, {
+        id: props.id,
+        title: props.title,
+        description: props.description,
+        enum: eenum,
+        enum_titles: props.enum_titles,
+        isRequired: props.isRequired,
+        jsonSchemaPath: `${props.jsonSchemaPath}.${props.id}`,
+        modelValue: value.value as string,
+        'onUpdate:modelValue': (v: string) => {
+          value.value = v
+        }
+      })
     } else {
       return h(SInputField, {
         id: props.id,
         title: props.title,
+        description: props.description,
         isRequired: props.isRequired,
         type,
         jsonSchemaPath: `${props.jsonSchemaPath}.${props.id}`,

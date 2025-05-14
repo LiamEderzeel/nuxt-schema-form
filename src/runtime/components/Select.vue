@@ -13,7 +13,7 @@ const props = defineProps<{
 
 const options = computed(() => props.enum.map((x, i) => ({ label: props?.enum_titles?.[i] ?? x, value: x })))
 
-const value = defineModel<string>({ required: true })
+const value = defineModel<string>()
 </script>
 
 <template>
@@ -25,12 +25,13 @@ const value = defineModel<string>({ required: true })
       :name="props.id"
     >
       <USelect
-        v-model="value"
         :placeholder="props.placeholder || 'Make a seletion'"
         :items="options"
         value-attribute="value"
         option-attribute="key"
         class="w-full"
+        :modelValue="value || ''"
+        @update:modelValue="value = $event"
       />
     </UFormField>
   </div>
