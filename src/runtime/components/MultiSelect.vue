@@ -37,7 +37,7 @@ const value = defineModel<string[]>({ required: true })
     >
       <USelect
         v-model="value"
-        :placeholder="props.placeholder || 'select size'"
+        :placeholder="props.placeholder || 'Make a selection'"
         :items="options"
         multiple
         value-attribute="value"
