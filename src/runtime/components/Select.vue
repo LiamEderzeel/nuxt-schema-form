@@ -25,7 +25,7 @@ const value = defineModel<string>({ default: '' })
       :name="props.id"
     >
       <USelect
-        :placeholder="props.placeholder || 'Make a seletion'"
+        :placeholder="props.placeholder || 'Make a selection'"
         :items="options"
         value-attribute="value"
         option-attribute="key"
