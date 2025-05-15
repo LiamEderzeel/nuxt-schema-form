@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { Draft2019 } from 'json-schema-library'
 
-import formSchema from '@/assets/schema-numbers.json'
-// import formSchema from '@/assets/schema-basic.json'
+const route = useRoute()
+const { default: formSchema } = await import(`../assets/schema-${route.params.component}.json`, {
+  assert: { type: 'json' }
+})
 
 const schemaObject = ref(new Draft2019(formSchema))
 
@@ -12,6 +14,6 @@ const state = ref(schemaObject.value.getTemplate())
 
 <template>
   <div>
-    <SForm v-if="schema" v-model="state" :schema="schema"/>
+    <SForm v-if="schema" v-model="state" :schema="schema" />
   </div>
 </template>

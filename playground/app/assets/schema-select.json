@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "required": [],
+  "properties": {
+    "firstname": {
+      "title": "Voornaam",
+      "description": "Voornaam deelnemer",
+      "type": "string",
+      "default": ""
+    },
+    "tentAmount": {
+      "title": "Hoeveelheid",
+      "description": "Ik neem eigen tent mee en daar kunnen we met .....kinderen in:",
+      "type": [
+        "string",
+        null
+      ],
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "enum_titles": [
+        "Alleen ikzelf (1 persoon)",
+        "2 persoonen",
+        "3 persoonen",
+        "4 persoonen"
+      ]
+    }
+  }
+}

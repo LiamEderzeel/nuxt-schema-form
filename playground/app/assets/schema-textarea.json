@@ -1,0 +1,13 @@
+{
+  "title": "Textarea",
+  "description": "A text area example",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "textarea": {
+      "title": "textarea",
+      "type": "string",
+      "renderer": "STextarea"
+    }
+  }
+}

@@ -1,0 +1,262 @@
+{
+  "description": "Questioneer for tennis camp 'name'",
+  "type": "object",
+  "required": [
+    "participant",
+    "guardian",
+    "misc"
+  ],
+  "renderer": "MultiStage",
+  "properties": {
+    "participant": {
+      "title": "Deelnemer",
+      "icon": "lucide:user",
+      "type": "object",
+      "required": [
+        "flex",
+        "birthDate",
+        "swimmingLevel",
+        "associationNumber"
+      ],
+      "properties": {
+        "flex": {
+          "required": [
+            "firstname",
+            "lastname"
+          ],
+          "type": "object",
+          "renderer": "SRow",
+          "properties": {
+            "firstname": {
+              "title": "Voornaam",
+              "description": "Voornaam deelnemer",
+              "type": "string",
+              "default": ""
+            },
+            "lastname": {
+              "title": "Achternaam",
+              "description": "Achternaam deelnemer",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "birthDate": {
+          "title": "Geboorte datum",
+          "format": "full-date",
+          "default": "2000-01-01",
+          "type": "string"
+        },
+        "associationNumber": {
+          "title": "Bondsnummer",
+          "type": "string"
+        },
+        "swimmingLevel": {
+          "title": "Zwemdiploma",
+          "renderer": "SSelect",
+          "description": "Het zwemdiploma van de deelnemer",
+          "enum": [
+            "a",
+            "b",
+            "c",
+            "geen"
+          ],
+          "type": "string"
+        },
+        "health": {
+          "title": "Voedsel allergieën of gezondheid",
+          "renderer": "STextarea",
+          "description": "Zijn er bijzonderheden waar we rekening mee moeten houden betreffende voedsel allergieën en/of informatie over de gezondheid?",
+          "type": "string"
+        }
+      }
+    },
+    "guardian": {
+      "title": "Voogd",
+      "icon": "lucide:users",
+      "type": "object",
+      "required": [
+        "flex",
+        "email",
+        "phoneNumber",
+        "address"
+      ],
+      "properties": {
+        "flex": {
+          "required": [
+            "firstname",
+            "lastname"
+          ],
+          "type": "object",
+          "renderer": "SRow",
+          "properties": {
+            "firstname": {
+              "title": "Voornaam",
+              "description": "Voornaam voogd",
+              "type": "string",
+              "default": ""
+            },
+            "lastname": {
+              "title": "Lastname",
+              "description": "Achternaame voogd",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "email": {
+          "title": "Email",
+          "description": "Email address voogd",
+          "type": "string",
+          "format": "email",
+          "default": ""
+        },
+        "phoneNumber": {
+          "title": "Telefoon nummber",
+          "description": "Telefoon nummer voor contact of noodgevallen",
+          "type": "string",
+          "default": ""
+        },
+        "emergencyNumber": {
+          "title": "Extra nood nummer",
+          "description": "Telefoon nummer om te bellen bij nood",
+          "type": "string",
+          "default": ""
+        },
+        "address": {
+          "type": "object",
+          "renderer": "Address",
+          "required": [
+            "street",
+            "number",
+            "zipCode",
+            "city"
+          ],
+          "properties": {
+            "street": {
+              "title": "Straat",
+              "type": "string"
+            },
+            "number": {
+              "title": "Huisnummer",
+              "type": "string"
+            },
+            "unit": {
+              "title": "Toevoeging",
+              "type": "string"
+            },
+            "zipCode": {
+              "title": "Postcode",
+              "type": "string"
+            },
+            "city": {
+              "title": "Stad",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "misc": {
+      "title": "Inschrijven",
+      "type": "object",
+      "required": [
+        "sleep",
+        "dubbelPartner",
+        "permission",
+        "found"
+      ],
+      "properties": {
+        "sleep": {
+          "title": "Overnachting",
+          "description": "Eerder hebben we kunnen zien dat het verblijf in het tentenkamp een fantastisch leuke en leerzame ervaring is. We hopen dan ook dat je aan wil sluiten in de tenten. Maar je mag er ook voor kiezen om thuis te slapen. Je kan dan na de wedstrijden of eventueel de avondactiviteit opgehaald worden en de volgende dag na het ontbijt om 8: 00 word je weer bij de training verwacht. Wil je hieronder aangeven wat je graag wilt:",
+          "type": "string",
+          "renderer": "SSelect",
+          "enum": [
+            "sleepAtHome",
+            "sleepAtCamp"
+          ],
+          "enum_titles": [
+            "Ik slaap in het tentenkamp",
+            "Ik slaap thuis"
+          ]
+        },
+        "tent": {
+          "title": "Tent",
+          "description": "Als je hierboven hebt gekozen voor dat je in het tentenkamp verblijft, wil je dan hieronder aangeven of je een eigen tent meebrengt?",
+          "type": [
+            "string",
+            null
+          ],
+          "renderer": "SSelect",
+          "enum": [
+            "yes",
+            "no"
+          ],
+          "enum_titles": [
+            "Ja, ik neem een eigen tent mee",
+            "Nee, ik heb geen eige tent"
+          ]
+        },
+        "tentAmount": {
+          "title": "Hoeveelheid",
+          "description": "Ik neem eigen tent mee en daar kunnen we met .....kinderen in:",
+          "type": [
+            "string",
+            null
+          ],
+          "renderer": "SSelect",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "enum_titles": [
+            "Alleen ikzelf (1 persoon)",
+            "2 persoonen",
+            "3 persoonen",
+            "4 persoonen"
+          ]
+        },
+        "tentPref": {
+          "title": "Tentgenoten",
+          "description": "Als je hierboven hebt gekozen voor dat je in het tentenkamp verblijft, dan kan je hieronder aangeven met wie je graag in een tent zou willen slapen. Je slaapt met ongeveer 3 of 4 personen in een tent.",
+          "type": "string"
+        },
+        "dubbelPartner": {
+          "title": "Wie is je voorkeur voor het dubbelen?",
+          "description": "Graag voornaam en achternaam aangeven.",
+          "type": "string"
+        },
+        "permission": {
+          "title": "Toestemming",
+          "description": "Door middel van het aanvinken van onderstaande selectiebox, geef hierbij toestemming voor de vastlegging en de weergave van mijn naam, beeltenis en afbeelding verbonden aan mijn persoon, in foto&#39;s, beelden, of audiovisuele opnamen gemaakt, alsook in publiciteit over de onderneming.",
+          "const": false,
+          "enum": [
+            false
+          ],
+          "type": "boolean"
+        },
+        "found": {
+          "title": "Hoe bent u erachter gekomen dat er een kamp was:",
+          "renderer": "SSelect",
+          "enum": [
+            "trainer",
+            "website",
+            "mouthToMouth",
+            "socialMedia",
+            "other"
+          ],
+          "type": "string"
+        },
+        "questions": {
+          "title": "Vragen",
+          "renderer": "STextarea",
+          "description": "Overige opmerkingen/bijzonderheden/vragen?",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

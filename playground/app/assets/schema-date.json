@@ -1,0 +1,28 @@
+{
+  "title": "Date",
+  "description": "A date example",
+  "type": "object",
+  "required": [],
+  "properties": {
+    "full-date": {
+      "title": "full-date",
+      "type": "string",
+      "format": "full-date"
+    },
+    "time": {
+      "title": "time",
+      "type": "string",
+      "format": "full-date"
+    },
+    "date": {
+      "title": "date",
+      "type": "string",
+      "format": "full-date"
+    },
+    "duration": {
+      "title": "duration",
+      "type": "string",
+      "format": "full-date"
+    }
+  }
+}
