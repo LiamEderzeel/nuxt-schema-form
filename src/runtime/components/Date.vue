@@ -11,8 +11,9 @@ const props = defineProps<{
 
 const df = new DateFormatter('nl-NL', { dateStyle: 'medium' })
 
-const value = defineModel<string>({ required: true })
-const date = ref(new CalendarDate(2000, 1, 1))
+const value = defineModel<string>({ required: true, default: new Date().toISOString() })
+const valueDate = new Date(value.value)
+const date = ref(new CalendarDate(valueDate.getFullYear(), valueDate.getMonth() + 1, valueDate.getDate()))
 
 watch(date, () => {
   value.value = date.value.toDate(getLocalTimeZone()).toISOString()
