@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { Draft2019 } from 'json-schema-library'
 
-import formSchema from '@/assets/hot2.json'
+import formSchema from '@/assets/schema-hot2.json'
 import type { CustomValidation } from '#schema-form/components/SForm.vue'
 // import formSchema from '@/assets/schema-basic.json'
 
