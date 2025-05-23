@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Draft2019 } from 'json-schema-library'
+import { compileSchema } from 'json-schema-library'
 import SComponent from '../Component.vue'
 import { ref, computed, h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
@@ -38,7 +38,7 @@ const massActions = [
 ]
 
 const selectedRows = ref<{ __id: any }[]>([])
-const schemaObject = ref(new Draft2019(props.items))
+const schemaObject = ref(compileSchema(props.items))
 const model = ref<{ open: boolean; index: number; value: Record<string, unknown> }>({
   open: false,
   index: 0,
@@ -53,7 +53,7 @@ const values = computed(() => {
   if (props.modelValue.length > 0) {
     return props.modelValue.map((x, i) => ({ ...x, __id: i }))
   } else if (props.minItems && props.minItems > 0) {
-    const template = schemaObject.value.getTemplate()
+    const template = schemaObject.value.getData()
     return [...Array(props.minItems)].map((_, i) => ({ ...template, __id: i }))
   }
 
@@ -172,7 +172,7 @@ const onInput = (value: Record<string, unknown>, index: number) => {
 }
 
 const add = () => {
-  emit('update:modelValue', [...props.modelValue, schemaObject.value.getTemplate()])
+  emit('update:modelValue', [...props.modelValue, schemaObject.value.getData()])
 }
 
 const remove = (index: number) => {

@@ -52,8 +52,8 @@ importers:
         specifier: ^2.4.2
         version: 2.4.2
       json-schema-library:
-        specifier: 10.0.0-rc7
-        version: 10.0.0-rc7
+        specifier: 10.0.0
+        version: 10.0.0
       magic-string:
         specifier: ^0.30.17
         version: 0.30.17
@@ -1511,8 +1511,8 @@ packages:
   '@sagold/json-pointer@5.1.2':
     resolution: {integrity: sha512-+wAhJZBXa6MNxRScg6tkqEbChEHMgVZAhTHVJ60Y7sbtXtu9XA49KfUkdWlS2x78D6H9nryiKePiYozumauPfA==}
 
-  '@sagold/json-pointer@6.0.2':
-    resolution: {integrity: sha512-lRc5U3g4jYVufZbd5VkXKs/rbgJex8+nRGc+1EMUNbpO5D/XA4Cb2/uyuCFOl6M+q1vAZ9u4CIXuqcH5uD7FAw==}
+  '@sagold/json-pointer@7.1.1':
+    resolution: {integrity: sha512-m6BoBo42tsq0mTy1U53pXfVC5WH5s4DtG0VRhOoYaxy6x9ssZNLHez4dTYF+ghcS1Sf88Bi4BL1aTNhgyjBMqQ==}
 
   '@sagold/json-query@6.2.0':
     resolution: {integrity: sha512-7bOIdUE6eHeoWtFm8TvHQHfTVSZuCs+3RpOKmZCDBIOrxpvF/rNFTeuvIyjHva/RR0yVS3kQtr+9TW72LQEZjA==}
@@ -3447,8 +3447,8 @@ packages:
   json-buffer@3.0.1:
     resolution: {integrity: sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==}
 
-  json-schema-library@10.0.0-rc7:
-    resolution: {integrity: sha512-q9DMhftVyO8Xa8cfupS5Kx5Uv1A9OJvyRn8DVDMATQv8bITq18cdZimWilwjHIuf2Mzphy67bSJU9gEFno7BLw==}
+  json-schema-library@10.0.0:
+    resolution: {integrity: sha512-hT18aoABvl007deN9lI4KPgw4RomuLAWR9sjo5UKDrgV4/U4OT+8CwojRBOQFmZCPbSzZk4lSeYuzW4PMcA/Lg==}
 
   json-schema-to-typescript-lite@14.1.0:
     resolution: {integrity: sha512-b8K6P3aiLgiYKYcHacgZKrwPXPyjekqRPV5vkNfBt0EoohcOSXEbcuGzgi6KQmsAhuy5Mh2KMxofXodRhMxURA==}
@@ -7537,7 +7537,7 @@ snapshots:
 
   '@sagold/json-pointer@5.1.2': {}
 
-  '@sagold/json-pointer@6.0.2': {}
+  '@sagold/json-pointer@7.1.1': {}
 
   '@sagold/json-query@6.2.0':
     dependencies:
@@ -9908,9 +9908,9 @@ snapshots:
 
   json-buffer@3.0.1: {}
 
-  json-schema-library@10.0.0-rc7:
+  json-schema-library@10.0.0:
     dependencies:
-      '@sagold/json-pointer': 6.0.2
+      '@sagold/json-pointer': 7.1.1
       '@sagold/json-query': 6.2.0
       deepmerge: 4.3.1
       fast-copy: 3.0.2

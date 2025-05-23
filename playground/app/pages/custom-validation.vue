@@ -18,13 +18,13 @@
 import ColorMode from '@/components/ColorMode.vue'
 import formSchema from '@/assets/schema-custom-validation.json'
 import type { CustomValidation } from '#schema-form/components/SForm.vue'
-import { Draft2019 } from 'json-schema-library'
+import { compileSchema } from 'json-schema-library'
 import type { Config } from 'json-schema-yup-transformer'
 
-const schemaObject = ref(new Draft2019(formSchema))
+const schemaObject = ref(compileSchema(formSchema))
 
-const schema = ref(schemaObject.value.rootSchema)
-const state = ref(schemaObject.value.getTemplate())
+const schema = ref(schemaObject.value.schema)
+const state = ref(schemaObject.value.getData())
 
 const jsonSchemaYupTransfromer: Config = {
   errors: {

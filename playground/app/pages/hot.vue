@@ -1,14 +1,15 @@
 <script lang="ts" setup>
-import { Draft2019 } from 'json-schema-library'
+import { compileSchema } from 'json-schema-library'
 
 import formSchema from '@/assets/schema-hot2.json'
 import type { CustomValidation } from '#schema-form/components/SForm.vue'
 // import formSchema from '@/assets/schema-basic.json'
 
-const schemaObject = ref(new Draft2019(formSchema))
+const schemaObject = ref(compileSchema(formSchema))
 
-const schema = ref(schemaObject.value.rootSchema)
-const state = ref(schemaObject.value.getTemplate())
+const schema = ref(schemaObject.value.schema)
+const state = ref(schemaObject.value.getData())
+// const state = ref({})
 
 const customValidation: CustomValidation[] = [
   {

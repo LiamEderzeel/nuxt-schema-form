@@ -31,13 +31,14 @@
               "title": "Voornaam",
               "description": "Voornaam deelnemer",
               "type": "string",
-              "default": ""
+              "minimum": 1,
+              "maxLength": 2
             },
             "lastname": {
               "title": "Achternaam",
               "description": "Achternaam deelnemer",
               "type": "string",
-              "default": ""
+              "minLength": 1
             }
           }
         },
@@ -93,14 +94,12 @@
             "firstname": {
               "title": "Voornaam",
               "description": "Voornaam voogd",
-              "type": "string",
-              "default": ""
+              "type": "string"
             },
             "lastname": {
               "title": "Lastname",
               "description": "Achternaame voogd",
-              "type": "string",
-              "default": ""
+              "type": "string"
             }
           }
         },
@@ -108,20 +107,17 @@
           "title": "Email",
           "description": "Email address voogd",
           "type": "string",
-          "format": "email",
-          "default": ""
+          "format": "email"
         },
         "phoneNumber": {
           "title": "Telefoon nummber",
           "description": "Telefoon nummer voor contact of noodgevallen",
-          "type": "string",
-          "default": ""
+          "type": "string"
         },
         "emergencyNumber": {
           "title": "Extra nood nummer",
           "description": "Telefoon nummer om te bellen bij nood",
-          "type": "string",
-          "default": ""
+          "type": "string"
         },
         "address": {
           "type": "object",
@@ -184,10 +180,7 @@
         "tent": {
           "title": "Tent",
           "description": "Als je hierboven hebt gekozen voor dat je in het tentenkamp verblijft, wil je dan hieronder aangeven of je een eigen tent meebrengt?",
-          "type": [
-            "string",
-            null
-          ],
+          "type": "string",
           "renderer": "SSelect",
           "enum": [
             "yes",
@@ -201,10 +194,7 @@
         "tentAmount": {
           "title": "Hoeveelheid",
           "description": "Ik neem eigen tent mee en daar kunnen we met .....kinderen in:",
-          "type": [
-            "string",
-            null
-          ],
+          "type": "string",
           "renderer": "SSelect",
           "enum": [
             "1",

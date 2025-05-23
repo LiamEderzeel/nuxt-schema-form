@@ -10,7 +10,14 @@
       "title": "Firstname",
       "description": "Firstname field for submitting a first name",
       "type": "string",
-      "default": ""
+      "minLength": 1,
+      "maxLength": 2
+    },
+    "number": {
+      "title": "number",
+      "type": "number",
+      "minimum": 1,
+      "maximum": 2
     }
   }
 }

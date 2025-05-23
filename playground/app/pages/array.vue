@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import { Draft2019 } from 'json-schema-library'
+import { compileSchema } from 'json-schema-library'
 
 import formSchema from '@/assets/schema-array.json'
 // import formSchema from '@/assets/schema-basic.json'
 
-const schemaObject = ref(new Draft2019(formSchema))
+const schemaObject = ref(compileSchema(formSchema))
 
-const schema = ref(schemaObject.value.rootSchema)
-const state = ref(schemaObject.value.getTemplate())
+const schema = ref(schemaObject.value.schema)
+const state = ref(schemaObject.value.getData())
 </script>
 
 <template>

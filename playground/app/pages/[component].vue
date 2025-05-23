@@ -1,19 +1,24 @@
 <script lang="ts" setup>
-import { Draft2019 } from 'json-schema-library'
+import { compileSchema } from 'json-schema-library'
 
 const route = useRoute()
 const { default: formSchema } = await import(`../assets/schema-${route.params.component}.json`, {
   assert: { type: 'json' }
 })
 
-const schemaObject = ref(new Draft2019(formSchema))
+const schemaObject = ref(compileSchema(formSchema))
+const schema = ref(schemaObject.value.schema)
+const state = ref({})
 
-const schema = ref(schemaObject.value.rootSchema)
-const state = ref(schemaObject.value.getTemplate())
+console.log(state.value)
+
+const onSubmit = (value: unknown) => {
+  console.log(value)
+}
 </script>
 
 <template>
   <div>
-    <SForm v-if="schema" v-model="state" :schema="schema" />
+    <SForm v-if="schema" v-model="state" :schema="schema" @submit="onSubmit" />
   </div>
 </template>

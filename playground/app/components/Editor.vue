@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 // import formSchema from '@/assets/schema.json'
-import { Draft2019 } from 'json-schema-library'
+import { compileSchema } from 'json-schema-library'
 import { computed } from 'vue'
 import type { editor } from 'monaco-editor'
 type IStandaloneEditorConstructionOptions = editor.IStandaloneEditorConstructionOptions
@@ -13,9 +13,9 @@ const colorMode = useColorMode()
 const schemaString = ref(JSON.stringify(props.schema, null, 2))
 const error = ref()
 
-const schemaObject = ref(new Draft2019(JSON.parse(schemaString.value)))
-const schema2 = ref(schemaObject.value.rootSchema)
-const state = ref(schemaObject.value.getTemplate())
+const schemaObject = ref(compileSchema(JSON.parse(schemaString.value)))
+const schema2 = ref(schemaObject.value.schema)
+const state = ref(schemaObject.value.getData())
 
 const monacoOptions = computed(
   (): IStandaloneEditorConstructionOptions => ({

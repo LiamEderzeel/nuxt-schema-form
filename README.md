@@ -14,10 +14,10 @@ Runtime form generation for Nuxt apps.
 
 ```ts
 <script lang="ts" setup>
-import { Draft2019 } from 'json-schema-library'
+import { compileSchema } from 'json-schema-library'
 
 const schemaObject = ref(
-  new Draft2019({
+  compileSchema({
     title: 'From',
     description: 'A minimal form example',
     type: 'object',
@@ -33,8 +33,8 @@ const schemaObject = ref(
   })
 )
 
-const schema = ref(schemaObject.value.rootSchema)
-const state = ref(schemaObject.value.getTemplate())
+const schema = ref(schemaObject.value.getNode().node.schema)
+const state = ref(schemaObject.value.getData())
 </script>
 
 <template>
