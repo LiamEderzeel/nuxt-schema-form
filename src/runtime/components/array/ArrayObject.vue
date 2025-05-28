@@ -63,18 +63,8 @@ const values = computed(() => {
 const columns = computed<TableColumn<{}>[]>(() => {
   const columns = props.columns ?? []
 
-  if (!props.columns && props.items.type === 'object') {
-    for (const column of Object.keys(props?.items?.properties).map<TableColumn<{}>>(x => ({
-      header: x,
-      accessorKey: x,
-      cell: ({ row }) => row.getValue(x)
-    }))) {
-      columns.push(column)
-    }
-  }
-
   if (props.editInline) {
-    columns.push({
+    columns.unshift({
       id: 'expand',
       cell: ({ row }) =>
         h(UButton, {
@@ -89,6 +79,16 @@ const columns = computed<TableColumn<{}>[]>(() => {
           onClick: () => row.toggleExpanded()
         })
     })
+
+    if (!props.columns && props.items.type === 'object') {
+      for (const column of Object.keys(props?.items?.properties).map<TableColumn<{}>>(x => ({
+        header: x,
+        accessorKey: x,
+        cell: ({ row }) => row.getValue(x)
+      }))) {
+        columns.push(column)
+      }
+    }
   }
 
   if (props.edit) {
