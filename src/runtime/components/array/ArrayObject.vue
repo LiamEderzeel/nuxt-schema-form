@@ -62,7 +62,7 @@ const values = computed(() => {
 })
 
 const columns = computed<TableColumn<{}>[]>(() => {
-  const columns = props.columns ?? []
+  const columns = props.columns ? Array.from(props.columns) : []
 
   if (props.editInline) {
     columns.unshift({
