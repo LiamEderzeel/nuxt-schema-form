@@ -8,7 +8,7 @@ const props = defineProps<{
   jsonSchemaPath: string
   properties: PropertiesType
   modelValue: Record<string, unknown>
-  required: string[]
+  required?: string[]
   isRequired: boolean
 }>()
 
@@ -33,7 +33,7 @@ const onInput = (value: unknown, key: string) => {
       :model-value="modelValue[key]"
       :json-schema-path="jsonSchemaPath?.length <= 0 ? `properties.${key}` : `${jsonSchemaPath}.properties.${key}`"
       v-bind="options"
-      :isRequired="required.includes(key)"
+      :isRequired="required ? required.includes(key) : false"
       class="mt-4"
       @update:model-value="(event: unknown) => onInput(event, key)"
       @submit="() => emit('submit')"
