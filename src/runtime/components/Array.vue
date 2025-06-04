@@ -10,7 +10,7 @@ const props = defineProps<{
   title?: string
   description?: string
   jsonSchemaPath: string
-  items: PropertiesType
+  items: PropertiesType & { required?: string[] }
   isRequired: boolean
   minItems?: number
   maxItems?: number
