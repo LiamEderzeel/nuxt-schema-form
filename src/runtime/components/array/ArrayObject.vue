@@ -22,6 +22,7 @@ const props = defineProps<{
   edit?: boolean
   columns?: TableColumn<{}>[]
   editInline?: boolean
+  required?: string[]
 }>()
 const emit = defineEmits(['update:modelValue', 'submit'])
 
