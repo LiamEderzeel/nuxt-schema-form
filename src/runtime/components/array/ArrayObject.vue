@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { compileSchema } from 'json-schema-library'
 import SComponent from '../Component.vue'
-import { ref, computed, h, resolveComponent } from 'vue'
+import { ref, toRaw, computed, h, resolveComponent } from 'vue'
 import type { TableColumn } from '@nuxt/ui'
 import type { Row } from '@tanstack/vue-table'
 import type { PropertiesType } from '../../types'
@@ -23,6 +23,7 @@ const props = defineProps<{
   columns?: TableColumn<{}>[]
   editInline?: boolean
   required?: string[]
+  setHidden?: (value: boolean) => void
 }>()
 const emit = defineEmits(['update:modelValue', 'submit'])
 
@@ -40,10 +41,9 @@ const massActions = [
 
 const selectedRows = ref<{ __id: any }[]>([])
 const schemaObject = ref(compileSchema(props.items))
-const model = ref<{ open: boolean; index: number; value: Record<string, unknown> }>({
-  open: false,
+const model = ref<{ index: number; value: Record<string, unknown> | undefined }>({
   index: 0,
-  value: {}
+  value: undefined
 })
 const expand = ref({
   openedRows: [],
@@ -52,7 +52,7 @@ const expand = ref({
 
 const values = computed(() => {
   if (props.modelValue.length > 0) {
-    return props.modelValue.map((x, i) => ({ ...x, __id: i }))
+    return toRaw(props.modelValue).map((x, i) => ({ ...x, __id: i }))
   } else if (props.minItems && props.minItems > 0) {
     const template = schemaObject.value.getData()
     return [...Array(props.minItems)].map((_, i) => ({ ...template, __id: i }))
@@ -165,6 +165,9 @@ const options = computed(() => {
 })
 
 const open = (index: number) => {
+  console.log('click')
+  console.log(values.value[index])
+  if (props.setHidden) props.setHidden(true)
   model.value = { open: true, index: index, value: structuredClone(values.value[index]) }
 }
 
@@ -190,6 +193,9 @@ const massRemove = () => {
 
   emit('update:modelValue', res)
 }
+
+const setHiddenSelf = (value: boolean) => (hidden.value = value)
+const hidden = ref(false)
 </script>
 
 <template>
@@ -235,34 +241,44 @@ const massRemove = () => {
         </template>
       </UTable>
     </div>
-    <UModal v-model:open="model.open">
-      <template #content>
-        <UCard>
-          <SComponent
-            :id="id.length <= 0 ? `${model.index}` : `${id}[0]`"
-            :model-value="model.value"
-            :json-schema-path="
-              jsonSchemaPath?.length <= 0 ? `properties.${model.index}` : `${jsonSchemaPath}[${model.index}]`
+    <Teleport to="#test-teleport">
+      <div v-if="model.value" v-show="!hidden" class="overflow-auto bg-white" style="background-color: white">
+        <SComponent
+          :id="id.length <= 0 ? `${model.index}` : `${id}[0]`"
+          :model-value="model.value"
+          :json-schema-path="
+            jsonSchemaPath?.length <= 0 ? `properties.${model.index}` : `${jsonSchemaPath}[${model.index}]`
+          "
+          v-bind="items"
+          :isRequired="false"
+          class="mt-4"
+          :setHidden="setHiddenSelf"
+          @update:model-value="(event: Record<string, unknown>) => (model.value = event)"
+          @submit="() => emit('submit')"
+        />
+        <div class="mt-4 flex gap-2 justify-end">
+          <UButton
+            @click="
+              () => {
+                onInput(model.value, model.index)
+                if (props.setHidden) props.setHidden(false)
+                model.value = undefined
+              }
             "
-            v-bind="items"
-            :isRequired="false"
-            class="mt-4"
-            @update:model-value="(event: Record<string, unknown>) => (model.value = event)"
-            @submit="() => emit('submit')"
-          />
-          <template #footer>
-            <UButton
-              @click="
-                () => {
-                  onInput(model.value, model.index)
-                  model.open = false
-                }
-              "
-              >Save</UButton
-            >
-          </template>
-        </UCard>
-      </template>
-    </UModal>
+            >Save</UButton
+          >
+          <UButton
+            variant="outline"
+            @click="
+              () => {
+                if (props.setHidden) props.setHidden(false)
+                model.value = undefined
+              }
+            "
+            >Cancle</UButton
+          >
+        </div>
+      </div>
+    </Teleport>
   </div>
 </template>

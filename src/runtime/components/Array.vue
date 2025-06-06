@@ -19,6 +19,7 @@ const props = defineProps<{
   editInline?: boolean
   modelValue: unknown[]
   required?: string[]
+  setHidden?: (value: boolean) => void
 }>()
 
 const emit = defineEmits(['update:modelValue', 'submit'])

@@ -58,19 +58,39 @@ const submit = () => {
 defineExpose({
   submit
 })
+const isHidden = ref(false)
+const setHidden = (value: boolean) => (isHidden.value = value)
 </script>
 
 <template>
   <div>
     <!-- {{ formRef ? formRef.errors : undefined }} -->
-    <UForm ref="formRef" :state="value" :schema="formValidationSchema" autocomplete="on" @submit="onSubmit">
-      <SComponent v-model="value" v-bind="schema" :validate-fields="validateFields" @submit="submit"
-        :isRequired="true" />
-      <slot />
+    <div id="test-teleport" class="top-0 w-full h-full">
+      <UForm
+        class="overflow-auto bg-white"
+        ref="formRef"
+        :state="value"
+        :schema="formValidationSchema"
+        autocomplete="on"
+        @submit="onSubmit"
+        v-show="!isHidden"
+      >
+        <SComponent
+          v-model="value"
+          v-bind="schema"
+          :validate-fields="validateFields"
+          :setHidden="setHidden"
+          @submit="submit"
+          :isRequired="true"
+        />
+        <slot />
 
-      <slot name="submit">
-        <UButton class="btn mt-4" type="submit"> Submit </UButton>
-      </slot>
-    </UForm>
+        <div class="mt-4 flex gap-2 justify-end">
+          <slot name="submit">
+            <UButton class="btn mt-4" type="submit"> Submit </UButton>
+          </slot>
+        </div>
+      </UForm>
+    </div>
   </div>
 </template>
