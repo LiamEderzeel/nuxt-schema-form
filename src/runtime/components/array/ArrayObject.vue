@@ -61,8 +61,36 @@ const values = computed(() => {
   return []
 })
 
+type Entries<T> = {
+  [K in keyof T]: [K, T[K]]
+}[keyof T][]
+
+const geneateColumnsFromSchema = (items: PropertiesType): TableColumn<{}>[] => {
+  if (!items.properties) return []
+  const res: TableColumn<{}>[] = (Object.entries(items.properties) as [string, PropertiesType][]).map(
+    ([key, value]): TableColumn<{}, unknown[]> => {
+      if (value.type === 'array') {
+        return {
+          header: value.title || key,
+          accessorKey: key,
+          cell: ({ getValue }) => {
+            return getValue().length
+          }
+        }
+      }
+      return {
+        header: value.title || key,
+        accessorKey: key
+      }
+    }
+  ) as TableColumn<{}>[]
+
+  return res
+}
+
 const columns = computed<TableColumn<{}>[]>(() => {
-  const columns = props.columns ? Array.from(props.columns) : []
+  console.log(geneateColumnsFromSchema(props.items))
+  const columns = props.columns ? Array.from(props.columns) : geneateColumnsFromSchema(props.items)
 
   if (props.editInline) {
     columns.unshift({
@@ -80,16 +108,6 @@ const columns = computed<TableColumn<{}>[]>(() => {
           onClick: () => row.toggleExpanded()
         })
     })
-
-    if (!props.columns && props.items.type === 'object') {
-      for (const column of Object.keys(props?.items?.properties).map<TableColumn<{}>>(x => ({
-        header: x,
-        accessorKey: x,
-        cell: ({ row }) => row.getValue(x)
-      }))) {
-        columns.push(column)
-      }
-    }
   }
 
   if (props.edit) {
