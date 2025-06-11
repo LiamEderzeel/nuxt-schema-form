@@ -35,6 +35,7 @@ export type SComponentProps = {
   editInline?: boolean
   columns?: TableColumn<{}>[]
   validateFields?: (fields: string[]) => Promise<boolean>
+  setHidden?: (value: boolean) => void
 }
 
 const props = withDefaults(defineProps<SComponentProps>(), { id: '', jsonSchemaPath: '' })
@@ -142,6 +143,7 @@ const Render = () => {
       isRequired: props.isRequired,
       jsonSchemaPath: `${props.jsonSchemaPath}.${props.id}`,
       onSubmit,
+      setHidden: props.setHidden,
       modelValue: value.value as Record<string, unknown>,
       'onUpdate:modelValue': (v: Record<string, unknown>) => {
         value.value = v
@@ -163,6 +165,7 @@ const Render = () => {
       editInline: props.editInline,
       jsonSchemaPath: `${props.jsonSchemaPath}.${props.id}`,
       onSubmit,
+      setHidden: props.setHidden,
       modelValue: value.value as unknown[],
       'onUpdate:modelValue': (v: unknown) => {
         value.value = v as unknown[]

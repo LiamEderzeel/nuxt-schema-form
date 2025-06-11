@@ -1,0 +1,66 @@
+{
+  "title": "From",
+  "description": "A minimal form example",
+  "type": "object",
+  "required": [
+    "level1"
+  ],
+  "properties": {
+    "level1": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 5,
+      "edit": true,
+      "items": {
+        "type": "object",
+        "required": [
+          "firstname",
+          "lastname",
+          "level2"
+        ],
+        "properties": {
+          "firstname": {
+            "title": "Firstname",
+            "description": "Firstname field for submitting a first name",
+            "type": "string",
+            "default": "Peter"
+          },
+          "lastname": {
+            "title": "Lastname",
+            "description": "Last field for submitting a first name",
+            "type": "string",
+            "default": "Jackson"
+          },
+          "level2": {
+            "title": "Items",
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 5,
+            "edit": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "firstname",
+                "lastname"
+              ],
+              "properties": {
+                "firstname": {
+                  "title": "Firstname",
+                  "description": "Firstname field for submitting a first name",
+                  "type": "string",
+                  "default": "Peter"
+                },
+                "lastname": {
+                  "title": "Lastname",
+                  "description": "Last field for submitting a first name",
+                  "type": "string",
+                  "default": "Jackson"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
