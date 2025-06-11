@@ -7,7 +7,8 @@
     ".": {
       "types": "./dist/module.d.ts",
       "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
+      "require": "./dist/module.cjs",
+      "style": "./dist/runtime/index.css"
     },
     "./utils/*": {
       "types": "./dist/runtime/utils/*.d.ts",
