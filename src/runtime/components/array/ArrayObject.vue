@@ -191,8 +191,9 @@ const open = (index: number) => {
 }
 
 const onInput = (value: Record<string, unknown>, index: number) => {
-  props.modelValue[index] = value
-  emit('update:modelValue', props.modelValue)
+  const res = JSON.parse(JSON.stringify(props.modelValue))
+  res[index] = value
+  emit('update:modelValue', res)
 }
 
 const add = () => {
