@@ -185,7 +185,7 @@ const options = computed(() => {
 
 const open = (index: number) => {
   if (props.setHidden) props.setHidden(true)
-  model.value = { index: index, value: structuredClone(values.value[index]) }
+  model.value = { index: index, value: JSON.parse(JSON.stringify(values.value[index])) }
 }
 
 const onInput = (value: Record<string, unknown>, index: number) => {
