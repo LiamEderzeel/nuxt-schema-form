@@ -61,10 +61,6 @@ const values = computed(() => {
   return []
 })
 
-type Entries<T> = {
-  [K in keyof T]: [K, T[K]]
-}[keyof T][]
-
 const geneateColumnsFromSchema = (items: PropertiesType): TableColumn<{}>[] => {
   if (!items.properties) return []
   const res: TableColumn<{}>[] = (Object.entries(items.properties) as [string, PropertiesType][]).map(
