@@ -108,7 +108,6 @@ const columns = computed<TableColumn<{}>[]>(() => {
   if (props.edit) {
     columns.push({
       id: 'actions',
-      rowClass: 'text-right',
       cell: ({ row }) => {
         return h(
           'div',
