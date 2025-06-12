@@ -89,7 +89,6 @@ const geneateColumnsFromSchema = (items: PropertiesType): TableColumn<{}>[] => {
 }
 
 const columns = computed<TableColumn<{}>[]>(() => {
-  console.log(geneateColumnsFromSchema(props.items))
   const columns = props.columns ? Array.from(props.columns) : geneateColumnsFromSchema(props.items)
 
   if (props.editInline) {
