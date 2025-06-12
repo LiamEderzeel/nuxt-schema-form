@@ -184,8 +184,6 @@ const options = computed(() => {
 })
 
 const open = (index: number) => {
-  console.log('click')
-  console.log(values.value[index])
   if (props.setHidden) props.setHidden(true)
   model.value = { open: true, index: index, value: structuredClone(values.value[index]) }
 }
