@@ -280,7 +280,7 @@ const hidden = ref(false)
           <UButton
             @click="
               () => {
-                onInput(model.value, model.index)
+                if (model.value) onInput(model.value, model.index)
                 if (props.setHidden) props.setHidden(false)
                 model.value = undefined
               }
