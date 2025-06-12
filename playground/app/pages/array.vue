@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { compileSchema } from 'json-schema-library'
 
-import formSchema from '@/assets/schema-arrayt.json'
+import formSchema from '@/assets/schema-het-arsenaal.json'
 // import formSchema from '@/assets/schema-basic.json'
 
 const schemaObject = ref(compileSchema(formSchema))
