@@ -32,6 +32,8 @@ export type SComponentProps = {
   edit?: boolean
   minItems?: number
   maxItems?: number
+  minimum?: number
+  maximum?: number
   editInline?: boolean
   columns?: TableColumn<{}>[]
   validateFields?: (fields: string[]) => Promise<boolean>

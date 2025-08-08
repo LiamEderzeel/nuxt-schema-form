@@ -4,6 +4,8 @@ const props = defineProps<{
   title?: string
   description?: string
   type: string
+  minimum?: number
+  maximum?: number
   isRequired: boolean
 }>()
 
@@ -22,6 +24,8 @@ const value = defineModel<number>({ required: true, default: 0 })
         v-model="value"
         class="w-full"
         orientation="vertical"
+        :min="minimum"
+        :max="maximum"
         :step="0.01"
         :stepSnapping="props.type === 'integer'"
         :format-options="{
