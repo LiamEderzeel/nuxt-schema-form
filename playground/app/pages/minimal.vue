@@ -11,7 +11,7 @@ const state = ref(schemaObject.value.getData())
 </script>
 
 <template>
-  <div>
+  <div class="p-8">
     <SForm v-if="schema" v-model="state" :schema="schema" />
   </div>
 </template>

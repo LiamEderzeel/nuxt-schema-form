@@ -14,10 +14,12 @@
       "maxLength": 2
     },
     "number": {
+      "renderer": "SSlider",
       "title": "number",
+      "description": "test",
       "type": "number",
       "minimum": 1,
-      "maximum": 2
+      "maximum": 10
     }
   }
 }
