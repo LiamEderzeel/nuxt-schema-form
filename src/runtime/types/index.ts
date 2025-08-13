@@ -5,6 +5,7 @@ export type CustomValidation = {
 }
 
 export type PropertiesType = {
+  title?: string
   properties: {
     [key: string]: unknown
   }
