@@ -23,14 +23,13 @@ const open = ref(false)
 
 <template>
   <div>
-    {{ open }}
     <UFormField
       :label="props.title || id"
       :hint="!props.isRequired ? 'optional' : undefined"
       :description="props.description"
       :name="props.id"
     >
-      <UPopover v-model="open" :open="open" :dismissable="true">
+      <UPopover v-model:open="open">
         <UButton color="neutral" variant="subtle" icon="i-lucide-calendar" class="w-full" @click="() => (open = true)">
           {{ value ? df.format(date.toDate(getLocalTimeZone())) : 'Select a date' }}
         </UButton>
