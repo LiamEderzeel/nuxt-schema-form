@@ -67,7 +67,7 @@ const setHidden = (value: boolean) => (isHidden.value = value)
     <!-- {{ formRef ? formRef.errors : undefined }} -->
     <div id="test-teleport" class="top-0 w-full h-full">
       <UForm
-        class="overflow-auto bg-white"
+        class="overflow-auto"
         ref="formRef"
         :state="value"
         :schema="formValidationSchema"
