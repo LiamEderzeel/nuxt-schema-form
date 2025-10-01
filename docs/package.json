@@ -17,7 +17,7 @@
     "@iconify-json/simple-icons": "^1.2.25",
     "@iconify-json/vscode-icons": "^1.2.15",
     "@nuxt/content": "^3.2.2",
-    "@nuxt/ui-pro": "^3.0.0",
+    "@nuxt/ui": "^4.0.0",
     "nuxt": "^3.16.0",
     "shiki-transformer-color-highlight": "^1.0.0",
     "vue-component-meta": "^2.2.8"
