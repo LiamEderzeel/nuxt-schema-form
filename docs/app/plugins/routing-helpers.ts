@@ -1,4 +1,4 @@
-import { mapContentNavigation } from "@nuxt/ui-pro/runtime/utils/content.js";
+import { mapContentNavigation } from "@nuxt/ui/runtime/utils/content.js";
 import type { ContentNavigationItem } from "@nuxt/content";
 
 const v7DocsRE = /^\/docs\/v7/;
@@ -13,8 +13,7 @@ export default defineNuxtPlugin(async () => {
   );
   const nav = computed<ContentNavigationItem[]>(
     () =>
-      mapContentNavigation(navigation.value).at(0)
-        .children as ContentNavigationItem[],
+      (mapContentNavigation(navigation.value || []).at(0)?.children ?? []) as ContentNavigationItem[],
   );
 
   const isV7Docs = computed(() =>
@@ -25,10 +24,10 @@ export default defineNuxtPlugin(async () => {
   );
 
   const navigationV7 = computed(() =>
-    nav.value.filter((x) => v7DocsRE.test(String(x.path)))[0].children!
+    nav.value.filter((x) => v7DocsRE.test(String(x.path)))[0]!.children!
   );
   const navigationV8 = computed(() =>
-    nav.value.filter((x) => v8DocsRE.test(String(x.path)))[0].children!
+    nav.value.filter((x) => v8DocsRE.test(String(x.path)))[0]!.children!
   );
   const navigationV9 = computed(() =>
     nav.value.filter((x) => {
