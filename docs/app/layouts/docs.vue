@@ -28,7 +28,7 @@ watch(
             >
               <template #link-title="{ link }">
                 <span class="inline-flex items-center gap-0.5">
-                  {{ link.title }}
+                  {{ link.label }}
                 </span>
               </template>
             </UContentNavigation>

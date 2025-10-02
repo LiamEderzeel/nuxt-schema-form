@@ -5,9 +5,8 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/module.d.ts",
+      "types": "./dist/module.d.mts",
       "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs",
       "style": "./dist/runtime/index.css"
     },
     "./utils/*": {
@@ -16,7 +15,7 @@
     }
   },
   "main": "./dist/module.mjs",
-  "types": "./dist/module.d.ts",
+  "types": "./dist/module.d.mts",
   "files": [
     "dist"
   ],
@@ -46,38 +45,39 @@
     "url": "https://github.com/LiamEderzeel/nuxt-schema-form/issues"
   },
   "homepage": "https://github.com/LiamEderzeel/nuxt-schema-form#readme",
-  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
+  "packageManager": "pnpm@10.17.1+sha512.17c560fca4867ae9473a3899ad84a88334914f379be46d455cbf92e5cf4b39d34985d452d2583baf19967fa76cb5c17bc9e245529d0b98745721aa7200ecaf7a",
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
-    "@nuxt/eslint-config": "^1.0.0",
-    "@nuxt/kit": "^4.1.2",
-    "@nuxt/module-builder": "^1.0.2",
-    "@nuxt/ui": "^4.0.0",
-    "@tanstack/vue-table": "^8.21.3",
-    "@types/eslint": "^9.6.1",
-    "eslint": "^9.19.0",
-    "eslint-config-prettier": "^10.0.1",
-    "globals": "^15.14.0",
-    "jiti": "^2.4.2",
-    "json-schema-library": "10.0.0",
-    "magic-string": "^0.30.17",
-    "mlly": "^1.7.4",
-    "nuxt": "^4.1.2",
-    "nuxt-component-meta": "^0.10.0",
-    "ohash": "^2.0.11",
-    "pathe": "^2.0.2",
-    "prettier": "^3.4.2",
-    "tinyglobby": "^0.2.10",
-    "typescript": "~5.6.3",
-    "typescript-eslint": "^8.22.0",
-    "unplugin": "^2.1.2",
-    "unplugin-auto-import": "^19.0.0",
-    "unplugin-vue-components": "^28.0.0",
-    "yup": "^1.6.1"
+    "@eslint/js": "catalog:",
+    "@nuxt/eslint-config": "catalog:",
+    "@nuxt/kit": "catalog:",
+    "@nuxt/module-builder": "catalog:",
+    "@nuxt/ui": "catalog:",
+    "@tanstack/vue-table": "catalog:",
+    "@types/eslint": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "catalog:",
+    "globals": "catalog:",
+    "jiti": "catalog:",
+    "json-schema-library": "catalog:",
+    "magic-string": "catalog:",
+    "mlly": "catalog:",
+    "nuxt": "catalog:",
+    "nuxt-component-meta": "catalog:",
+    "ohash": "catalog:",
+    "pathe": "catalog:",
+    "prettier": "catalog:",
+    "tinyglobby": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "^8.45.0",
+    "unplugin": "catalog:",
+    "unplugin-auto-import": "catalog:",
+    "unplugin-vue-components": "catalog:",
+    "vue-tsc": "catalog:",
+    "yup": "catalog:"
   },
   "dependencies": {
-    "@internationalized/date": "^3.7.0",
-    "json-schema-yup-transformer": "^1.6.12"
+    "@internationalized/date": "catalog:",
+    "json-schema-yup-transformer": "catalog:"
   },
   "resolutions": {
     "@ederzeel/nuxt-schema-form": "workspace:*"

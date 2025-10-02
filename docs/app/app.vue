@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { mapContentNavigation } from '@nuxt/ui-pro/runtime/utils/content.js'
+import { mapContentNavigation } from '@nuxt/ui/runtime/utils/content.js'
 import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
@@ -22,7 +22,7 @@ useHead({
 // Navigation Data
 const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'))
 const nav = computed<ContentNavigationItem[]>(
-  () => mapContentNavigation(navigation.value).at(0).children as ContentNavigationItem[]
+  () => (mapContentNavigation(navigation.value ?? []).at(0)?.children ?? []) as ContentNavigationItem[]
 )
 provide('navigation', nav)
 
@@ -49,17 +49,18 @@ const links = computed<NavigationMenuItem[]>(() => [
 </script>
 
 <template>
-  <NuxtLoadingIndicator />
-  <HeaderComponent :links="links" />
-
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
-
-  <FooterComponent />
-
-  <ClientOnly>
-    <LazyUContentSearch :files="files" :navigation="currentVersionNavigation" :multiple="true" :kbds="['meta', 'K']" />
-  </ClientOnly>
-  <UApp></UApp>
+  <UApp>
+    <NuxtLoadingIndicator />
+    <HeaderComponent :links="links" />
+    
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+    
+    <FooterComponent />
+    
+    <ClientOnly>
+      <LazyUContentSearch :files="files" :navigation="currentVersionNavigation" :multiple="true" :kbds="['meta', 'K']" />
+    </ClientOnly>
+  </UApp>
 </template>

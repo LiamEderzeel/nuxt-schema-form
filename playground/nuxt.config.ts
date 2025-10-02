@@ -2,18 +2,24 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  modules: ["../src/module", "@nuxt/ui", "@nuxt/eslint", "nuxt-monaco-editor"],
+  modules: ['@ederzeel/nuxt-schema-form', '@nuxt/ui', '@nuxt/eslint', 'nuxt-monaco-editor'],
 
-  css: ["~/assets/css/main.css"],
+  css: ['~/assets/css/main.css'],
+
+  vite: {
+    optimizeDeps: {
+      include: ['@internationalized/date', 'reka-ui'],
+    }
+  },
+
+  monacoEditor: {
+    optimizeMonacoDeps: false,
+  },
 
   components: {
     global: true,
-    dirs: ["@/components"],
-  },
-  future: {
-    compatibilityVersion: 4,
+    dirs: ['@/components']
   },
 
-  compatibilityDate: "2024-11-27",
-});
-
+  compatibilityDate: '2025-10-02'
+})

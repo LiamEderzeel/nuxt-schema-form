@@ -5,7 +5,6 @@ import { upperFirst, camelCase, kebabCase } from 'scule'
 import { hash } from 'ohash'
 import { CalendarDate } from '@internationalized/date'
 import * as theme from '#build/ui'
-import * as themePro from '#build/ui-pro'
 import { get, set } from '#schema-form/utils'
 
 interface Cast {
@@ -94,14 +93,14 @@ const name = `${props.prose ? 'Prose' : 'U'}${upperFirst(camelName)}`
 const component = defineAsyncComponent(() => {
   if (props.pro) {
     if (props.prefix) {
-      return import(`#ui-pro/components/${props.prefix}/${upperFirst(camelName)}.vue`)
+      return import(`#ui/components/${props.prefix}/${upperFirst(camelName)}.vue`)
     }
 
     if (props.prose) {
-      return import(`#ui-pro/components/prose/${upperFirst(camelName)}.vue`)
+      return import(`#ui/components/prose/${upperFirst(camelName)}.vue`)
     }
 
-    return import(`#ui-pro/components/${upperFirst(camelName)}.vue`)
+    return import(`#ui/components/${upperFirst(camelName)}.vue`)
   }
 
   return import(`#schema-form/components/${upperFirst(camelName)}.vue`)
@@ -121,8 +120,8 @@ const componentProps = reactive({
   )
 })
 const componentEvents = reactive({
-  ...Object.fromEntries((props.model || []).map(key => [`onUpdate:${key}`, (e: any) => setComponentProp(key, e)])),
-  ...(componentProps.modelValue ? { [`onUpdate:modelValue`]: (e: any) => setComponentProp('modelValue', e) } : {})
+  ...Object.fromEntries((props.model || []).map(key => [`onUpdate:${key}`, (e: unknown) => setComponentProp(key, e)])),
+  ...(componentProps.modelValue ? { [`onUpdate:modelValue`]: (e: unknown) => setComponentProp('modelValue', e) } : {})
 })
 
 function getComponentProp(name: string) {
@@ -133,8 +132,8 @@ function setComponentProp(name: string, value: any) {
   set(componentProps, name, value)
 }
 
-const componentTheme = ((props.pro ? (props.prose ? themePro.prose : themePro) : theme) as any)[camelName]
-const meta = await fetchComponentMeta(name as any)
+const componentTheme = theme[camelName as keyof typeof theme]
+const meta = await fetchComponentMeta(name)
 
 function mapKeys(obj: object, parentKey = ''): any {
   return Object.entries(obj || {})
@@ -154,10 +153,10 @@ const options = computed(() => {
   const keys = mapKeys(props.props || {})
 
   return keys.map((key: string) => {
-    const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
+    const prop = meta?.meta?.props?.find((prop: {name: string}) => prop.name === key)
     const propItems = get(props.items, key, [])
-    const items = propItems.length
-      ? propItems.map((item: any) => ({
+    const items = propItems?.length
+      ? propItems.map((item: unknown) => ({
           value: item,
           label: String(item)
         }))
@@ -257,7 +256,7 @@ ${props.slots?.default}
       continue
     }
 
-    const prop = meta?.meta?.props?.find((prop: any) => prop.name === key)
+    const prop = meta?.meta?.props?.find((prop: {name: string}) => prop.name === key)
     const propDefault =
       prop &&
       (prop.default ??
