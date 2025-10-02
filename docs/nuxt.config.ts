@@ -4,7 +4,7 @@ import pkg from '../package.json'
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  modules: ['../src/module', '@nuxt/ui-pro', '@nuxt/content', '@nuxt/eslint', 'nuxt-component-meta'],
+  modules: ['@ederzeel/nuxt-schema-form', '@nuxt/ui', '@nuxt/content', '@nuxt/eslint',],
 
   css: ['~/assets/css/main.css'],
 
