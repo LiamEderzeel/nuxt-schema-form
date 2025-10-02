@@ -5,9 +5,8 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/module.d.ts",
+      "types": "./dist/module.d.mts",
       "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs",
       "style": "./dist/runtime/index.css"
     },
     "./utils/*": {
@@ -16,7 +15,7 @@
     }
   },
   "main": "./dist/module.mjs",
-  "types": "./dist/module.d.ts",
+  "types": "./dist/module.d.mts",
   "files": [
     "dist"
   ],
@@ -73,6 +72,7 @@
     "unplugin": "catalog:",
     "unplugin-auto-import": "catalog:",
     "unplugin-vue-components": "catalog:",
+    "vue-tsc": "catalog:",
     "yup": "catalog:"
   },
   "dependencies": {
