@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import SComponent from './Component.vue'
-import convertToYup from 'json-schema-yup-transformer'
+import convertToYup from '@ederzeel/json-schema-yup-transformer'
 import type { JsonSchema } from 'json-schema-library'
 import { computed, ref } from 'vue'
-import type { Config } from 'json-schema-yup-transformer'
+import type { Config } from '@ederzeel/json-schema-yup-transformer'
 import type { CustomValidation } from '#schema-form-types'
 
 const props = defineProps<{

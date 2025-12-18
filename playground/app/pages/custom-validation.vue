@@ -19,7 +19,7 @@ import ColorMode from '@/components/ColorMode.vue'
 import formSchema from '@/assets/schema-custom-validation.json'
 import type { CustomValidation } from '#schema-form/components/SForm.vue'
 import { compileSchema } from 'json-schema-library'
-import type { Config } from 'json-schema-yup-transformer'
+import type { Config } from '@ederzeel/json-schema-yup-transformer'
 
 const schemaObject = ref(compileSchema(formSchema))
 

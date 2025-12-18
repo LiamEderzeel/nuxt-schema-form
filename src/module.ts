@@ -38,7 +38,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.vite.optimizeDeps ??= {}
     nuxt.options.vite.optimizeDeps.include ??= []
     nuxt.options.vite.optimizeDeps.include.push('json-schema-library')
-    nuxt.options.vite.optimizeDeps.include.push('json-schema-yup-transformer')
+
     nuxt.options.build.transpile.push('json-schema-library')
   }
 })
