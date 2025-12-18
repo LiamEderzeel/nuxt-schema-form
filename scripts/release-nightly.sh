@@ -21,4 +21,4 @@ fi
 
 # Release package
 echo "⚡ Publishing nightly version"
-npx npm@8.17.0 publish --access public --tolerate-republish
+pnpm publish --access public --no-git-checks
