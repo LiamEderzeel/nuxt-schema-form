@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@ederzeel/json-schema-yup-transformer':
-      specifier: 0.1.0-alpha.10
-      version: 0.1.0-alpha.10
+      specifier: 0.1.0-alpha.12
+      version: 0.1.0-alpha.12
     '@eslint/js':
       specifier: ^9.19.0
       version: 9.22.0
@@ -154,7 +154,7 @@ importers:
     dependencies:
       '@ederzeel/json-schema-yup-transformer':
         specifier: 'catalog:'
-        version: 0.1.0-alpha.10
+        version: 0.1.0-alpha.12
       '@internationalized/date':
         specifier: 'catalog:'
         version: 3.9.0
@@ -528,8 +528,8 @@ packages:
     resolution: {integrity: sha512-+tv3z+SPp+gqTIcImN9o0hqE9xyfQjI1XD9pL6NuKjua9B1y7mNYv0S9cP+QEbA4ppVgGZEmKOvHX5G5Ei1CVA==}
     engines: {node: '>=18.0.0'}
 
-  '@ederzeel/json-schema-yup-transformer@0.1.0-alpha.10':
-    resolution: {integrity: sha512-C9jqqBnOXNnUFUYVMbYAFSILfdMySSd88uyYRI4F1wKvkcDOwsq5ko82v6M9cdNYQG2UDxBRic9kp7stF3KVxA==}
+  '@ederzeel/json-schema-yup-transformer@0.1.0-alpha.12':
+    resolution: {integrity: sha512-KvVwkrPhlkbQtu+CFkpMVCS1DZJdoXupj0BZxZN0Mqf4OTv6y6SCWR5JazXl4rDQK1GaED8qbSuJEyevngPqXw==}
     engines: {node: '>=20.19.0'}
 
   '@emnapi/core@1.5.0':
@@ -1628,8 +1628,8 @@ packages:
   '@sagold/json-pointer@5.1.2':
     resolution: {integrity: sha512-+wAhJZBXa6MNxRScg6tkqEbChEHMgVZAhTHVJ60Y7sbtXtu9XA49KfUkdWlS2x78D6H9nryiKePiYozumauPfA==}
 
-  '@sagold/json-pointer@7.1.1':
-    resolution: {integrity: sha512-m6BoBo42tsq0mTy1U53pXfVC5WH5s4DtG0VRhOoYaxy6x9ssZNLHez4dTYF+ghcS1Sf88Bi4BL1aTNhgyjBMqQ==}
+  '@sagold/json-pointer@7.2.1':
+    resolution: {integrity: sha512-8EX4r5Royl5M3qNPTh5W5njdOtRqbWgQfVv26DbzjGj2/55b60EqvbiqUIglzw7fADfY/Io6jDJxGNJHmC+g8g==}
 
   '@sagold/json-query@6.2.0':
     resolution: {integrity: sha512-7bOIdUE6eHeoWtFm8TvHQHfTVSZuCs+3RpOKmZCDBIOrxpvF/rNFTeuvIyjHva/RR0yVS3kQtr+9TW72LQEZjA==}
@@ -6049,12 +6049,15 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@ederzeel/json-schema-yup-transformer@0.1.0-alpha.10':
+  '@ederzeel/json-schema-yup-transformer@0.1.0-alpha.12':
     dependencies:
+      debug: 4.4.3
       is-relative-url: 4.1.0
       lodash-es: 4.17.22
       stringify-object: 3.3.0
       yup: 1.7.1
+    transitivePeerDependencies:
+      - supports-color
 
   '@emnapi/core@1.5.0':
     dependencies:
@@ -7568,7 +7571,7 @@ snapshots:
 
   '@sagold/json-pointer@5.1.2': {}
 
-  '@sagold/json-pointer@7.1.1': {}
+  '@sagold/json-pointer@7.2.1': {}
 
   '@sagold/json-query@6.2.0':
     dependencies:
@@ -9724,7 +9727,7 @@ snapshots:
 
   json-schema-library@10.0.0:
     dependencies:
-      '@sagold/json-pointer': 7.1.1
+      '@sagold/json-pointer': 7.2.1
       '@sagold/json-query': 6.2.0
       deepmerge: 4.3.1
       fast-copy: 3.0.2
