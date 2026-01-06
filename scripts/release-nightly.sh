@@ -21,4 +21,4 @@ fi
 
 # Release package
 echo "⚡ Publishing nightly version"
-pnpm publish --access public --no-git-checks
+pnpm publish --access public --tag latest --no-git-checks
