@@ -5,7 +5,7 @@ packages:
 catalogMode: prefer
 
 catalog:
-  '@ederzeel/json-schema-yup-transformer': 0.1.0-alpha.8
+  '@ederzeel/json-schema-yup-transformer': 0.1.0-alpha.10
   '@eslint/js': ^9.19.0
   '@iconify-json/heroicons': ^1.2.2
   '@iconify-json/logos': ^1.2.4
@@ -29,7 +29,6 @@ catalog:
   globals: ^15.14.0
   jiti: ^2.4.2
   json-schema-library: 10.0.0
-  json-schema-yup-transformer: ^1.6.12
   json5: ^2.2.3
   magic-string: ^0.30.17
   mlly: ^1.7.4

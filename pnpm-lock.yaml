@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@ederzeel/json-schema-yup-transformer':
-      specifier: 0.1.0-alpha.8
-      version: 0.1.0-alpha.8
+      specifier: 0.1.0-alpha.10
+      version: 0.1.0-alpha.10
     '@eslint/js':
       specifier: ^9.19.0
       version: 9.22.0
@@ -154,7 +154,7 @@ importers:
     dependencies:
       '@ederzeel/json-schema-yup-transformer':
         specifier: 'catalog:'
-        version: 0.1.0-alpha.8
+        version: 0.1.0-alpha.10
       '@internationalized/date':
         specifier: 'catalog:'
         version: 3.9.0
@@ -528,8 +528,8 @@ packages:
     resolution: {integrity: sha512-+tv3z+SPp+gqTIcImN9o0hqE9xyfQjI1XD9pL6NuKjua9B1y7mNYv0S9cP+QEbA4ppVgGZEmKOvHX5G5Ei1CVA==}
     engines: {node: '>=18.0.0'}
 
-  '@ederzeel/json-schema-yup-transformer@0.1.0-alpha.8':
-    resolution: {integrity: sha512-xr9P2lVGiNB3de6Jv/M4gdCJzqN+MTPTwqzY7ezMQ5EdHfAItO1rP9EC4vEpG/kcz89pJc1BmWZIHTINovob5g==}
+  '@ederzeel/json-schema-yup-transformer@0.1.0-alpha.10':
+    resolution: {integrity: sha512-C9jqqBnOXNnUFUYVMbYAFSILfdMySSd88uyYRI4F1wKvkcDOwsq5ko82v6M9cdNYQG2UDxBRic9kp7stF3KVxA==}
     engines: {node: '>=20.19.0'}
 
   '@emnapi/core@1.5.0':
@@ -6049,15 +6049,12 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@ederzeel/json-schema-yup-transformer@0.1.0-alpha.8':
+  '@ederzeel/json-schema-yup-transformer@0.1.0-alpha.10':
     dependencies:
-      debug: 4.4.3
       is-relative-url: 4.1.0
       lodash-es: 4.17.22
       stringify-object: 3.3.0
       yup: 1.7.1
-    transitivePeerDependencies:
-      - supports-color
 
   '@emnapi/core@1.5.0':
     dependencies:
