@@ -40,6 +40,7 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.vite.optimizeDeps.include ??= []
     nuxt.options.vite.optimizeDeps.include.push('json-schema-library')
     nuxt.options.vite.optimizeDeps.include.push('stringify-object')
+    nuxt.options.vite.optimizeDeps.include.push('yup')
 
     nuxt.options.build.transpile.push('json-schema-library')
   }
