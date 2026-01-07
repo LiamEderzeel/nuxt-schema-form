@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@ederzeel/json-schema-yup-transformer':
-      specifier: 0.1.0-alpha.13
-      version: 0.1.0-alpha.13
+      specifier: 0.1.0-alpha.15
+      version: 0.1.0-alpha.15
     '@eslint/js':
       specifier: ^9.19.0
       version: 9.22.0
@@ -118,8 +118,8 @@ catalogs:
       specifier: ^1.0.0
       version: 1.0.0
     stringify-object:
-      specifier: ^3.2.0
-      version: 3.2.0
+      specifier: ^5.0.0
+      version: 5.0.0
     tailwindcss:
       specifier: 4.0.13
       version: 4.0.13
@@ -157,7 +157,7 @@ importers:
     dependencies:
       '@ederzeel/json-schema-yup-transformer':
         specifier: 'catalog:'
-        version: 0.1.0-alpha.13
+        version: 0.1.0-alpha.15
       '@internationalized/date':
         specifier: 'catalog:'
         version: 3.9.0
@@ -166,7 +166,7 @@ importers:
         version: 2.0.3
       stringify-object:
         specifier: 'catalog:'
-        version: 3.2.0
+        version: 5.0.0
     devDependencies:
       '@eslint/js':
         specifier: 'catalog:'
@@ -537,8 +537,8 @@ packages:
     resolution: {integrity: sha512-+tv3z+SPp+gqTIcImN9o0hqE9xyfQjI1XD9pL6NuKjua9B1y7mNYv0S9cP+QEbA4ppVgGZEmKOvHX5G5Ei1CVA==}
     engines: {node: '>=18.0.0'}
 
-  '@ederzeel/json-schema-yup-transformer@0.1.0-alpha.13':
-    resolution: {integrity: sha512-jR1b2uD9c3SKcVOMnogRvFvZKmoIdYSTnebHqT0UVsviK/MnE1twVbwJPo2Ed4zi5bqHKhPdw4ofqM243ODh0w==}
+  '@ederzeel/json-schema-yup-transformer@0.1.0-alpha.15':
+    resolution: {integrity: sha512-VY60DdFTjJ+6HAUs9Y2XMiD4fHVJX+kTi13tmElfkwa14DzGL7mNpml0prDUZCGTl1d9N9DPzte1iA7qtCNFzg==}
     engines: {node: '>=20.19.0'}
 
   '@emnapi/core@1.5.0':
@@ -3222,8 +3222,9 @@ packages:
     resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
     engines: {node: 6.* || 8.* || >= 10.*}
 
-  get-own-enumerable-property-symbols@1.0.1:
-    resolution: {integrity: sha512-j+C01hgJfrjIWJ3VLGKIgLAuABx3nW1ffb9JCp9rDJmRc42Wp0x82LnIWN1C6r2YPti11s2DRE4tYjwR4AH+HA==}
+  get-own-enumerable-keys@1.0.0:
+    resolution: {integrity: sha512-PKsK2FSrQCyxcGHsGrLDcK0lx+0Ke+6e8KFFozA9/fIQLhQzPaRvJFdcz7+Axg3jUH/Mq+NI4xa5u/UT2tQskA==}
+    engines: {node: '>=14.16'}
 
   get-port-please@3.2.0:
     resolution: {integrity: sha512-I9QVvBw5U/hw3RmWpYKRumUeaDgxTPd401x364rLmWBJcOQ753eov1eTgzDqRG9bqFIfDc7gfzcQEWrUri3o1A==}
@@ -3513,9 +3514,9 @@ packages:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
     engines: {node: '>=0.12.0'}
 
-  is-obj@1.0.1:
-    resolution: {integrity: sha512-l4RyHgRqGN4Y3+9JHVrNqO+tN0rV5My76uW5/nuO4K1b6vw5G8d/cmFjP9tRfEsdhZNt0IFdZuK/c2Vr4Nb+Qg==}
-    engines: {node: '>=0.10.0'}
+  is-obj@3.0.0:
+    resolution: {integrity: sha512-IlsXEHOjtKhpN8r/tRFj2nDyTmHvcfNeu/nrRIcXE17ROeatXchkojffa1SpdqW4cr/Fj6QkEf/Gn4zf6KKvEQ==}
+    engines: {node: '>=12'}
 
   is-path-inside@4.0.0:
     resolution: {integrity: sha512-lJJV/5dYS+RcL8uQdBDW9c9uWFLLBNRyFhnAKXw5tVqLlKZ4RMGZKv+YQ/IA3OhD+RpbJa1LLFM1FQPGyIXvOA==}
@@ -3528,9 +3529,9 @@ packages:
   is-reference@1.2.1:
     resolution: {integrity: sha512-U82MsXXiFIrjCK4otLT+o2NA2Cd2g5MLoOVXUZjIOhLurrRxpEXzI8O0KZHr3IjLvlAH1kTPYSuqer5T9ZVBKQ==}
 
-  is-regexp@1.0.0:
-    resolution: {integrity: sha512-7zjFAPO4/gwyQAAgRRmqeEeyIICSdmCqa3tsVHMdBzaXXRiqopZL4Cyghg/XulGWrtABTpbnYYzzIRffLkP4oA==}
-    engines: {node: '>=0.10.0'}
+  is-regexp@3.1.0:
+    resolution: {integrity: sha512-rbku49cWloU5bSMI+zaRaXdQHXnthP6DZ/vLnfdSKyL4zUzuWnomtOEiZZOd+ioQ+avFo/qau3KPTc7Fjy1uPA==}
+    engines: {node: '>=12'}
 
   is-relative-url@4.1.0:
     resolution: {integrity: sha512-vhIXKasjAuxS7n+sdv7pJQykEAgS+YU8VBQOENXwo/VZpOHDgBBsIbHo7zFKaWBjYWF4qxERdhbPRRtFAeJKfg==}
@@ -5012,9 +5013,9 @@ packages:
   stringify-entities@4.0.4:
     resolution: {integrity: sha512-IwfBptatlO+QCJUo19AqvrPNqlVMpW9YEL2LIVY+Rpv2qsjCGxaDLNRgeGsQWJhfItebuJhsGSLjaBbNSQ+ieg==}
 
-  stringify-object@3.2.0:
-    resolution: {integrity: sha512-QSO3+nAMH+6BBn9B2C3puzbywg7jC1o8rPJRRWy3AbBkGhnyksMHGQT3jknS16AvpsZv+ZgWPCsz3C9w/o/5EQ==}
-    engines: {node: '>=4'}
+  stringify-object@5.0.0:
+    resolution: {integrity: sha512-zaJYxz2FtcMb4f+g60KsRNFOpVMUyuJgA51Zi5Z1DOTC3S59+OQiVOzE9GZt0x72uBGWKsQIuBKeF9iusmKFsg==}
+    engines: {node: '>=14.16'}
 
   strip-ansi@6.0.1:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==}
@@ -6058,12 +6059,12 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@ederzeel/json-schema-yup-transformer@0.1.0-alpha.13':
+  '@ederzeel/json-schema-yup-transformer@0.1.0-alpha.15':
     dependencies:
       debug: 4.4.3
       is-relative-url: 4.1.0
       lodash-es: 4.17.22
-      stringify-object: 3.2.0
+      stringify-object: 5.0.0
       yup: 1.7.1
     transitivePeerDependencies:
       - supports-color
@@ -9292,7 +9293,7 @@ snapshots:
 
   get-caller-file@2.0.5: {}
 
-  get-own-enumerable-property-symbols@1.0.1: {}
+  get-own-enumerable-keys@1.0.0: {}
 
   get-port-please@3.2.0: {}
 
@@ -9664,7 +9665,7 @@ snapshots:
 
   is-number@7.0.0: {}
 
-  is-obj@1.0.1: {}
+  is-obj@3.0.0: {}
 
   is-path-inside@4.0.0: {}
 
@@ -9674,7 +9675,7 @@ snapshots:
     dependencies:
       '@types/estree': 1.0.8
 
-  is-regexp@1.0.0: {}
+  is-regexp@3.1.0: {}
 
   is-relative-url@4.1.0:
     dependencies:
@@ -11830,11 +11831,11 @@ snapshots:
       character-entities-html4: 2.1.0
       character-entities-legacy: 3.0.0
 
-  stringify-object@3.2.0:
+  stringify-object@5.0.0:
     dependencies:
-      get-own-enumerable-property-symbols: 1.0.1
-      is-obj: 1.0.1
-      is-regexp: 1.0.0
+      get-own-enumerable-keys: 1.0.0
+      is-obj: 3.0.0
+      is-regexp: 3.1.0
 
   strip-ansi@6.0.1:
     dependencies:
