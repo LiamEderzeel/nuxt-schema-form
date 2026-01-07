@@ -76,9 +76,10 @@
     "yup": "catalog:"
   },
   "dependencies": {
-    "pathe": "catalog:",
     "@ederzeel/json-schema-yup-transformer": "catalog:",
-    "@internationalized/date": "catalog:"
+    "@internationalized/date": "catalog:",
+    "pathe": "catalog:",
+    "stringify-object": "catalog:"
   },
   "resolutions": {
     "@ederzeel/nuxt-schema-form": "workspace:*"

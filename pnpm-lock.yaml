@@ -117,6 +117,9 @@ catalogs:
     shiki-transformer-color-highlight:
       specifier: ^1.0.0
       version: 1.0.0
+    stringify-object:
+      specifier: ^3.2.0
+      version: 3.2.0
     tailwindcss:
       specifier: 4.0.13
       version: 4.0.13
@@ -161,6 +164,9 @@ importers:
       pathe:
         specifier: 'catalog:'
         version: 2.0.3
+      stringify-object:
+        specifier: 'catalog:'
+        version: 3.2.0
     devDependencies:
       '@eslint/js':
         specifier: 'catalog:'
@@ -3216,8 +3222,8 @@ packages:
     resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
     engines: {node: 6.* || 8.* || >= 10.*}
 
-  get-own-enumerable-property-symbols@3.0.2:
-    resolution: {integrity: sha512-I0UBV/XOz1XkIJHEUDMZAbzCThU/H8DxmSfmdGcKPnVhu2VfFqr34jr9777IyaTYvxjedWhqVIilEDsCdP5G6g==}
+  get-own-enumerable-property-symbols@1.0.1:
+    resolution: {integrity: sha512-j+C01hgJfrjIWJ3VLGKIgLAuABx3nW1ffb9JCp9rDJmRc42Wp0x82LnIWN1C6r2YPti11s2DRE4tYjwR4AH+HA==}
 
   get-port-please@3.2.0:
     resolution: {integrity: sha512-I9QVvBw5U/hw3RmWpYKRumUeaDgxTPd401x364rLmWBJcOQ753eov1eTgzDqRG9bqFIfDc7gfzcQEWrUri3o1A==}
@@ -5006,8 +5012,8 @@ packages:
   stringify-entities@4.0.4:
     resolution: {integrity: sha512-IwfBptatlO+QCJUo19AqvrPNqlVMpW9YEL2LIVY+Rpv2qsjCGxaDLNRgeGsQWJhfItebuJhsGSLjaBbNSQ+ieg==}
 
-  stringify-object@3.3.0:
-    resolution: {integrity: sha512-rHqiFh1elqCQ9WPLIC8I0Q/g/wj5J1eMkyoiD6eoQApWHP0FtlK7rqnhmabL5VUY9JQCcqwwvlOaSuutekgyrw==}
+  stringify-object@3.2.0:
+    resolution: {integrity: sha512-QSO3+nAMH+6BBn9B2C3puzbywg7jC1o8rPJRRWy3AbBkGhnyksMHGQT3jknS16AvpsZv+ZgWPCsz3C9w/o/5EQ==}
     engines: {node: '>=4'}
 
   strip-ansi@6.0.1:
@@ -6057,7 +6063,7 @@ snapshots:
       debug: 4.4.3
       is-relative-url: 4.1.0
       lodash-es: 4.17.22
-      stringify-object: 3.3.0
+      stringify-object: 3.2.0
       yup: 1.7.1
     transitivePeerDependencies:
       - supports-color
@@ -9286,7 +9292,7 @@ snapshots:
 
   get-caller-file@2.0.5: {}
 
-  get-own-enumerable-property-symbols@3.0.2: {}
+  get-own-enumerable-property-symbols@1.0.1: {}
 
   get-port-please@3.2.0: {}
 
@@ -11824,9 +11830,9 @@ snapshots:
       character-entities-html4: 2.1.0
       character-entities-legacy: 3.0.0
 
-  stringify-object@3.3.0:
+  stringify-object@3.2.0:
     dependencies:
-      get-own-enumerable-property-symbols: 3.0.2
+      get-own-enumerable-property-symbols: 1.0.1
       is-obj: 1.0.1
       is-regexp: 1.0.0
 
