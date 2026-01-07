@@ -158,6 +158,9 @@ importers:
       '@internationalized/date':
         specifier: 'catalog:'
         version: 3.9.0
+      pathe:
+        specifier: 'catalog:'
+        version: 2.0.3
     devDependencies:
       '@eslint/js':
         specifier: 'catalog:'
@@ -210,12 +213,12 @@ importers:
       ohash:
         specifier: 'catalog:'
         version: 2.0.11
-      pathe:
-        specifier: 'catalog:'
-        version: 2.0.3
       prettier:
         specifier: 'catalog:'
         version: 3.5.3
+      reka-ui:
+        specifier: 'catalog:'
+        version: 2.5.1(typescript@5.9.3)(vue@3.5.22(typescript@5.9.3))
       tinyglobby:
         specifier: 'catalog:'
         version: 0.2.15

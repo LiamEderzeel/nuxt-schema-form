@@ -64,8 +64,8 @@
     "nuxt": "catalog:",
     "nuxt-component-meta": "catalog:",
     "ohash": "catalog:",
-    "pathe": "catalog:",
     "prettier": "catalog:",
+    "reka-ui": "catalog:",
     "tinyglobby": "catalog:",
     "typescript": "catalog:",
     "typescript-eslint": "^8.45.0",
@@ -76,6 +76,7 @@
     "yup": "catalog:"
   },
   "dependencies": {
+    "pathe": "catalog:",
     "@ederzeel/json-schema-yup-transformer": "catalog:",
     "@internationalized/date": "catalog:"
   },
