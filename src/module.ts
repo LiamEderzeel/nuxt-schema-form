@@ -30,7 +30,8 @@ export default defineNuxtModule<ModuleOptions>({
     addComponentsDir({
       path: resolve('./runtime/components'),
       prefix: options.prefix,
-      pathPrefix: false
+      pathPrefix: false,
+      global: true
     })
 
     // optimize deps
