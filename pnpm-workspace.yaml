@@ -43,7 +43,7 @@ catalog:
   stringify-object: ^5.0.0
   tailwindcss: 4.0.13
   tinyglobby: ^0.2.10
-  typescript: ^5.8.2
+  typescript: ^6.0.2
   typescript-eslint: ^8.57.2
   unplugin: ^2.1.2
   unplugin-auto-import: ^19.0.0
