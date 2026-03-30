@@ -27,7 +27,8 @@ export const NuxtSchemaFormPlugin = createUnplugin<NuxtSchemaFormOptions | undef
   return [
     NuxtEnvironmentPlugin(),
     ...ComponentImportPlugin(meta.framework, options),
-    AutoImport[meta.framework]({ dts: true, dirs: [join(runtimeDir, 'composables')] }),
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+    (AutoImport as any)[meta.framework]({ dts: true, dirs: [join(runtimeDir, 'composables')] }),
     // tailwind(),
     // PluginsPlugin(options),
     // TemplatePlugin(options, appConfig),

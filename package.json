@@ -49,6 +49,7 @@
   "devDependencies": {
     "@eslint/js": "catalog:",
     "@nuxt/eslint-config": "catalog:",
+    "@nuxt/fonts": "catalog:",
     "@nuxt/kit": "catalog:",
     "@nuxt/module-builder": "catalog:",
     "@nuxt/ui": "catalog:",
@@ -68,10 +69,11 @@
     "reka-ui": "catalog:",
     "tinyglobby": "catalog:",
     "typescript": "catalog:",
-    "typescript-eslint": "^8.45.0",
+    "typescript-eslint": "catalog:",
     "unplugin": "catalog:",
     "unplugin-auto-import": "catalog:",
     "unplugin-vue-components": "catalog:",
+    "vue": "catalog:",
     "vue-tsc": "catalog:",
     "yup": "catalog:"
   },
