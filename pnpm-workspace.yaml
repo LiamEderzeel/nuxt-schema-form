@@ -33,7 +33,7 @@ catalog:
   mlly: ^1.8.2
   monaco-editor: ^0.52.2
   nuxt: ^4.4.2
-  nuxt-component-meta: ^0.10.0
+  nuxt-component-meta: ^0.17.2
   nuxt-monaco-editor: ^1.4.0
   ohash: ^2.0.11
   pathe: ^2.0.2
