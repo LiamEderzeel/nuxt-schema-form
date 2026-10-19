@@ -11,14 +11,19 @@
     "lint:fix": "eslint --fix ."
   },
   "dependencies": {
+    "@codemirror/lang-json": "catalog:",
+    "@codemirror/language": "catalog:",
+    "@codemirror/lint": "catalog:",
+    "@codemirror/state": "catalog:",
+    "@codemirror/view": "catalog:",
     "@ederzeel/nuxt-schema-form": "workspace:*",
     "@iconify-json/lucide": "catalog:",
     "@iconify-json/simple-icons": "catalog:",
+    "@lezer/highlight": "catalog:",
     "@nuxt/ui": "catalog:",
     "@tanstack/charts": "catalog:",
-    "monaco-editor": "catalog:",
+    "codemirror": "catalog:",
     "nuxt": "catalog:",
-    "nuxt-monaco-editor": "catalog:",
     "reka-ui": "catalog:"
   },
   "devDependencies": {
