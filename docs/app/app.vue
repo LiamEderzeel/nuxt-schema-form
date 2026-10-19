@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { mapContentNavigation } from '@nuxt/ui/runtime/utils/content.js'
-import type { ContentNavigationItem } from '@nuxt/content'
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const appConfig = useAppConfig()
@@ -19,17 +17,10 @@ useHead({
 //   twitterCard: 'summary_large_image'
 // })
 
-// Navigation Data
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('docs'))
-const nav = computed<ContentNavigationItem[]>(
-  () => (mapContentNavigation(navigation.value ?? []).at(0)?.children ?? []) as ContentNavigationItem[]
-)
-provide('navigation', nav)
-
 // Search
 const { data: files } = useAsyncData('/api/search.json', () => queryCollectionSearchSections('docs'), { server: false })
 
-const currentVersionNavigation = useNuxtApp().$currentDocsVersionNavigation
+const docsNavigation = useNuxtApp().$docsNavigation
 
 // // Header
 const route = useRoute()
@@ -66,7 +57,7 @@ const links = computed<NavigationMenuItem[]>(() => [
     <FooterComponent />
     
     <ClientOnly>
-      <LazyUContentSearch :files="files" :navigation="currentVersionNavigation" :multiple="true" :kbds="['meta', 'K']" />
+      <LazyUContentSearch :files="files" :navigation="docsNavigation" :multiple="true" :kbds="['meta', 'K']" />
     </ClientOnly>
   </UApp>
 </template>

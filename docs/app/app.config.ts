@@ -1,17 +1,5 @@
 const githubLink = "https://github.com/liamederzeel/nuxt-schema-form";
 export default defineAppConfig({
-  legacy: {
-    ui: {
-      primary: "green",
-      neutral: "slate",
-    },
-  },
-  default: {
-    ui: {
-      primary: "green",
-      neutral: "zinc",
-    },
-  },
   theme: {
     radius: 0.25,
   },
