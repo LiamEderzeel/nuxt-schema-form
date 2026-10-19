@@ -75,7 +75,8 @@ jobs:
       - name: Release Nightly
         if: |
           github.event_name == 'push' &&
-          !startsWith(github.event.head_commit.message, '[skip-release]') &&
+          !contains(github.event.head_commit.message, '[skip-release]') &&
           !startsWith(github.event.head_commit.message, 'chore: generate changelog') &&
-          !startsWith(github.event.head_commit.message, 'docs')
+          !startsWith(github.event.head_commit.message, 'docs') &&
+          !startsWith(github.event.head_commit.message, 'release:')
         run: ./scripts/release-nightly.sh
