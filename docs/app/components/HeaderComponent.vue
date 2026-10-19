@@ -1,26 +1,11 @@
 <script setup lang="ts">
-import type { DropdownMenuItem, NavigationMenuItem } from '#ui/types'
+import type { NavigationMenuItem } from '#ui/types'
 
 const props = defineProps<{ links?: NavigationMenuItem[] }>()
 
 const appConfig = useAppConfig()
 const config = useRuntimeConfig()
-const { $currentDocsVersion, $currentDocsVersionNavigation } = useNuxtApp()
-
-const processed = computed<DropdownMenuItem[]>(() => {
-  const items = [{ label: `v${config.public.version}`, version: 9, to: '/docs' }]
-
-  return items.map(x => {
-    const isActive = $currentDocsVersion.value === x.version
-    return {
-      ...x,
-      color: (isActive && 'primary') || undefined,
-      active: isActive,
-      checked: isActive,
-      type: (isActive && 'checkbox') || undefined
-    }
-  })
-})
+const { $docsNavigation } = useNuxtApp()
 </script>
 
 <template>
@@ -28,21 +13,10 @@ const processed = computed<DropdownMenuItem[]>(() => {
     <template #left>
       <NuxtLink
 to="/"
-        class="flex items-end gap-2 font-bold text-xl text-(--ui-text-highlighted) min-w-0 focus-visible:outline-(--ui-primary) shrink-0">
-        <LogoComponent class="w-auto h-8 shrink-0" />
+        class="flex items-center gap-2 font-bold text-xl text-(--ui-text-highlighted) min-w-0 focus-visible:outline-(--ui-primary) shrink-0">
+        <LogoComponent class="h-6 shrink-0" />
       </NuxtLink>
-      <UDropdownMenu
-v-slot="{ open }" :modal="false" :items="processed"
-        :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width) min-w-0' }" size="xs">
-        <UButton
-:label="$currentDocsVersion === 9 ? `v${config.public.version}` : `v${$currentDocsVersion}.x`"
-          variant="subtle" trailing-icon="i-lucide-chevron-down" size="xs"
-          class="-mb-[6px] font-semibold rounded-full truncate" :class="[open && 'bg-(--ui-primary)/15 ']" :ui="{
-            trailingIcon: ['transition-transform duration-200', open ? 'rotate-180' : undefined]
-              .filter(Boolean)
-              .join(' ')
-          }" />
-      </UDropdownMenu>
+      <UBadge :label="`v${config.public.version}`" variant="subtle" size="sm" class="font-semibold rounded-full" />
     </template>
 
     <UNavigationMenu class="z-10" :items="links" variant="link" />
@@ -67,7 +41,7 @@ v-for="(link, index) of appConfig.header.links" :key="index"
       <USeparator type="dashed" class="mt-4 mb-6" />
 
       <UContentNavigation
-:navigation="$currentDocsVersionNavigation" highlight
+:navigation="$docsNavigation" highlight
         :ui="{ linkTrailingBadge: 'font-semibold uppercase' }">
         <template #link-title="{ link }">
           <span class="inline-flex items-center gap-0.5">

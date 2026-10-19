@@ -10,7 +10,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      githubLink: 'https://github.com/ederzeel/nuxt-form',
+      githubLink: 'https://github.com/LiamEderzeel/nuxt-schema-form',
       version: pkg.version
     }
   },

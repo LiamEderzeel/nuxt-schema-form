@@ -1,47 +1,56 @@
-title: 'Runtime Form Generation for Nuxt Applications · @ederzeel/nuxt-form'
-description: 'Runtime form generation module for your Nuxt project powered by @nuxt/ui.'
+title: 'Nuxt Schema Form · @ederzeel/nuxt-schema-form'
+description: 'Generate validated forms at runtime from JSON Schema, rendered with Nuxt UI.'
 navigation: false
 hero:
-  description: 'Form module for your Nuxt project powered by @nuxt/ui.'
+  description: 'Describe a form once as JSON Schema and get the fields, validation and layout at runtime, rendered with Nuxt UI components.'
   orientation: horizontal
   links:
     - label: Get Started
       trailingIcon: 'i-heroicons-arrow-right-20-solid'
       to: '/docs/getting-started'
       size: lg
+    - label: Try the demo
+      icon: i-lucide-play
+      size: lg
+      variant: outline
+      color: neutral
+      to: '/demo'
     - label: Star on GitHub
       icon: i-simple-icons-github
       size: lg
       variant: ghost
-      color: gray
+      color: neutral
       to: https://github.com/liamederzeel/nuxt-schema-form
       target: _blank
   code: |
     ```bash
-    npx nuxi@latest module add nuxt-form
+    npx nuxi@latest module add @ederzeel/nuxt-schema-form
     ```
 
 features:
-  title: 'Generate a form in seconds!'
+  title: 'From schema to form'
 
   items:
-    - title: 'Run time form generation'
-      description: 'Powered by json-schema for form generating forms a runtime.'
-      icon: 'i-heroicons-cog'
+    - title: 'Forms from JSON Schema'
+      description: 'Strings, numbers, booleans, enums, dates, objects and arrays each render as a matching input.'
+      icon: 'i-lucide-braces'
 
-    - title: 'Validation'
-      description: 'Validation generated from json schema or with custom functions'
-      icon: 'i-heroicons-check'
-      to: '/docs/guide'
+    - title: 'Validation built in'
+      description: 'Rules like required and format come from the schema. Add custom error messages or your own validation functions.'
+      icon: 'i-lucide-shield-check'
 
-    - title: 'Search Engine Optimization'
-      description: 'Composables to add SEO metadata based on current locale.'
-      icon: 'i-heroicons-presentation-chart-line'
-      to: '/docs/guide/seo'
+    - title: 'Layouts'
+      description: 'Place fields side by side with layout rows, without changing the shape of your data.'
+      icon: 'i-lucide-columns-2'
 
-  links:
-    - label: Get Started
-      trailingIcon: 'i-heroicons-arrow-right-20-solid'
-      to: '/docs/getting-started'
-      size: lg
-      color: white
+    - title: 'Custom renderers'
+      description: 'Set a renderer on any property to draw it with your own component, from an address block to a multi-step wizard.'
+      icon: 'i-lucide-puzzle'
+
+    - title: 'Defined at runtime'
+      description: 'Schemas are plain JSON, so you can load them from an API or a CMS and render new forms without a rebuild.'
+      icon: 'i-lucide-refresh-cw'
+
+    - title: 'Built on Nuxt UI'
+      description: 'Fields use Nuxt UI components, so forms follow your theme, colors and color mode.'
+      icon: 'i-lucide-palette'

@@ -2,7 +2,7 @@
 import { useClipboard } from '@vueuse/core'
 const { data: page } = await useAsyncData('index', () => queryCollection('docs').where('path', '=', '/docs').first())
 
-const source = ref('npx nuxi module add nuxt-form')
+const source = ref('npx nuxi module add @ederzeel/nuxt-schema-form')
 const { copy, copied } = useClipboard({ source })
 </script>
 
@@ -28,16 +28,15 @@ v-if="page.hero" v-bind="page.hero" class="relative" :ui="{
 
         <template #title>
           <p>
-            <span class="hidden md:block">Runtime form generation</span>
-            for
-            <span class="text-(--ui-primary)">Nuxt Applications</span>
+            Forms from JSON Schema
+            <span class="text-(--ui-primary)">for Nuxt</span>
           </p>
         </template>
 
         <UInput
 aria-label="Copy code to get started" :model-value="source" name="get-started" class="mx-auto" disabled
           autocomplete="off" size="lg"
-          :ui="{ base: 'w-[300px] disabled:cursor-default', icon: { trailing: { pointer: '' } } }">
+          :ui="{ base: 'w-[440px] max-w-full disabled:cursor-default', icon: { trailing: { pointer: '' } } }">
           <template #leading>
             <UIcon name="i-ph-terminal" />
           </template>
@@ -51,11 +50,11 @@ aria-label="Copy Code" :color="copied ? 'primary' : 'neutral'" variant="ghost" :
 
       <UPageSection :title="page.features.title">
         <UPageGrid>
-          <UCard v-for="(item, index) of page.features.items" :key="index" v-bind="item">
+          <UCard v-for="(item, index) of page.features.items" :key="index">
             <!-- <template #header> </template> -->
             <div class="flex flex-col gap-4 py-2">
               <UIcon class="text-(--ui-primary)" size="32" :name="item.icon" />
-              <h2 class="text-xl font-bold">{{ item.title }}</h2>
+              <h2 class="text-xl font-bold min-h-[2lh]">{{ item.title }}</h2>
               <p class="text-(--ui-text-muted)">
                 {{ item.description }}
               </p>

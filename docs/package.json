@@ -1,5 +1,5 @@
 {
-  "name": "@ederzeel/nuxt-schema-from-docs",
+  "name": "@ederzeel/nuxt-schema-form-docs",
   "private": true,
   "type": "module",
   "scripts": {
