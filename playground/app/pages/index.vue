@@ -5,7 +5,7 @@
         <h1>Demo</h1>
         <ColorMode />
       </div>
-      <Editor :schema="schema" />
+      <Editor :schema="schema" :options="{ customValidation }" />
     </div>
   </div>
 </template>
@@ -13,10 +13,15 @@
 <script lang="ts" setup>
 import ColorMode from '@/components/ColorMode.vue'
 import formSchema from '@/assets/schema.json'
+import type { CustomValidation } from '#schema-form-types'
 
 const schema = ref(formSchema)
 
-const onSubmit = (value: unknown) => {
-  console.log(value)
-}
+const customValidation: CustomValidation[] = [
+  {
+    field: 'misc.permission',
+    message: 'Toestemming is verplicht',
+    validate: (state: { misc: { permission?: boolean } }) => state.misc?.permission === true
+  }
+]
 </script>
