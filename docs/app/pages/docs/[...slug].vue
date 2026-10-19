@@ -71,7 +71,7 @@ const links = computed(() =>
     {
       icon: 'i-lucide-star',
       label: 'Star on GitHub',
-      to: runtimeConfig.githubLink,
+      to: runtimeConfig.public.githubLink,
       target: '_blank'
     }
     // TODO:
