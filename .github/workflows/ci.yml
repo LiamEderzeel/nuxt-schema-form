@@ -41,8 +41,8 @@ jobs:
           path: dist
           key: ubuntu-latest-node-v22-${{ github.sha }}
 
-      # - name: Test
-      #   run: pnpm test
+      - name: Test
+        run: pnpm test
 
   nightly-release:
     needs:
