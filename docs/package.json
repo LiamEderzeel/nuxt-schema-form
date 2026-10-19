@@ -11,16 +11,19 @@
     "lint:fix": "eslint --fix ."
   },
   "dependencies": {
+    "@ederzeel/nuxt-schema-form": "workspace:*",
     "@iconify-json/logos": "catalog:",
     "@iconify-json/lucide": "catalog:",
     "@iconify-json/simple-icons": "catalog:",
     "@iconify-json/vscode-icons": "catalog:",
     "@nuxt/content": "catalog:",
     "@nuxt/ui": "catalog:",
+    "@shikijs/engine-oniguruma": "catalog:",
+    "better-sqlite3": "catalog:",
     "nuxt": "catalog:",
+    "shiki": "catalog:",
     "shiki-transformer-color-highlight": "catalog:",
-    "vue-component-meta": "catalog:",
-    "@ederzeel/nuxt-schema-form": "workspace:*"
+    "vue-component-meta": "catalog:"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "catalog:",
