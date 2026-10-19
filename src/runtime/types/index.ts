@@ -11,3 +11,7 @@ export type PropertiesType = {
   }
   [key: string]: unknown
 }
+
+export type LayoutField = string | { key: string; width?: number }
+
+export type Layout = (LayoutField | LayoutField[])[]

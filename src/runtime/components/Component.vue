@@ -7,7 +7,7 @@ import SArray from './Array.vue'
 import SInputNumber from './InputNumber.vue'
 import SInputField from './InputField.vue'
 import SSelect from './Select.vue'
-import type { PropertiesType } from '../types'
+import type { Layout, PropertiesType } from '../types'
 import type { TableColumn } from '@nuxt/ui'
 
 type Properties = {
@@ -36,6 +36,7 @@ export type SComponentProps = {
   maximum?: number
   editInline?: boolean
   columns?: TableColumn<{}>[]
+  layout?: Layout
   validateFields?: (fields: string[]) => Promise<boolean>
   setHidden?: (value: boolean) => void
 }
@@ -142,6 +143,7 @@ const Render = () => {
       description: props.description,
       properties: props.properties,
       required: props.required,
+      layout: props.layout,
       isRequired: props.isRequired,
       jsonSchemaPath: `${props.jsonSchemaPath}.${props.id}`,
       onSubmit,

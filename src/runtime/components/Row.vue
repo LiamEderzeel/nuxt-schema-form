@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+// Deprecated: wrapping fields in an SRow object nests their data. Use `layout` on the parent object instead.
 import SComponent from './Component.vue'
 
 const props = defineProps<{
