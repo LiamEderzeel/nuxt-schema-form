@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build module
+        run: pnpm build
+
       - name: Create github releases
         run: |
           npx changelogithub
@@ -46,9 +49,12 @@ jobs:
           msg: ${{ github.ref }}
           separator: '/'
 
-      - name: Sync changelog from github releases
+      - name: Update changelog
         run: |
-          pnpm changelog --tag=${{ steps.split.outputs._2 }}
+          TAG=${{ steps.split.outputs._2 }}
+          # changelogen defaults to the latest tag, which is the new tag itself here; the first release has no previous tag
+          FROM=$(git describe --tags --abbrev=0 "$TAG^" 2>/dev/null || git rev-list --max-parents=0 HEAD)
+          pnpm changelog --from="$FROM" --to="$TAG" -r "${TAG#v}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

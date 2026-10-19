@@ -27,7 +27,8 @@
     "docs:dev": "nuxi dev docs",
     "test": "vitest test",
     "lint": "eslint .",
-    "release": "bumpp --commit \"release: v%s\" --push --tag"
+    "release": "pnpm dlx bumpp@12.3.0 --commit \"release: v%s\" --push --tag",
+    "changelog": "changelogen --output CHANGELOG.md"
   },
   "repository": {
     "type": "git",
@@ -54,6 +55,7 @@
     "@nuxt/module-builder": "catalog:",
     "@nuxt/ui": "catalog:",
     "@types/eslint": "catalog:",
+    "changelogen": "catalog:",
     "eslint": "catalog:",
     "eslint-config-prettier": "catalog:",
     "globals": "catalog:",
