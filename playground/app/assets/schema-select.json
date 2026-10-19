@@ -3,14 +3,14 @@
   "required": [],
   "properties": {
     "firstname": {
-      "title": "Voornaam",
-      "description": "Voornaam deelnemer",
+      "title": "First name",
+      "description": "Participant's first name",
       "type": "string",
       "default": ""
     },
     "tentAmount": {
-      "title": "Hoeveelheid",
-      "description": "Ik neem eigen tent mee en daar kunnen we met .....kinderen in:",
+      "title": "Quantity",
+      "description": "I'm bringing my own tent, and it fits this many children:",
       "type": "string",
       "enum": [
         "1",
@@ -19,10 +19,10 @@
         "4"
       ],
       "enum_titles": [
-        "Alleen ikzelf (1 persoon)",
-        "2 persoonen",
-        "3 persoonen",
-        "4 persoonen"
+        "Just me (1 person)",
+        "2 people",
+        "3 people",
+        "4 people"
       ]
     }
   }

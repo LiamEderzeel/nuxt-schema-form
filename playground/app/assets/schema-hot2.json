@@ -1,5 +1,5 @@
 {
-  "description": "Questioneer for tennis camp 'name'",
+  "description": "Questionnaire for tennis camp 'name'",
   "type": "object",
   "required": [
     "participant",
@@ -9,7 +9,7 @@
   "renderer": "MultiStage",
   "properties": {
     "participant": {
-      "title": "Deelnemer",
+      "title": "Participant",
       "icon": "lucide:user",
       "type": "object",
       "required": [
@@ -27,50 +27,50 @@
       ],
       "properties": {
         "firstname": {
-          "title": "Voornaam",
-          "description": "Voornaam deelnemer",
+          "title": "First name",
+          "description": "Participant's first name",
           "type": "string",
           "minimum": 1,
           "maxLength": 2
         },
         "lastname": {
-          "title": "Achternaam",
-          "description": "Achternaam deelnemer",
+          "title": "Last name",
+          "description": "Participant's last name",
           "type": "string",
           "minLength": 1
         },
         "birthDate": {
-          "title": "Geboorte datum",
+          "title": "Date of birth",
           "format": "full-date",
           "default": "2000-01-01",
           "type": "string"
         },
         "associationNumber": {
-          "title": "Bondsnummer",
+          "title": "Membership number",
           "type": "string"
         },
         "swimmingLevel": {
-          "title": "Zwemdiploma",
+          "title": "Swimming certificate",
           "renderer": "SSelect",
-          "description": "Het zwemdiploma van de deelnemer",
+          "description": "The participant's swimming certificate",
           "enum": [
             "a",
             "b",
             "c",
-            "geen"
+            "none"
           ],
           "type": "string"
         },
         "health": {
-          "title": "Voedsel allergieën of gezondheid",
+          "title": "Food allergies or health",
           "renderer": "STextarea",
-          "description": "Zijn er bijzonderheden waar we rekening mee moeten houden betreffende voedsel allergieën en/of informatie over de gezondheid?",
+          "description": "Is there anything we should know about food allergies or health?",
           "type": "string"
         }
       }
     },
     "guardian": {
-      "title": "Voogd",
+      "title": "Guardian",
       "icon": "lucide:users",
       "type": "object",
       "required": [
@@ -88,29 +88,29 @@
       ],
       "properties": {
         "firstname": {
-          "title": "Voornaam",
-          "description": "Voornaam voogd",
+          "title": "First name",
+          "description": "Guardian's first name",
           "type": "string"
         },
         "lastname": {
           "title": "Lastname",
-          "description": "Achternaame voogd",
+          "description": "Guardian's last name",
           "type": "string"
         },
         "email": {
           "title": "Email",
-          "description": "Email address voogd",
+          "description": "Guardian's email address",
           "type": "string",
           "format": "email"
         },
         "phoneNumber": {
-          "title": "Telefoon nummber",
-          "description": "Telefoon nummer voor contact of noodgevallen",
+          "title": "Phone number",
+          "description": "Phone number for contact or emergencies",
           "type": "string"
         },
         "emergencyNumber": {
-          "title": "Extra nood nummer",
-          "description": "Telefoon nummer om te bellen bij nood",
+          "title": "Extra emergency number",
+          "description": "Phone number to call in an emergency",
           "type": "string"
         },
         "address": {
@@ -124,23 +124,23 @@
           ],
           "properties": {
             "street": {
-              "title": "Straat",
+              "title": "Street",
               "type": "string"
             },
             "number": {
-              "title": "Huisnummer",
+              "title": "House number",
               "type": "string"
             },
             "unit": {
-              "title": "Toevoeging",
+              "title": "Unit",
               "type": "string"
             },
             "zipCode": {
-              "title": "Postcode",
+              "title": "Postal code",
               "type": "string"
             },
             "city": {
-              "title": "Stad",
+              "title": "City",
               "type": "string"
             }
           }
@@ -148,7 +148,7 @@
       }
     },
     "misc": {
-      "title": "Inschrijven",
+      "title": "Registration",
       "type": "object",
       "required": [
         "sleep",
@@ -158,8 +158,8 @@
       ],
       "properties": {
         "sleep": {
-          "title": "Overnachting",
-          "description": "Eerder hebben we kunnen zien dat het verblijf in het tentenkamp een fantastisch leuke en leerzame ervaring is. We hopen dan ook dat je aan wil sluiten in de tenten. Maar je mag er ook voor kiezen om thuis te slapen. Je kan dan na de wedstrijden of eventueel de avondactiviteit opgehaald worden en de volgende dag na het ontbijt om 8: 00 word je weer bij de training verwacht. Wil je hieronder aangeven wat je graag wilt:",
+          "title": "Overnight stay",
+          "description": "Staying at the tent camp is a fun and educational experience, and we hope you'll join us in the tents. You can also choose to sleep at home: you'll be picked up after the matches or the evening activity, and we expect you back at training the next day after breakfast at 8:00. Let us know what you prefer:",
           "type": "string",
           "renderer": "SSelect",
           "enum": [
@@ -167,13 +167,13 @@
             "sleepAtCamp"
           ],
           "enum_titles": [
-            "Ik slaap in het tentenkamp",
-            "Ik slaap thuis"
+            "I'll sleep at the tent camp",
+            "I'll sleep at home"
           ]
         },
         "tent": {
           "title": "Tent",
-          "description": "Als je hierboven hebt gekozen voor dat je in het tentenkamp verblijft, wil je dan hieronder aangeven of je een eigen tent meebrengt?",
+          "description": "If you chose to stay at the tent camp above, let us know below whether you are bringing your own tent.",
           "type": "string",
           "renderer": "SSelect",
           "enum": [
@@ -181,13 +181,13 @@
             "no"
           ],
           "enum_titles": [
-            "Ja, ik neem een eigen tent mee",
-            "Nee, ik heb geen eige tent"
+            "Yes, I'm bringing my own tent",
+            "No, I don't have my own tent"
           ]
         },
         "tentAmount": {
-          "title": "Hoeveelheid",
-          "description": "Ik neem eigen tent mee en daar kunnen we met .....kinderen in:",
+          "title": "Quantity",
+          "description": "I'm bringing my own tent, and it fits this many children:",
           "type": "string",
           "renderer": "SSelect",
           "enum": [
@@ -197,25 +197,25 @@
             "4"
           ],
           "enum_titles": [
-            "Alleen ikzelf (1 persoon)",
-            "2 persoonen",
-            "3 persoonen",
-            "4 persoonen"
+            "Just me (1 person)",
+            "2 people",
+            "3 people",
+            "4 people"
           ]
         },
         "tentPref": {
-          "title": "Tentgenoten",
-          "description": "Als je hierboven hebt gekozen voor dat je in het tentenkamp verblijft, dan kan je hieronder aangeven met wie je graag in een tent zou willen slapen. Je slaapt met ongeveer 3 of 4 personen in een tent.",
+          "title": "Tent mates",
+          "description": "If you chose to stay at the tent camp above, tell us below who you would like to share a tent with. Each tent sleeps about 3 or 4 people.",
           "type": "string"
         },
         "dubbelPartner": {
-          "title": "Wie is je voorkeur voor het dubbelen?",
-          "description": "Graag voornaam en achternaam aangeven.",
+          "title": "Who would you like to play doubles with?",
+          "description": "Please enter a first and last name.",
           "type": "string"
         },
         "permission": {
-          "title": "Toestemming",
-          "description": "Door middel van het aanvinken van onderstaande selectiebox, geef hierbij toestemming voor de vastlegging en de weergave van mijn naam, beeltenis en afbeelding verbonden aan mijn persoon, in foto&#39;s, beelden, of audiovisuele opnamen gemaakt, alsook in publiciteit over de onderneming.",
+          "title": "Permission",
+          "description": "By checking the box below, I give permission for my name and likeness to be recorded and shown in photos, videos or other recordings, and in publicity about the organization.",
           "const": false,
           "enum": [
             false
@@ -223,7 +223,7 @@
           "type": "boolean"
         },
         "found": {
-          "title": "Hoe bent u erachter gekomen dat er een kamp was:",
+          "title": "How did you hear about the camp?",
           "renderer": "SSelect",
           "enum": [
             "trainer",
@@ -235,9 +235,9 @@
           "type": "string"
         },
         "questions": {
-          "title": "Vragen",
+          "title": "Questions",
           "renderer": "STextarea",
-          "description": "Overige opmerkingen/bijzonderheden/vragen?",
+          "description": "Any other comments or questions?",
           "type": "string"
         }
       }

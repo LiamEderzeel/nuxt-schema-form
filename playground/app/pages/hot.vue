@@ -14,12 +14,12 @@ const state = ref(schemaObject.value.getData())
 const customValidation: CustomValidation[] = [
   {
     field: 'misc.permission',
-    message: 'Toestemming is verplicht',
+    message: 'Permission is required',
     validate: (state): boolean => state.misc.permission == true
   },
   {
     field: 'misc.days',
-    message: '3 dagen is verplicht',
+    message: 'Select exactly 3 days',
     validate: (state): boolean => {
       return state.misc.days.length === 3
     }

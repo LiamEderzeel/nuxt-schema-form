@@ -7,7 +7,7 @@ useSeoMeta({ title: 'Demo' })
 const customValidation: CustomValidation[] = [
   {
     field: 'misc.permission',
-    message: 'Toestemming is verplicht',
+    message: 'Permission is required',
     validate: (state: { misc: { permission?: boolean } }) => state.misc?.permission === true
   }
 ]
