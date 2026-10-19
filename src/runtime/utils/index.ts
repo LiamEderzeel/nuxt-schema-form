@@ -17,7 +17,7 @@ export function omit<Data extends object, Keys extends keyof Data>(data: Data, k
     delete result[key]
   }
 
-  return result as Omit<Data, Keys>
+  return result
 }
 
 export function get<T>(

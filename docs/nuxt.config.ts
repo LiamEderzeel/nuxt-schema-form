@@ -31,6 +31,12 @@ export default defineNuxtConfig({
     }
   },
 
+  vite: {
+    optimizeDeps: {
+      include: ['json5']
+    }
+  },
+
   future: {
     compatibilityVersion: 4
   },
