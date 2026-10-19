@@ -1,7 +1,16 @@
 <script lang="ts" setup>
 import formSchema from '~/assets/demo-schema.json'
+import type { CustomValidation } from '#schema-form-types'
 
 useSeoMeta({ title: 'Demo' })
+
+const customValidation: CustomValidation[] = [
+  {
+    field: 'misc.permission',
+    message: 'Toestemming is verplicht',
+    validate: (state: { misc: { permission?: boolean } }) => state.misc?.permission === true
+  }
+]
 </script>
 
 <template>
@@ -13,7 +22,7 @@ useSeoMeta({ title: 'Demo' })
         class="mb-10"
       />
       <ClientOnly>
-        <DemoEditor :schema="formSchema" />
+        <DemoEditor :schema="formSchema" :options="{ customValidation }" />
       </ClientOnly>
     </UContainer>
   </UMain>
