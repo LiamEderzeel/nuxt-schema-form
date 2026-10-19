@@ -33,7 +33,7 @@ export default defineNuxtConfig({
 
   vite: {
     optimizeDeps: {
-      include: ['json5']
+      include: ['json5', '@internationalized/date', 'reka-ui']
     }
   },
 
