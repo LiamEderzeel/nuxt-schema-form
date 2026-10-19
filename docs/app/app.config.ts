@@ -29,7 +29,7 @@ export default defineAppConfig({
       },
     },
   },
-  seo: { siteName: "@ederzeel/nuxt-form" },
+  seo: { siteName: "@ederzeel/nuxt-schema-form" },
   header: {
     search: true,
     colorMode: true,
