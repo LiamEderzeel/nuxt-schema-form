@@ -23,10 +23,18 @@ watch(schemaString, value => {
   }
 })
 
+const toast = useToast()
+
 const onSubmit = (value: any) => {
   if (value == null) return
 
   console.log(JSON.stringify(value, null, 2))
+  toast.add({
+    title: 'Form submitted',
+    description: 'All fields passed validation.',
+    icon: 'i-lucide-circle-check',
+    color: 'success'
+  })
 }
 </script>
 
