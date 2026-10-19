@@ -11,6 +11,9 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # github release + changelog commit
+      id-token: write # npm trusted publishing
     steps:
       - name: Checkout codes
         uses: actions/checkout@v7
@@ -58,5 +61,3 @@ jobs:
 
       - name: Publish package
         run: ./scripts/release.sh
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}

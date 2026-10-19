@@ -48,6 +48,9 @@ jobs:
     needs:
       - test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # npm trusted publishing
     steps:
       - name: Checkout codes
         uses: actions/checkout@v7
@@ -76,5 +79,3 @@ jobs:
           !startsWith(github.event.head_commit.message, 'chore: generate changelog') &&
           !startsWith(github.event.head_commit.message, 'docs')
         run: ./scripts/release-nightly.sh
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
