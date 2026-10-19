@@ -1,5 +1,5 @@
 {
-  "title": "From",
+  "title": "Form",
   "description": "A form with fields side by side",
   "type": "object",
   "required": ["firstname"],

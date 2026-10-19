@@ -1,5 +1,5 @@
 {
-  "title": "From",
+  "title": "Form",
   "description": "A minimal form example",
   "type": "object",
   "required": [
@@ -48,7 +48,7 @@
           },
           "lastname": {
             "title": "Lastname",
-            "description": "Last field for submitting a first name",
+            "description": "Last name field for submitting a last name",
             "type": "string",
             "default": "Jackson"
           }
@@ -77,7 +77,7 @@
           },
           "lastname": {
             "title": "Lastname",
-            "description": "Last field for submitting a first name",
+            "description": "Last name field for submitting a last name",
             "type": "string",
             "default": "Jackson"
           }
@@ -107,7 +107,7 @@
           },
           "lastname": {
             "title": "Lastname",
-            "description": "Last field for submitting a first name",
+            "description": "Last name field for submitting a last name",
             "type": "string",
             "default": "Jackson"
           }
@@ -142,7 +142,7 @@
           },
           "lastname": {
             "title": "Lastname",
-            "description": "Last field for submitting a first name",
+            "description": "Last name field for submitting a last name",
             "type": "string",
             "default": "Jackson"
           }

@@ -1,6 +1,6 @@
 {
-  "title": "Questioneer",
-  "description": "Questioneer for tennis camp 'name'",
+  "title": "Questionnaire",
+  "description": "Questionnaire for tennis camp 'name'",
   "renderer": "MultiStage",
   "type": "object",
   "required": [
@@ -21,33 +21,33 @@
       "properties": {
         "firstname": {
           "title": "Firstname",
-          "description": "First name pertisipant",
+          "description": "Participant's first name",
           "type": "string",
           "default": ""
         },
         "lastname": {
           "title": "Lastname",
-          "description": "Last name pertisipant",
+          "description": "Participant's last name",
           "type": "string",
           "default": ""
         },
         "email": {
           "title": "Email",
-          "description": "Last name pertisipant",
+          "description": "Participant's last name",
           "type": "string",
           "format": "email",
           "default": ""
         },
         "custmoinput": {
           "title": "Custom input",
-          "description": "First name pertisipant",
+          "description": "Participant's first name",
           "type": "string",
           "default": "",
           "renderer": "CustomInput"
         },
         "textarea": {
           "title": "Firstname",
-          "description": "First name pertisipant",
+          "description": "Participant's first name",
           "type": "string",
           "default": "",
           "renderer": "STextarea"

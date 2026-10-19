@@ -1,6 +1,6 @@
 {
-  "title": "Questioneer",
-  "description": "Questioneer for tennis camp 'name'",
+  "title": "Questionnaire",
+  "description": "Questionnaire for tennis camp 'name'",
   "type": "object",
   "required": [
     "misc"
@@ -8,7 +8,7 @@
   "renderer": "MultiStage",
   "properties": {
     "misc": {
-      "title": "Inschrijven",
+      "title": "Registration",
       "type": "object",
       "required": [
         "permission",
@@ -17,8 +17,8 @@
       ],
       "properties": {
         "permission": {
-          "title": "Toestemming",
-          "description": "Door middel van het aanvinken van onderstaande selectiebox, geef hierbij toestemming voor de vastlegging en de weergave van mijn naam, beeltenis en afbeelding verbonden aan mijn persoon, in foto&#39;s, beelden, of audiovisuele opnamen gemaakt, alsook in publiciteit over de onderneming.",
+          "title": "Permission",
+          "description": "By checking the box below, I give permission for my name and likeness to be recorded and shown in photos, videos or other recordings, and in publicity about the organization.",
           "const": false,
           "enum": [
             false
@@ -26,7 +26,7 @@
           "type": "boolean"
         },
         "found": {
-          "title": "Hoe bent u erachter gekomen dat er een kamp was:",
+          "title": "How did you hear about the camp?",
           "renderer": "SSelect",
           "enum": [
             "trainer",
@@ -38,9 +38,9 @@
           "type": "string"
         },
         "questions": {
-          "title": "Vragen",
+          "title": "Questions",
           "renderer": "STextarea",
-          "description": "Overige opmerkingen/bijzonderheden/vragen?",
+          "description": "Any other comments or questions?",
           "type": "string"
         },
         "name": {

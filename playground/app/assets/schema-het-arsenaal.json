@@ -92,7 +92,7 @@
                     "type": "string"
                   },
                   "price": {
-                    "title": "item prijs",
+                    "title": "item price",
                     "type": "number"
                   }
                 }

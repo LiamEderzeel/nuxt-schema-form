@@ -29,8 +29,8 @@ const state = ref(schemaObject.value.getData())
 const jsonSchemaYupTransfromer: Config = {
   errors: {
     defaults: {
-      format: ([_key, { title, format }]) => `${title} heeft een ongeldig ${format} formaat`,
-      required: ([_key, { title }]) => `${title} is verplicht`
+      format: ([_key, { title, format }]) => `${title} has an invalid ${format} format`,
+      required: ([_key, { title }]) => `${title} is required`
     }
   }
 }
@@ -38,7 +38,7 @@ const jsonSchemaYupTransfromer: Config = {
 const customValidation: CustomValidation[] = [
   {
     field: 'misc.permission',
-    message: 'Toestemming is verplicht',
+    message: 'Permission is required',
     validate: (state): boolean => state.misc.permission == true
   }
 ]

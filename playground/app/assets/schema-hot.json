@@ -1,5 +1,5 @@
 {
-  "description": "Questioneer for tennis camp 'name'",
+  "description": "Questionnaire for tennis camp 'name'",
   "type": "object",
   "required": [
     "participant",
@@ -9,7 +9,7 @@
   "renderer": "MultiStage",
   "properties": {
     "participant": {
-      "title": "Deelnemer",
+      "title": "Participant",
       "icon": "lucide:user",
       "type": "object",
       "required": [
@@ -28,25 +28,25 @@
       ],
       "properties": {
         "firstname": {
-          "title": "Voornaam",
-          "description": "Voornaam deelnemer",
+          "title": "First name",
+          "description": "Participant's first name",
           "type": "string",
           "default": ""
         },
         "lastname": {
-          "title": "Achternaam",
-          "description": "Achternaam deelnemer",
+          "title": "Last name",
+          "description": "Participant's last name",
           "type": "string",
           "default": ""
         },
         "birthDate": {
-          "title": "Geboorte datum",
+          "title": "Date of birth",
           "format": "full-date",
           "default": "2000-01-01",
           "type": "string"
         },
         "tshirtSize": {
-          "title": "T-shirt maat",
+          "title": "T-shirt size",
           "renderer": "SSelect",
           "enum": [
             "s",
@@ -55,17 +55,17 @@
             "xl"
           ],
           "enum_titles": [
-            "Maat S (5/6 jaar)",
-            "Maat M (7/8 jaar)",
-            "Maat L (9/11 jaar)",
-            "Maat XL (12/13 jaar)"
+            "Size S (5–6 years)",
+            "Size M (7–8 years)",
+            "Size L (9–11 years)",
+            "Size XL (12–13 years)"
           ],
           "type": "string"
         },
         "tennisLevel": {
-          "title": "Tennisniveau",
+          "title": "Tennis level",
           "renderer": "SSelect",
-          "description": "Het niveau van de deelnemer",
+          "description": "The participant's level",
           "enum": [
             "red",
             "orange",
@@ -74,36 +74,36 @@
             "other"
           ],
           "enum_titles": [
-            "rood",
-            "oranje",
-            "groen",
-            "geel",
-            "overige"
+            "red",
+            "orange",
+            "green",
+            "yellow",
+            "other"
           ],
           "type": "string"
         },
         "swimmingLevel": {
-          "title": "Zwemdiploma",
+          "title": "Swimming certificate",
           "renderer": "SSelect",
-          "description": "Het zwemdiploma van de deelnemer",
+          "description": "The participant's swimming certificate",
           "enum": [
             "a",
             "b",
             "c",
-            "geen"
+            "none"
           ],
           "type": "string"
         },
         "health": {
-          "title": "Voedsel allergieën of gezondheid",
+          "title": "Food allergies or health",
           "renderer": "STextarea",
-          "description": "Zijn er bijzonderheden waar we rekening mee moeten houden betreffende voedsel allergieën en/of informatie over de gezondheid?",
+          "description": "Is there anything we should know about food allergies or health?",
           "type": "string"
         }
       }
     },
     "guardian": {
-      "title": "Voogd",
+      "title": "Guardian",
       "icon": "lucide:users",
       "type": "object",
       "required": [
@@ -121,33 +121,33 @@
       ],
       "properties": {
         "firstname": {
-          "title": "Voornaam",
-          "description": "Voornaam voogd",
+          "title": "First name",
+          "description": "Guardian's first name",
           "type": "string",
           "default": ""
         },
         "lastname": {
           "title": "Lastname",
-          "description": "Achternaame voogd",
+          "description": "Guardian's last name",
           "type": "string",
           "default": ""
         },
         "email": {
           "title": "Email",
-          "description": "Email address voogd",
+          "description": "Guardian's email address",
           "type": "string",
           "format": "email",
           "default": ""
         },
         "phoneNumber": {
-          "title": "Telefoon nummber",
-          "description": "Telefoon nummer voor contact of noodgevallen",
+          "title": "Phone number",
+          "description": "Phone number for contact or emergencies",
           "type": "string",
           "default": ""
         },
         "emergencyNumber": {
-          "title": "Extra nood nummer",
-          "description": "Telefoon nummer om te bellen bij nood",
+          "title": "Extra emergency number",
+          "description": "Phone number to call in an emergency",
           "type": "string",
           "default": ""
         },
@@ -162,23 +162,23 @@
           ],
           "properties": {
             "street": {
-              "title": "Straat",
+              "title": "Street",
               "type": "string"
             },
             "number": {
-              "title": "Huisnummer",
+              "title": "House number",
               "type": "string"
             },
             "unit": {
-              "title": "Toevoeging",
+              "title": "Unit",
               "type": "string"
             },
             "zipCode": {
-              "title": "Postcode",
+              "title": "Postal code",
               "type": "string"
             },
             "city": {
-              "title": "Stad",
+              "title": "City",
               "type": "string"
             }
           }
@@ -186,7 +186,7 @@
       }
     },
     "misc": {
-      "title": "Inschrijven",
+      "title": "Registration",
       "type": "object",
       "required": [
         "permission",
@@ -195,8 +195,8 @@
       ],
       "properties": {
         "days": {
-          "title": "Dagen",
-          "description": "Geef aan welken 3 dagen de deelnemer aanwezig is op het tennis kamp.",
+          "title": "Days",
+          "description": "Select the 3 days the participant will attend the tennis camp.",
           "maxItems": 3,
           "type": "array",
           "items": {
@@ -208,16 +208,16 @@
               "thursday"
             ],
             "enum_titles": [
-              "Maandag",
-              "Dinsdag",
-              "Woensdag",
-              "Donderdag"
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday"
             ]
           }
         },
         "permission": {
-          "title": "Toestemming",
-          "description": "Door middel van het aanvinken van onderstaande selectiebox, geef hierbij toestemming voor de vastlegging en de weergave van mijn naam, beeltenis en afbeelding verbonden aan mijn persoon, in foto&#39;s, beelden, of audiovisuele opnamen gemaakt, alsook in publiciteit over de onderneming.",
+          "title": "Permission",
+          "description": "By checking the box below, I give permission for my name and likeness to be recorded and shown in photos, videos or other recordings, and in publicity about the organization.",
           "const": false,
           "enum": [
             false
@@ -225,7 +225,7 @@
           "type": "boolean"
         },
         "found": {
-          "title": "Hoe bent u erachter gekomen dat er een kamp was:",
+          "title": "How did you hear about the camp?",
           "renderer": "SSelect",
           "enum": [
             "trainer",
@@ -237,9 +237,9 @@
           "type": "string"
         },
         "questions": {
-          "title": "Vragen",
+          "title": "Questions",
           "renderer": "STextarea",
-          "description": "Overige opmerkingen/bijzonderheden/vragen?",
+          "description": "Any other comments or questions?",
           "type": "string"
         }
       }
