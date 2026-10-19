@@ -39,6 +39,11 @@ const links = computed<NavigationMenuItem[]>(() => [
     to: `/docs/getting-started`,
     // icon: 'i-heroicons-book-open',
     active: route.path.startsWith('/docs')
+  },
+  {
+    label: 'Demo',
+    to: '/demo',
+    active: route.path.startsWith('/demo')
   }
   // {
   //   label: 'Roadmap',
