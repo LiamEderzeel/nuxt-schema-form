@@ -1,31 +1,27 @@
 <script lang="ts" setup>
-// import formSchema from '@/assets/schema.json'
 import { compileSchema } from 'json-schema-library'
-import { computed } from 'vue'
-import type { editor } from 'monaco-editor'
-type IStandaloneEditorConstructionOptions = editor.IStandaloneEditorConstructionOptions
 
 const props = defineProps<{
   schema: Record<string, unknown>
 }>()
 
-const colorMode = useColorMode()
 const schemaString = ref(JSON.stringify(props.schema, null, 2))
-const error = ref()
+const error = ref<string>()
 
 const schemaObject = ref(compileSchema(JSON.parse(schemaString.value)))
 const schema2 = ref(schemaObject.value.schema)
 const state = ref(schemaObject.value.getData())
 
-const monacoOptions = computed(
-  (): IStandaloneEditorConstructionOptions => ({
-    minimap: { enabled: false },
-    theme: colorMode.value === 'dark' ? 'vs-dark' : 'vs-light',
-    contextmenu: false,
-    lineNumbers: 'off',
-    scrollBeyondLastLine: false
-  })
-)
+watch(schemaString, value => {
+  try {
+    schemaObject.value = compileSchema(JSON.parse(value))
+    schema2.value = schemaObject.value.schema
+    state.value = schemaObject.value.getData(state.value)
+    error.value = undefined
+  } catch (e) {
+    error.value = e instanceof Error ? e.message : String(e)
+  }
+})
 
 const onSubmit = (value: any) => {
   if (value == null) return
@@ -36,13 +32,14 @@ const onSubmit = (value: any) => {
 
 <template>
   <div class="w-full gap-10 flex">
-    <div
-      class="w-1/2 h-[80vh] rounded-md ring-1 focus:ring-2 ring-neutral-300 dark:ring-gray-700 overflow-hidden shadow-sm"
-    >
-      <MonacoEditor v-model="schemaString" :options="monacoOptions" lang="json" class="h-full rounded-md" />
-      <UFormField :error="error">
-        <UTextarea v-model="schemaString" :rows="25" class="w-full" />
-      </UFormField>
+    <div class="w-1/2 flex flex-col gap-2">
+      <div
+        class="h-[80vh] rounded-md bg-default ring ring-inset focus-within:ring-2 overflow-hidden transition-colors"
+        :class="error ? 'ring-error' : 'ring-accented focus-within:ring-primary'"
+      >
+        <CodeEditor v-model="schemaString" class="h-full" />
+      </div>
+      <p v-if="error" class="text-sm text-error">{{ error }}</p>
     </div>
     <div class="w-1/2">
       <SForm v-if="schema2 && error == null" v-model="state" :schema="schema2" @submit="onSubmit">

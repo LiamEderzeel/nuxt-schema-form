@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  modules: ['@ederzeel/nuxt-schema-form', '@nuxt/ui', '@nuxt/eslint', 'nuxt-monaco-editor'],
+  modules: ['@ederzeel/nuxt-schema-form', '@nuxt/ui', '@nuxt/eslint'],
 
   css: ['~/assets/css/main.css'],
 
@@ -10,10 +10,6 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: ['@internationalized/date', 'reka-ui'],
     }
-  },
-
-  monacoEditor: {
-    optimizeMonacoDeps: false,
   },
 
   components: {
