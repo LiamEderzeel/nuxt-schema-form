@@ -37,12 +37,13 @@ const links = computed<NavigationMenuItem[]>(() => [
   {
     label: 'Docs',
     to: `/docs/getting-started`,
-    // icon: 'i-heroicons-book-open',
+    icon: 'i-lucide-book-open',
     active: route.path.startsWith('/docs')
   },
   {
     label: 'Demo',
     to: '/demo',
+    icon: 'i-lucide-play',
     active: route.path.startsWith('/demo')
   }
   // {
