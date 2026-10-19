@@ -31,8 +31,7 @@
     "nuxt": "catalog:",
     "reka-ui": "catalog:",
     "shiki": "catalog:",
-    "shiki-transformer-color-highlight": "catalog:",
-    "vue-component-meta": "catalog:"
+    "shiki-transformer-color-highlight": "catalog:"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "catalog:",

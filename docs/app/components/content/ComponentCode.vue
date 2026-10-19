@@ -89,7 +89,7 @@ const route = useRoute()
 const { $prettier } = useNuxtApp()
 
 const camelName = camelCase(props.slug ?? route.path.split('/').pop() ?? '')
-const name = `${props.prose ? 'Prose' : 'U'}${upperFirst(camelName)}`
+const name = `${props.prose ? 'Prose' : props.pro ? 'U' : 'S'}${upperFirst(camelName)}`
 const component = defineAsyncComponent(() => {
   if (props.pro) {
     if (props.prefix) {
@@ -133,7 +133,6 @@ function setComponentProp(name: string, value: any) {
 }
 
 const componentTheme = theme[camelName as keyof typeof theme]
-const meta = await fetchComponentMeta(name)
 
 function mapKeys(obj: object, parentKey = ''): any {
   return Object.entries(obj || {})
@@ -153,32 +152,26 @@ const options = computed(() => {
   const keys = mapKeys(props.props || {})
 
   return keys.map((key: string) => {
-    const prop = meta?.meta?.props?.find((prop: {name: string}) => prop.name === key)
     const propItems = get(props.items, key, [])
     const items = propItems?.length
       ? propItems.map((item: unknown) => ({
           value: item,
           label: String(item)
         }))
-      : prop?.type === 'boolean' || prop?.type === 'boolean | undefined'
-        ? [
-            { value: true, label: 'true' },
-            { value: false, label: 'false' }
-          ]
-        : Object.keys(componentTheme?.variants?.[key] || {})
-            .filter(variant => {
-              return variant !== 'true' && variant !== 'false'
-            })
-            .map(variant => ({
-              value: variant,
-              label: variant,
-              chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
-            }))
+      : Object.keys(componentTheme?.variants?.[key] || {})
+          .filter(variant => {
+            return variant !== 'true' && variant !== 'false'
+          })
+          .map(variant => ({
+            value: variant,
+            label: variant,
+            chip: key.toLowerCase().endsWith('color') ? { color: variant } : undefined
+          }))
 
     return {
       name: key,
       label: key,
-      type: props?.cast?.[key] ?? prop?.type,
+      type: props?.cast?.[key],
       items
     }
   })
@@ -256,12 +249,7 @@ ${props.slots?.default}
       continue
     }
 
-    const prop = meta?.meta?.props?.find((prop: {name: string}) => prop.name === key)
-    const propDefault =
-      prop &&
-      (prop.default ??
-        prop.tags?.find(tag => tag.name === 'defaultValue')?.text ??
-        componentTheme?.defaultVariants?.[prop.name])
+    const propDefault = componentTheme?.defaultVariants?.[key]
     const name = kebabCase(key)
 
     if (typeof value === 'boolean') {
