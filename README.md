@@ -5,9 +5,7 @@ Runtime form generation for Nuxt apps. Describe a form as JSON Schema and get th
 - 📖 [Documentation](https://liamederzeel.github.io/nuxt-schema-form/docs/getting-started)
 - ▶️ [Live demo](https://liamederzeel.github.io/nuxt-schema-form/demo): edit a schema and watch the form update as you type
 
-## 🚀 Usage
-
-### Install
+## 🚀 Install
 
 1. Install the `@ederzeel/nuxt-schema-form` module in your project:
 
@@ -23,38 +21,4 @@ npx nuxi module add @ederzeel/nuxt-schema-form
 @import '@ederzeel/nuxt-schema-form';
 ```
 
-### Generate a form
-
-```vue
-<script lang="ts" setup>
-import { compileSchema } from 'json-schema-library'
-
-const schemaObject = ref(
-  compileSchema({
-    title: 'Form',
-    description: 'A minimal form example',
-    type: 'object',
-    required: ['firstname'],
-    properties: {
-      firstname: {
-        title: 'Firstname',
-        description: 'Firstname field for submitting a first name',
-        type: 'string',
-        default: ''
-      }
-    }
-  })
-)
-
-const schema = ref(schemaObject.value.schema)
-const state = ref(schemaObject.value.getData())
-</script>
-
-<template>
-  <div>
-    <SForm v-if="schema" v-model="state" :schema="schema" />
-  </div>
-</template>
-```
-
-See the [documentation](https://liamederzeel.github.io/nuxt-schema-form/docs/getting-started) for validation, layouts and custom renderers.
+Then render a form from your schema with `SForm`. The [usage guide](https://liamederzeel.github.io/nuxt-schema-form/docs/getting-started/form) shows how, and the [documentation](https://liamederzeel.github.io/nuxt-schema-form/docs/getting-started) covers validation, layouts and custom renderers.
