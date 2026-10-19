@@ -73,7 +73,7 @@ jobs:
         if: |
           github.event_name == 'push' &&
           !startsWith(github.event.head_commit.message, '[skip-release]') &&
-          !startsWith(github.event.head_commit.message, 'chore') &&
+          !startsWith(github.event.head_commit.message, 'chore: generate changelog') &&
           !startsWith(github.event.head_commit.message, 'docs')
         run: ./scripts/release-nightly.sh
         env:
