@@ -1,36 +1,38 @@
 {
   "title": "From",
-  "description": "A minimal form example",
+  "description": "A form with fields side by side",
   "type": "object",
-  "required": [
-    "flex"
+  "required": ["firstname"],
+  "layout": [
+    ["firstname", "lastname"],
+    [{ "key": "street", "width": 3 }, "number"]
   ],
   "properties": {
-    "flex": {
-      "type": "object",
-      "renderer": "SRow",
-      "required": [
-        "firstname"
-      ],
-      "properties": {
-        "firstname": {
-          "title": "Firstname",
-          "description": "Firstname field for submitting a first name",
-          "type": "string",
-          "default": ""
-        },
-        "lastname": {
-          "title": "Lastname",
-          "description": "Lastname field for submitting a last name",
-          "type": "string",
-          "default": ""
-        },
-        "test": {
-          "title": "Lastname",
-          "description": "Lastname field for submitting a last name",
-          "type": "number"
-        }
-      }
+    "firstname": {
+      "title": "Firstname",
+      "description": "Firstname field for submitting a first name",
+      "type": "string",
+      "default": ""
+    },
+    "lastname": {
+      "title": "Lastname",
+      "description": "Lastname field for submitting a last name",
+      "type": "string",
+      "default": ""
+    },
+    "street": {
+      "title": "Street",
+      "type": "string",
+      "default": ""
+    },
+    "number": {
+      "title": "Number",
+      "type": "number"
+    },
+    "email": {
+      "title": "Email",
+      "type": "string",
+      "default": ""
     }
   }
 }

@@ -14,34 +14,31 @@
       "icon": "lucide:user",
       "type": "object",
       "required": [
-        "flex",
+        "firstname",
+        "lastname",
         "birthDate",
         "tshirtSize",
         "tennisLevel",
         "swimmingLevel"
       ],
+      "layout": [
+        [
+          "firstname",
+          "lastname"
+        ]
+      ],
       "properties": {
-        "flex": {
-          "required": [
-            "firstname",
-            "lastname"
-          ],
-          "type": "object",
-          "renderer": "SRow",
-          "properties": {
-            "firstname": {
-              "title": "Voornaam",
-              "description": "Voornaam deelnemer",
-              "type": "string",
-              "default": ""
-            },
-            "lastname": {
-              "title": "Achternaam",
-              "description": "Achternaam deelnemer",
-              "type": "string",
-              "default": ""
-            }
-          }
+        "firstname": {
+          "title": "Voornaam",
+          "description": "Voornaam deelnemer",
+          "type": "string",
+          "default": ""
+        },
+        "lastname": {
+          "title": "Achternaam",
+          "description": "Achternaam deelnemer",
+          "type": "string",
+          "default": ""
         },
         "birthDate": {
           "title": "Geboorte datum",
@@ -105,34 +102,31 @@
       "icon": "lucide:users",
       "type": "object",
       "required": [
-        "flex",
+        "firstname",
+        "lastname",
         "email",
         "phoneNumber",
         "emergencyNumber",
         "address"
       ],
+      "layout": [
+        [
+          "firstname",
+          "lastname"
+        ]
+      ],
       "properties": {
-        "flex": {
-          "required": [
-            "firstname",
-            "lastname"
-          ],
-          "type": "object",
-          "renderer": "SRow",
-          "properties": {
-            "firstname": {
-              "title": "Voornaam",
-              "description": "Voornaam voogd",
-              "type": "string",
-              "default": ""
-            },
-            "lastname": {
-              "title": "Lastname",
-              "description": "Achternaame voogd",
-              "type": "string",
-              "default": ""
-            }
-          }
+        "firstname": {
+          "title": "Voornaam",
+          "description": "Voornaam voogd",
+          "type": "string",
+          "default": ""
+        },
+        "lastname": {
+          "title": "Lastname",
+          "description": "Achternaame voogd",
+          "type": "string",
+          "default": ""
         },
         "email": {
           "title": "Email",

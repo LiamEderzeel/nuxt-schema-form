@@ -13,34 +13,31 @@
       "icon": "lucide:user",
       "type": "object",
       "required": [
-        "flex",
+        "firstname",
+        "lastname",
         "birthDate",
         "swimmingLevel",
         "associationNumber"
       ],
+      "layout": [
+        [
+          "firstname",
+          "lastname"
+        ]
+      ],
       "properties": {
-        "flex": {
-          "required": [
-            "firstname",
-            "lastname"
-          ],
-          "type": "object",
-          "renderer": "SRow",
-          "properties": {
-            "firstname": {
-              "title": "Voornaam",
-              "description": "Voornaam deelnemer",
-              "type": "string",
-              "minimum": 1,
-              "maxLength": 2
-            },
-            "lastname": {
-              "title": "Achternaam",
-              "description": "Achternaam deelnemer",
-              "type": "string",
-              "minLength": 1
-            }
-          }
+        "firstname": {
+          "title": "Voornaam",
+          "description": "Voornaam deelnemer",
+          "type": "string",
+          "minimum": 1,
+          "maxLength": 2
+        },
+        "lastname": {
+          "title": "Achternaam",
+          "description": "Achternaam deelnemer",
+          "type": "string",
+          "minLength": 1
         },
         "birthDate": {
           "title": "Geboorte datum",
@@ -77,31 +74,28 @@
       "icon": "lucide:users",
       "type": "object",
       "required": [
-        "flex",
+        "firstname",
+        "lastname",
         "email",
         "phoneNumber",
         "address"
       ],
+      "layout": [
+        [
+          "firstname",
+          "lastname"
+        ]
+      ],
       "properties": {
-        "flex": {
-          "required": [
-            "firstname",
-            "lastname"
-          ],
-          "type": "object",
-          "renderer": "SRow",
-          "properties": {
-            "firstname": {
-              "title": "Voornaam",
-              "description": "Voornaam voogd",
-              "type": "string"
-            },
-            "lastname": {
-              "title": "Lastname",
-              "description": "Achternaame voogd",
-              "type": "string"
-            }
-          }
+        "firstname": {
+          "title": "Voornaam",
+          "description": "Voornaam voogd",
+          "type": "string"
+        },
+        "lastname": {
+          "title": "Lastname",
+          "description": "Achternaame voogd",
+          "type": "string"
         },
         "email": {
           "title": "Email",
