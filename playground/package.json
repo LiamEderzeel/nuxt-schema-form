@@ -15,8 +15,9 @@
     "@iconify-json/lucide": "catalog:",
     "@iconify-json/simple-icons": "catalog:",
     "@nuxt/ui": "catalog:",
-    "nuxt": "catalog:",
+    "@tanstack/charts": "catalog:",
     "monaco-editor": "catalog:",
+    "nuxt": "catalog:",
     "nuxt-monaco-editor": "catalog:",
     "reka-ui": "catalog:"
   },
