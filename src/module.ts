@@ -38,7 +38,13 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.vite ??= {}
     nuxt.options.vite.optimizeDeps ??= {}
     nuxt.options.vite.optimizeDeps.include ??= []
+    nuxt.options.vite.optimizeDeps.include.push('@ederzeel/json-schema-yup-transformer')
+    nuxt.options.vite.optimizeDeps.include.push('@internationalized/date')
     nuxt.options.vite.optimizeDeps.include.push('json-schema-library')
+    // json-schema-library is transpiled (not pre-bundled), so its CommonJS deps must be pre-bundled
+    nuxt.options.vite.optimizeDeps.include.push('json-schema-library > fast-deep-equal')
+    nuxt.options.vite.optimizeDeps.include.push('json-schema-library > smtp-address-parser')
+    nuxt.options.vite.optimizeDeps.include.push('json-schema-library > valid-url')
     nuxt.options.vite.optimizeDeps.include.push('stringify-object')
     nuxt.options.vite.optimizeDeps.include.push('yup')
 
