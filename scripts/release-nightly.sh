@@ -11,14 +11,10 @@ pnpm jiti ./scripts/bump-nightly
 # Resolve pnpm
 pnpm i --frozen-lockfile=false
 
-# Update token
-if [[ ! -z ${NPM_TOKEN} ]]; then
-	echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >>~/.npmrc
-	echo "registry=https://registry.npmjs.org/" >>~/.npmrc
-	echo "always-auth=true" >>~/.npmrc
-	npm whoami
-fi
+# Pack with pnpm so catalog: and workspace: versions are resolved
+rm -rf .pack
+pnpm pack --pack-destination .pack
 
-# Release package
+# Release package (npm >= 11.5.1 authenticates through npm trusted publishing)
 echo "⚡ Publishing nightly version"
-pnpm publish --access public --tag latest --no-git-checks
+npx -y npm@11.19.1 publish .pack/*.tgz --access public --tag latest
