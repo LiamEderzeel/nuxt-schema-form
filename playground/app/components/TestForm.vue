@@ -18,7 +18,15 @@ const props = defineProps<{
 }>()
 const state = ref(props.state)
 
+const toast = useToast()
+
 const onSubmit = (value: unknown) => {
   console.log(value)
+  toast.add({
+    title: 'Form submitted',
+    description: 'All fields passed validation. The value is logged in the console.',
+    icon: 'i-lucide-circle-check',
+    color: 'success'
+  })
 }
 </script>

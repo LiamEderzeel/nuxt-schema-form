@@ -5,6 +5,7 @@ import type { JsonSchema } from 'json-schema-library'
 import { computed, ref } from 'vue'
 import type { Config } from '@ederzeel/json-schema-yup-transformer'
 import type { CustomValidation } from '#schema-form-types'
+import { getCustomValidationErrors } from '../utils/validation'
 
 const props = defineProps<{
   schema: JsonSchema
@@ -24,6 +25,10 @@ const formValidationSchema = computed(() => {
   return convertToYup(props.schema, props?.options?.jsonSchemaYupTransfromer ?? {})
 })
 
+// UForm runs this alongside the schema, so custom checks also block submit and show live errors
+const validateCustom = (state: Record<string, unknown>) =>
+  getCustomValidationErrors(props.options?.customValidation, state)
+
 const validateFields = async (fields: string[]) => {
   let allValid = true
   for (const field of fields) {
@@ -34,17 +39,6 @@ const validateFields = async (fields: string[]) => {
     } catch (err) {
       console.log(err)
       return false
-    }
-  }
-
-  if (props?.options?.customValidation) {
-    for (const { field, message, validate } of props.options.customValidation) {
-      if (!fields.includes(field)) continue
-      if (!validate(value.value)) {
-        const errors = [{ name: field, message }]
-        formRef.value.setErrors(errors, field)
-        allValid = false
-      }
     }
   }
 
@@ -71,6 +65,7 @@ const setHidden = (value: boolean) => (isHidden.value = value)
         ref="formRef"
         :state="value"
         :schema="formValidationSchema"
+        :validate="validateCustom"
         autocomplete="on"
         @submit="onSubmit"
         v-show="!isHidden"

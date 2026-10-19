@@ -9,11 +9,8 @@ import {
   StepperTitle,
   StepperTrigger
 } from 'reka-ui'
-
-export interface FormError<T extends string = string> {
-  path: T
-  message: string
-}
+import type { FormError } from '@nuxt/ui'
+import { formErrorsInjectionKey } from '#ui/composables/useFormField'
 
 const props = defineProps<{
   id: string
@@ -60,24 +57,63 @@ const getChildFieldIds = (id: string, schema: ChildIdsKeys) => {
   return children
 }
 
-const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
+const formErrors = inject<Ref<FormError[]> | null>(formErrorsInjectionKey, null)
+
+const hasStepError = (key: string) => {
+  const stepPath = props.id ? `${props.id}.${key}` : key
+  return !!formErrors?.value.some(error => error.name === stepPath || error.name?.startsWith(`${stepPath}.`))
+}
+
+const validatedSteps = ref(new Set<number>())
 
 const steps = computed(() => {
-  return children.value.map((x, i) => ({
-    ...x[1],
-    step: i,
-    error: formErrors?.value.find(error => error?.path?.includes(`${x[0]}`))
-  }))
+  return children.value.map((x, i) => {
+    const error = hasStepError(x[0])
+    return {
+      ...x[1],
+      step: i,
+      error,
+      validated: validatedSteps.value.has(i) && !error
+    }
+  })
 })
 
-const onNext = async () => {
-  const child = children.value[stage.value]
-  if (!(await props.validateFields(getChildFieldIds(child[0], child[1])))) return
-  if (stage.value < steps.value.length - 1) {
-    stage.value++
+const validateStep = async (index: number) => {
+  const [key, schema] = children.value[index]
+  const valid = await props.validateFields(getChildFieldIds(key, schema))
+  if (valid) {
+    validatedSteps.value.add(index)
   } else {
-    emit('submit')
+    validatedSteps.value.delete(index)
   }
+  return valid
+}
+
+// Moving forward, by the next button or by clicking a step, may not skip a step with errors
+const goToStep = async (target: number | undefined) => {
+  if (target === undefined) return
+
+  for (let index = stage.value; index < target; index++) {
+    if (!(await validateStep(index))) {
+      stage.value = index
+      return
+    }
+  }
+
+  stage.value = target
+}
+
+const onNext = async () => {
+  // Check every step before submitting, so each step shows whether it's valid, not just the last one
+  if (stage.value === steps.value.length - 1) {
+    for (const [, , index] of children.value) {
+      await validateStep(index)
+    }
+    emit('submit')
+    return
+  }
+
+  await goToStep(stage.value + 1)
 }
 </script>
 
@@ -91,16 +127,17 @@ const onNext = async () => {
     </h1>
 
     <div class="stepper">
-      <StepperRoot v-model="stage" class="flex gap-2 w-full">
+      <StepperRoot :model-value="stage" class="flex gap-2 w-full" @update:model-value="goToStep">
         <StepperItem
           v-for="item in steps"
           :key="item.step"
           class="w-full flex justify-center gap-2 cursor-pointer group relative px-4"
           :data-error="item.error ? 'error' : undefined"
+          :data-validated="item.validated ? 'true' : undefined"
           :step="item.step"
         >
           <StepperTrigger
-            class="inline-flex border-2 shadow-sm items-center text-primary-500 border-primary-500 group-data-[error=error]:text-red-500 group-data-[error=error]:border-red-500 group-data-[state=inactive]:border-neutral-200 group-data-[state=inactive]:text-stone-700 group-data-[disabled]:opacity-50 group-data-[disabled]:cursor-not-allowed justify-center rounded-full w-10 h-10 shrink-0 focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+            class="inline-flex border-2 items-center justify-center rounded-full w-10 h-10 shrink-0 transition-shadow border-accented text-muted group-data-[state=active]:text-highlighted group-data-[state=active]:ring-4 group-data-[state=active]:border-(--ui-text-muted) group-data-[state=active]:ring-(--ui-text-muted)/25 group-data-[validated=true]:border-primary! group-data-[validated=true]:text-primary! group-data-[validated=true]:ring-primary/30! group-data-[error=error]:text-error! group-data-[error=error]:border-error! group-data-[error=error]:ring-error/30! group-data-[disabled]:opacity-50 group-data-[disabled]:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <StepperIndicator class="flex">
               <UIcon
@@ -116,9 +153,9 @@ const onNext = async () => {
           />
 
           <div
-            class="absolute text-center top-full left-0 w-full mt-2 text-stone-700 dark:text-white group-data-[disabled]:opacity-50"
+            class="absolute text-center top-full left-0 w-full mt-2 text-muted group-data-[state=active]:text-highlighted group-data-[disabled]:opacity-50 group-data-[error=error]:text-error!"
           >
-            <StepperTitle class="font-medium">
+            <StepperTitle class="font-medium group-data-[state=active]:font-semibold">
               {{ item.title }}
             </StepperTitle>
             <StepperDescription class="hidden sm:block text-xs">

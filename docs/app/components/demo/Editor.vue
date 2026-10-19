@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { compileSchema } from 'json-schema-library'
+import type { CustomValidation } from '#schema-form-types'
 
 const props = defineProps<{
   schema: Record<string, unknown>
+  options?: { customValidation?: CustomValidation[] }
 }>()
 
 const schemaString = ref(JSON.stringify(props.schema, null, 2))
@@ -23,10 +25,18 @@ watch(schemaString, value => {
   }
 })
 
+const toast = useToast()
+
 const onSubmit = (value: any) => {
   if (value == null) return
 
   console.log(JSON.stringify(value, null, 2))
+  toast.add({
+    title: 'Form submitted',
+    description: 'All fields passed validation.',
+    icon: 'i-lucide-circle-check',
+    color: 'success'
+  })
 }
 </script>
 
@@ -42,7 +52,7 @@ const onSubmit = (value: any) => {
       <p v-if="error" class="text-sm text-error">{{ error }}</p>
     </div>
     <div class="w-full lg:w-1/2">
-      <SForm v-if="schema2 && error == null" v-model="state" :schema="schema2" @submit="onSubmit">
+      <SForm v-if="schema2 && error == null" v-model="state" :schema="schema2" :options="options" @submit="onSubmit">
         <template #submit>
           {{ undefined }}
         </template>
